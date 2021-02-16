@@ -1,3 +1,3 @@
 DMS-FOR-SMS
 
-SMS-Front-V1
+SMS-Front-Teacher-V1
