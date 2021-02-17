@@ -45,7 +45,17 @@ module.exports = {
     }),
     new Dotenv({
       path: path.join(__dirname, "src/.env")
-    })
+    }),
+    new webpack.EnvironmentPlugin([
+      "HOST_URL",
+      "S3_URL",
+      "VERSION",
+      "HOST_URL",
+      "NAVER_CLIENT_ID",
+      "NAVER_CLIENT_SECRET",
+      "SECURITY_BASE_PLAIN",
+      "SECURITY_PASS_PHRASE"
+    ])
   ],
   devServer: {
     contentBase: path.join(__dirname, "public"),

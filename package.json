@@ -1,8 +1,8 @@
 {
-  "name": "SMS-Front-V1",
+  "name": "SMS-Front-Teacher-V1",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/DSM-DMS/SMS-Front-V1.git",
+  "repository": "https://github.com/DSM-DMS/SMS-Front-Teacher-V1.git",
   "author": "DSM-DMS",
   "license": "MIT",
   "devDependencies": {
