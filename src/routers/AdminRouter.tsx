@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Redirect, Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import {
@@ -31,7 +31,7 @@ const AdminRouter: FC = () => {
   useEffect(() => {
     if (!(type === TEACHER || localStorage.getItem("sms-type") === TEACHER)) {
       toast.info("로그인 후 이용해주세요.");
-      history.push("/admin/login");
+      history.push("/login");
     }
   }, []);
 
@@ -40,65 +40,48 @@ const AdminRouter: FC = () => {
       isBackNeed={!noWhiteBack.some(path => pathname.includes(path))}
     >
       <Switch>
+        <Route exact path="/pw-change" component={PasswordChangeContainer} />
+        <Route exact path="/login" component={LoginContainer} />
+        <Route exact path="/home" component={AdminMainContainer} />
+        <Route exact path="/schedule" />
         <Route
           exact
-          path="/admin/pw-change"
-          component={PasswordChangeContainer}
-        />
-        <Route exact path="/admin/login" component={LoginContainer} />
-        <Route exact path="/admin/home" component={AdminMainContainer} />
-        <Route exact path="/admin/schedule" />
-        <Route
-          exact
-          path="/admin/out/wait"
+          path="/out/wait"
           component={AdminOutingWaitListContainer}
         />
+        <Route exact path="/out/now" component={AdminOutingNowListContainer} />
+        <Route exact path="/out/done" component={AdminOutingDoneContainer} />
         <Route
           exact
-          path="/admin/out/now"
-          component={AdminOutingNowListContainer}
-        />
-        <Route
-          exact
-          path="/admin/out/done"
-          component={AdminOutingDoneContainer}
-        />
-        <Route
-          exact
-          path="/admin/out/certified"
+          path="/out/certified"
           component={AdminOutingCertifiedListContainer}
         />
         <Route
           exact
-          path="/admin/notice/all"
+          path="/notice/all"
           component={AdminNoticeAllListContainer}
         />
         <Route
           exact
-          path="/admin/notice/all/:id"
+          path="/notice/all/:id"
           component={AdminNoticeAllDetailContainer}
         />
+        <Route exact path="/notice/mine" component={AdminNoticeMineContainer} />
         <Route
           exact
-          path="/admin/notice/mine"
-          component={AdminNoticeMineContainer}
-        />
-        <Route
-          exact
-          path="/admin/notice/edit/:id"
+          path="/notice/edit/:id"
           component={AdminNoticeEditContainer}
         />
         <Route
           exact
-          path="/admin/notice/mine/:id"
+          path="/notice/mine/:id"
           component={AdminNoticeMineDetailContainer}
         />
         <Route
           exact
-          path="/admin/notice/writing"
+          path="/notice/writing"
           component={AdminNoticeWritingContainer}
         />
-        <Redirect path="/admin" to="/admin/home" />
       </Switch>
     </GlobalInnerBody>
   );
