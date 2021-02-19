@@ -1,44 +1,28 @@
 import React, { FC, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { Header } from "../../components";
 import { ResStudentInfo } from "../../lib/api/payloads/Login";
-import { setInit, TEACHER, UserType } from "../../modules/action/header";
+import { setInit, UserType } from "../../modules/action/header";
 import { pageMove } from "../../modules/action/page";
-import { stateType } from "../../modules/reducer";
 
 interface Props {}
 
 const HeaderContainer: FC<Props> = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { type } = useSelector((state: stateType) => state.header);
 
   const moveLogin = useCallback(() => {
     dispatch(pageMove("로그인"));
 
-    if (type === TEACHER) {
-      history.push("/admin/login");
-    } else {
-      history.push("/login");
-    }
-  }, [type]);
+    history.push("/login");
+  }, []);
 
   const movePasswordChange = useCallback(() => {
     dispatch(pageMove(""));
 
-    if (type === TEACHER) {
-      history.push("/admin/pw-change");
-    } else {
-      history.push("/pw-change");
-    }
-  }, [type]);
-
-  const moveManagement = useCallback(() => {
-    dispatch(pageMove("정보수정"));
-
-    history.push("/management/edit");
+    history.push("/pw-change");
   }, []);
 
   const logout = useCallback(() => {
@@ -70,6 +54,7 @@ const HeaderContainer: FC<Props> = () => {
     const smsUser = JSON.parse(
       localStorage.getItem("sms-user")
     ) as ResStudentInfo;
+
     dispatch(setInit(type, smsUser, clubUuid));
   }, []);
 
@@ -78,7 +63,6 @@ const HeaderContainer: FC<Props> = () => {
       logout={logout}
       moveLogin={moveLogin}
       movePasswordChange={movePasswordChange}
-      moveManagement={moveManagement}
     />
   );
 };

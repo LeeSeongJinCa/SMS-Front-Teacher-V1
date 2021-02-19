@@ -6,8 +6,6 @@ export { default as HeaderContainer } from "./Header/HeaderContainer";
 
 export { default as PasswordChangeContainer } from "./PasswordChange/PasswordChangeContainer";
 
-export { default as ParentContainer } from "./Parent/ParentContainer";
-
 export { default as NoticeListContainer } from "./Notice/List/NoticeListContainer";
 export { default as NoticeDetailContainer } from "./Notice/Detail/NoticeDetailContainer";
 
