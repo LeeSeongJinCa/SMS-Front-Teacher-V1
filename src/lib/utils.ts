@@ -18,53 +18,15 @@ interface UrlObj {
   [key: string]: valueType;
 }
 
-const urlObj: UrlObj = {
-  home: ["홈", ""],
-  notice: ["공지", ""],
-  circles: ["동아리", "공지사항"],
-  outing: ["외출신청", "유의사항"]
-};
-
 const adminObj: UrlObj = {
   home: ["학사 일정", ""],
   out: ["외출 관리", "승인대기 외출증"],
   notice: ["공지사항", "전체 공지"]
 };
 
-const managementObj: UrlObj = {
-  edit: ["정보수정", ""],
-  wanted: ["모집관리", ""],
-  notice: ["공지 관리", ""]
-};
-
-const urlObjWrap = {
-  admin: adminObj,
-  management: managementObj
-};
-
 interface SubUrlObj {
   [key: string]: string;
 }
-
-const managementUrlObj: SubUrlObj = {
-  edit: "none",
-  wanted: "none",
-  notice: "none"
-};
-
-const subUrlObj: SubUrlObj = {
-  notice: "공지사항",
-  wanted: "부원 모집",
-  all: "동아리 전체보기",
-  warning: "유의사항",
-  apply: "외출신청",
-  history: "내 외출신청 내역"
-};
-
-const subUrlObjWrap = {
-  admin: subUrlObj,
-  management: managementUrlObj
-};
 
 const adminUrlObj: SubUrlObj = {
   certified: "미인증 외출증",
@@ -78,20 +40,10 @@ const adminUrlObj: SubUrlObj = {
 
 export const getNavUrl = (url: string): PageState => {
   const stringArr = url.split("/");
-  const filterStr = stringArr[1] as "home" | "notice" | "circles" | "outing";
-  const urlArr = urlObj[filterStr] ||
-    (urlObjWrap[stringArr[1]] && urlObjWrap[stringArr[1]][stringArr[2]]) || [
-      "",
-      ""
-    ];
+  const urlArr = adminObj[stringArr[1]] || ["", ""];
   return {
     mainUrl: urlArr[0],
-    subUrl:
-      adminUrlObj[stringArr[3]] ||
-      subUrlObj[stringArr[2]] ||
-      (subUrlObjWrap[stringArr[1]] &&
-        subUrlObjWrap[stringArr[1]][stringArr[2]]) ||
-      urlArr[1]
+    subUrl: adminUrlObj[stringArr[2]] || urlArr[1]
   };
 };
 
@@ -177,10 +129,7 @@ export const errorHandler = (errStatus: number, history: History): void => {
     case 401:
     case 403: {
       toast.error("로그인을 다시 진행해주세요");
-      const href = history.location.pathname;
-      if (href.includes("admin")) {
-        history.push("/admin/login");
-      } else history.push("/login");
+      history.push("/login");
       return;
     }
   }
