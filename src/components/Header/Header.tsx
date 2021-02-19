@@ -3,25 +3,16 @@ import { useSelector } from "react-redux";
 
 import * as S from "./style";
 
-import { STUDENT } from "../../modules/action/header";
 import { stateType } from "../../modules/reducer";
 
 interface Props {
   logout: () => void;
   moveLogin: () => void;
   movePasswordChange: () => void;
-  moveManagement: () => void;
 }
 
-const Header: FC<Props> = ({
-  logout,
-  moveLogin,
-  movePasswordChange,
-  moveManagement
-}) => {
-  const { type, grade, group, name, student_number, clubUuid } = useSelector(
-    (state: stateType) => state.header
-  );
+const Header: FC<Props> = ({ logout, moveLogin, movePasswordChange }) => {
+  const { type, name } = useSelector((state: stateType) => state.header);
 
   if (!type) {
     return (
@@ -33,11 +24,7 @@ const Header: FC<Props> = ({
 
   return (
     <S.HeaderWrap>
-      {type === STUDENT ? (
-        <S.UserInfo>{`${grade}학년 ${group}반 ${student_number}번 ${name}`}</S.UserInfo>
-      ) : (
-        <S.UserInfo>{`${name} 선생님`}</S.UserInfo>
-      )}
+      <S.UserInfo>{name} 선생님</S.UserInfo>
       <S.MovePasswordChange onClick={movePasswordChange}>
         비밀번호 변경
       </S.MovePasswordChange>
@@ -49,11 +36,6 @@ const Header: FC<Props> = ({
       >
         로그아웃
       </S.Logout>
-      {clubUuid && (
-        <S.MoveClubManagement onClick={moveManagement}>
-          동아리 관리 페이지
-        </S.MoveClubManagement>
-      )}
     </S.HeaderWrap>
   );
 };

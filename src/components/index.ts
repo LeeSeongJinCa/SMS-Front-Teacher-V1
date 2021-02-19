@@ -30,4 +30,3 @@ export { default as ManagementNoticeEdit } from "./Management/Notice/ManagememtN
 export { default as ManagementWantedDetail } from "./Management/Wanted/ManagementWantedDetail";
 export { default as ManagementInfo } from "./Management/Info/ManagementInfo";
 export * from "./default";
-export { default as Approve } from "./Parent/Approve";
