@@ -14,7 +14,7 @@ const AdminNoticeAllDetail: FC = () => {
   const headerData: NoticeDetailHeaderSet = {
     imgSrc: NavIconNoticeMint,
     title: "전체 공지사항",
-    href: "/admin/notice/all",
+    href: "/notice/all",
     color: "#23B2AD"
   };
   return (

@@ -63,7 +63,7 @@ const CalendarDate: React.FC<Props> = () => {
     styling: string = ""
   ): ReactElement => (
     <S.CalendarDate
-      key={id}
+      key={`${id}-${children}`}
       className={styling}
       onClick={styling.match("curr") ? onClickDate : () => {}}
       type={type as UserType}
@@ -196,7 +196,7 @@ const CalendarDate: React.FC<Props> = () => {
             let overlap = 0;
 
             schedules.forEach(
-              ({ schedule_uuid: uuid, start_date: sD, end_date: eD }) => {
+              ({ schedule_uuid: uuid, start_date: sD, end_date: eD }, i) => {
                 if (uuid !== schedule_uuid) {
                   if (eD - sDate >= 0 && eD - eDate < 0) overlapCount++;
                   if (eD === eDate && sD === sDate) sameCount++;
@@ -215,7 +215,7 @@ const CalendarDate: React.FC<Props> = () => {
             if (overlap < 3) {
               result.push(
                 <S.CalendarBar
-                  key={schedule_uuid}
+                  key={`${schedule_uuid}-${i}`}
                   backgroundColor={BackgroundColor[overlap]}
                   className={+fixedDate > eDate ? "prev" : ""}
                   eDay={eDay}

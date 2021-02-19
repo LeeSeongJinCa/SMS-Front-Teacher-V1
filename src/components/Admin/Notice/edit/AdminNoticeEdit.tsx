@@ -13,7 +13,7 @@ const AdminNoticeEdit: FC = () => {
     imgSrc: NavIconNoticeMint,
     title: "학교 공지사항 수정",
     type: "school",
-    cancelHref: "/admin/notice"
+    cancelHref: "/notice"
   };
   return <NoticeEdit editData={editData} setting={setting} />;
 };

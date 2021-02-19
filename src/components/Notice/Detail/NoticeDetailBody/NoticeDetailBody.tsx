@@ -19,7 +19,6 @@ const NoticeDetailBody: FC<Props> = ({ content }) => {
   const render = useCallback(() => {
     if (!content) return "";
     const blocks: EditerJSParserObj[] = JSON.parse(content).blocks;
-    console.log(blocks);
     return blocks.map(({ data, type }, i) => {
       switch (type) {
         case "header": {

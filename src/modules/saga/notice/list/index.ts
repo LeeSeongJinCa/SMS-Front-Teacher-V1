@@ -49,7 +49,6 @@ function* getNoticeWriterListSaga(
   yield put(startLoading(GET_NOTICE_LIST));
   try {
     const { page, uuid } = action.payload;
-    console.log(page, uuid);
     const res: AxiosResponse<ResBoardList> = yield call(
       noticeApi.getNoticeWriterList,
       uuid,

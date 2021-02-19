@@ -1,10 +1,9 @@
 import axios, { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 import AES256 from "aes-everywhere";
 
 import { StudentInfo } from "../../modules/type/user";
 import { getAxiosError } from "../utils";
-import { toast } from "react-toastify";
-import { STUDENT, TEACHER, UserType } from "../../modules/action/header";
 
 export const SERVER = {
   hostUrl: process.env.HOST_URL,
@@ -29,10 +28,7 @@ export const apiDefault = () => {
   const instance = axios.create({
     baseURL: BASE_URL
   });
-  const type: UserType = window.location.pathname.includes("admin")
-    ? TEACHER
-    : STUDENT;
-  const refreshUrl = type === TEACHER ? "/admin/login" : "/login";
+  const refreshUrl = "/login";
 
   instance.interceptors.request.use(config => {
     const accessToken = localStorage.getItem("access_token");

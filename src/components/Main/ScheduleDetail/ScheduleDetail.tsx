@@ -58,11 +58,9 @@ const ScheduleDetail: FC<Props> = ({
       <S.DetailHeader>
         <S.DetailHeaderTop>
           <S.DetailTitle>세부내용</S.DetailTitle>
-          {location.pathname.includes("admin") && (
-            <S.DetailAddSchedule onClick={handleShowAdd}>
-              <span>일정 추가</span>
-            </S.DetailAddSchedule>
-          )}
+          <S.DetailAddSchedule onClick={handleShowAdd}>
+            <span>일정 추가</span>
+          </S.DetailAddSchedule>
         </S.DetailHeaderTop>
         <S.DetailHead>
           <S.DetailHeadData>일정</S.DetailHeadData>
@@ -86,22 +84,20 @@ const ScheduleDetail: FC<Props> = ({
                   ? getLocalDate(start_date)
                   : `${getLocalDate(start_date)} - ${getLocalDate(end_date)}`}
               </S.DetailBodyItemData>
-              {location.pathname.includes("admin") && (
-                <S.DetailBodyItemButtonWrap>
-                  <S.DetailBodyItemButton
-                    data-uuid={schedule_uuid}
-                    onClick={handleEditSchedule}
-                  >
-                    수정
-                  </S.DetailBodyItemButton>
-                  <S.DetailBodyItemButton
-                    data-uuid={schedule_uuid}
-                    onClick={handleRemoveSchedule}
-                  >
-                    삭제
-                  </S.DetailBodyItemButton>
-                </S.DetailBodyItemButtonWrap>
-              )}
+              <S.DetailBodyItemButtonWrap>
+                <S.DetailBodyItemButton
+                  data-uuid={schedule_uuid}
+                  onClick={handleEditSchedule}
+                >
+                  수정
+                </S.DetailBodyItemButton>
+                <S.DetailBodyItemButton
+                  data-uuid={schedule_uuid}
+                  onClick={handleRemoveSchedule}
+                >
+                  삭제
+                </S.DetailBodyItemButton>
+              </S.DetailBodyItemButtonWrap>
             </S.DetailBodyItem>
           ))
         )}
