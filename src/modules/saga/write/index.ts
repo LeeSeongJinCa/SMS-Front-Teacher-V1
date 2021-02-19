@@ -18,7 +18,7 @@ function* writeNoticeSaga(
     );
     toast.dark("공지 작성에 성공 했습니다");
     const history = yield getContext("history");
-    history.push("/admin/notice/all");
+    history.push("/notice/all");
   } catch (err) {
     const axiosErr = err as AxiosError;
     errorHandler(axiosErr.response.status, yield getContext("history"));
