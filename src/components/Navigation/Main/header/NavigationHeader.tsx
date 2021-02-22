@@ -11,7 +11,7 @@ const NavigationHeader: FC<Props> = ({ isManagementMode }) => {
   return (
     <S.Container>
       <S.InnerContainer>
-        <Link to="/home">
+        <Link to="/">
           <S.LogoImg src={isManagementMode ? IconBlack : IconWhite} />
           <S.LogoText>SMS</S.LogoText>
         </Link>

@@ -149,7 +149,7 @@ const ClubMembers: FC<Props> = ({ leaderUuid, clubUuid, memberUuids }) => {
 
       toast.success("동아리 장을 변경했습니다.");
 
-      location.href = "/home";
+      location.href = "/";
     } catch (err) {
       const { status, code } = getAxiosError(err);
 

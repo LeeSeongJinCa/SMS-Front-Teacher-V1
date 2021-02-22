@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Switch, Router, Route, Redirect } from "react-router-dom";
+import { Switch, Router, Route } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
@@ -20,8 +20,7 @@ const App: FC<{}> = () => {
         <GlobalBody>
           <HeaderContainer />
           <Switch>
-            <Route path="/*" component={AdminRouter} />
-            <Redirect path="/" to="/home" />
+            <Route path="/" component={AdminRouter} />
             <Route path="*" component={PageNotFound} />
           </Switch>
         </GlobalBody>

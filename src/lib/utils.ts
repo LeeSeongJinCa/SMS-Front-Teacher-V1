@@ -6,11 +6,11 @@ import { History } from "history";
 import { ResDefault } from "./api/payloads";
 import { ResStudentInfo } from "./api/payloads/Login";
 import { ResStudents } from "./api/payloads/Management";
+import { BoardType } from "./api/payloads/Board";
 
 import { PageState } from "../modules/reducer/page";
 import { stateType } from "../modules/reducer";
 import { SERVER } from "../lib/api/client";
-import { BoardType } from "./api/payloads/Board";
 
 type valueType = [string, string];
 
@@ -19,7 +19,7 @@ interface UrlObj {
 }
 
 const adminObj: UrlObj = {
-  home: ["학사 일정", ""],
+  "": ["학사 일정", ""],
   out: ["외출 관리", "승인대기 외출증"],
   notice: ["공지사항", "전체 공지"]
 };
@@ -39,11 +39,12 @@ const adminUrlObj: SubUrlObj = {
 };
 
 export const getNavUrl = (url: string): PageState => {
-  const stringArr = url.split("/");
-  const urlArr = adminObj[stringArr[1]] || ["", ""];
+  const splitUrl = url.split("/");
+  const urlArr = adminObj[splitUrl[1]] || ["", ""];
+
   return {
     mainUrl: urlArr[0],
-    subUrl: adminUrlObj[stringArr[2]] || urlArr[1]
+    subUrl: adminUrlObj[splitUrl[2]] || urlArr[1]
   };
 };
 

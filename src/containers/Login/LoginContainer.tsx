@@ -95,7 +95,7 @@ const LoginContainer: FC<Props> = ({ loading, startLoading, endLoading }) => {
         await teacherLogin(id, pw, autoLogin);
         setErrorMessage(initErrorState);
         dispatch(pageMove("홈"));
-        history.push("/home");
+        history.push("/");
       } catch (err) {
         const { status, code } = getAxiosError(err);
 

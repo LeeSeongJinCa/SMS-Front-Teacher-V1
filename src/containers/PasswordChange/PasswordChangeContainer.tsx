@@ -35,7 +35,7 @@ const PasswordChangeContainer: FC<Props> = ({
         }
 
         toast.success("비밀번호를 변경했습니다.");
-        history.push("./home");
+        history.push("/");
       } catch (err) {
         const { status, code } = getAxiosError(err);
 

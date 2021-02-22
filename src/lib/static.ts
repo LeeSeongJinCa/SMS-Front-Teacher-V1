@@ -32,7 +32,7 @@ export const adminRouter: RouteData = {
   main: [
     {
       name: "학사 일정",
-      route: "/home",
+      route: "/",
       white: NavIconScheduleWhite,
       blue: NavIconScheduleMint
     }
