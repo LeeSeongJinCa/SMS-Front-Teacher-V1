@@ -7,10 +7,6 @@ export const NotFound = styled.div`
 `;
 
 export const Center = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   transition: transform 50ms;
   text-align: center;
 `;
