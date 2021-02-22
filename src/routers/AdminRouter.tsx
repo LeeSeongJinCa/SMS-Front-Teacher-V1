@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
+import { PageNotFound } from "../components";
 import {
   AdminOutingCertifiedListContainer,
   AdminOutingNowListContainer,
@@ -25,7 +26,7 @@ import { stateType } from "../modules/reducer";
 const AdminRouter: FC = () => {
   const history = useHistory();
   const pathname = history.location.pathname;
-  const noWhiteBack: string[] = ["login", "home", "pw-change"];
+  const needWhite: string[] = ["out", "notice"];
   const { type } = useSelector((state: stateType) => state.header);
 
   useEffect(() => {
@@ -37,13 +38,12 @@ const AdminRouter: FC = () => {
 
   return (
     <GlobalInnerBody
-      isBackNeed={!noWhiteBack.some(path => pathname.includes(path))}
+      isBackNeed={needWhite.some(path => pathname.includes(path))}
     >
       <Switch>
+        <Route exact path="/" component={AdminMainContainer} />
         <Route exact path="/pw-change" component={PasswordChangeContainer} />
         <Route exact path="/login" component={LoginContainer} />
-        <Route exact path="/home" component={AdminMainContainer} />
-        <Route exact path="/schedule" />
         <Route
           exact
           path="/out/wait"
@@ -82,6 +82,7 @@ const AdminRouter: FC = () => {
           path="/notice/writing"
           component={AdminNoticeWritingContainer}
         />
+        <Route path="*" component={PageNotFound} />
       </Switch>
     </GlobalInnerBody>
   );
