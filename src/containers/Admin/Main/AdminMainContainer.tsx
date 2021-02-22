@@ -12,7 +12,6 @@ import {
   ReqCreateSchedule,
   ReqEditSchedule
 } from "../../../lib/api/payloads/Main";
-import { getAxiosError } from "../../../lib/utils";
 import { getSchedulesSaga } from "../../../modules/action/main";
 
 interface Props {}
@@ -27,10 +26,22 @@ const AdminMainContainer: FC<Props> = (): ReactElement => {
   const [modal, setModal] = useState<boolean>(false);
   const [modalType, setModalType] = useState<ModalType>(null);
 
+  const checkOverHundredWord = useCallback((detail: string) => {
+    if (detail.length > 100) {
+      toast.error("일정 내용은 100자 이하여야 합니다.");
+      return true;
+    }
+    return false;
+  }, []);
+
   const createSchedule = useCallback(
     async ({ start, end, detail, schedulerDate }: ReqCreateSchedule) => {
       const startDate = new Date(start);
       const endDate = new Date(end);
+
+      if (checkOverHundredWord(detail)) {
+        return;
+      }
 
       try {
         await postSchedules(
@@ -52,6 +63,10 @@ const AdminMainContainer: FC<Props> = (): ReactElement => {
 
   const editSchedule = useCallback(
     async (editData: ReqEditSchedule, schedulerDate: Date) => {
+      if (checkOverHundredWord(editData.detail)) {
+        return;
+      }
+
       try {
         await patchSchedules(editData);
 

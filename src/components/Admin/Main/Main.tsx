@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState } from "react";
+import React, { FC, ReactElement } from "react";
 
 import * as S from "./style";
 import ScheduleModal from "./ScheduleModal";
