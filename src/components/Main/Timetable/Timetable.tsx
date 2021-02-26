@@ -28,7 +28,7 @@ const TimeTable: FC<Props> = (): ReactElement => {
       0
     ).getDate();
     if (tDate === currLastDate) {
-      toast.info("이번 달 안에서만 시간표 변경이 가능합니다.");
+      toast.info("이번 달 안에서만 시간표 조회가 가능합니다.");
       return;
     }
     setTDate(prev => prev + 1);
@@ -36,7 +36,7 @@ const TimeTable: FC<Props> = (): ReactElement => {
 
   const handlePrevTimetable = () => {
     if (tDate === 1) {
-      toast.info("이번 달 안에서만 시간표 변경이 가능합니다.");
+      toast.info("이번 달 안에서만 시간표 조회가 가능합니다.");
       return;
     }
     setTDate(prev => prev - 1);
