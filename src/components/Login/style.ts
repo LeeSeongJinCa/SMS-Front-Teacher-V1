@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Check, CheckGray } from "../../../assets";
+import { Check, CheckGray } from "../../assets";
 
 export const LoginWrap = styled.div`
   width: 500px;

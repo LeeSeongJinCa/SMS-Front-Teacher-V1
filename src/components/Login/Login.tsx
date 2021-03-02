@@ -2,9 +2,9 @@ import React, { ChangeEvent, FC, KeyboardEvent, useState } from "react";
 
 import * as S from "./style";
 
-import { ErrorState } from "../../../containers/Login/LoginContainer";
-import Loading from "../Loading/Loading";
-import { CapsLock as CapsLockIcon, Eye, EyeOff } from "../../../assets";
+import { ErrorState } from "../../containers/Login/LoginContainer";
+import Loading from "../default/Loading/Loading";
+import { CapsLock as CapsLockIcon, Eye, EyeOff } from "../../assets";
 
 interface Props {
   loading: boolean;
