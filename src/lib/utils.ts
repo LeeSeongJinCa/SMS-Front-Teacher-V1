@@ -4,8 +4,6 @@ import { AxiosError } from "axios";
 import { History } from "history";
 
 import { ResDefault } from "./api/payloads";
-import { ResStudentInfo } from "./api/payloads/Login";
-import { ResStudents } from "./api/payloads/Management";
 import { BoardType } from "./api/payloads/Board";
 
 import { PageState } from "../modules/reducer/page";
@@ -116,14 +114,6 @@ export const getWeekOfMonth = (d: Date) => {
 };
 
 export const padNum = (n: number) => (n + "").padStart(2, "0");
-
-export const formattingStudent = (student: ResStudents | ResStudentInfo) => {
-  return `${student.grade}${student.group}${padNum(student.student_number)}`;
-};
-
-export const sorting = (student1: ResStudents, student2: ResStudents) => {
-  return formattingStudent(student1) > formattingStudent(student2) ? 1 : -1;
-};
 
 export const errorHandler = (errStatus: number, history: History): void => {
   switch (errStatus) {
