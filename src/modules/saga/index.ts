@@ -5,7 +5,6 @@ import mainSaga from "./main";
 import headerSaga from "./header";
 import outingCardSaga from "./outingCard";
 import writeSaga from "./write";
-import managementSaga from "./management";
 import noticeListSaga from "./notice/list";
 import noticeDetailSaga from "./notice/detail";
 import recruitmentListSaga from "./recruitment/list";
@@ -20,7 +19,6 @@ function* rootSaga() {
     headerSaga(),
     outingCardSaga(),
     writeSaga(),
-    managementSaga(),
     noticeListSaga(),
     noticeDetailSaga(),
     recruitmentListSaga(),

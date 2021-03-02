@@ -29,8 +29,4 @@ export { default as AdminNoticeMineDetail } from "./Admin/Notice/mine/AdminNotic
 export { default as AdminOutingWaitList } from "./Admin/Outing/Wait/List/AdminOutingCardWaitList";
 export { default as AdminOutingCertifiedList } from "./Admin/Outing/certified/list/AdminOutingCertifiedList";
 
-export { default as ManagementInfo } from "./Management/Info/ManagementInfo";
-export { default as ManagementNotice } from "./Management/Notice/ManagementNotice";
-export { default as ManagementNoticeEdit } from "./Management/Notice/ManagememtNoticeEdit";
-export { default as ManagementNoticeDetail } from "./Management/Notice/ManagementNoticeDetail";
 export { default as ManagementWantedDetail } from "./Management/Wanted/ManagementWantedDetail";
