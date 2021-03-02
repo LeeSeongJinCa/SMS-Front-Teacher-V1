@@ -1,5 +1,9 @@
-import { ResDefault } from "../";
-import { SituationType } from "../../../../containers/Outing/ApplyContainer";
+import { ResDefault } from "..";
+
+export const NORMAL = "normal" as const;
+export const EMERGENCY = "emergency" as const;
+
+export type SituationType = typeof NORMAL | typeof EMERGENCY;
 
 export enum OutingStatus {
   "선생님 거절" = -2,

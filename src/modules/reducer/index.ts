@@ -6,7 +6,6 @@ import boardReducer from "./board";
 import posterReducer from "./poster";
 import outingCardReducer from "./OutingCard";
 import ManagementInfo from "./management/info";
-import outingReducer from "./outing";
 import mainReducer from "./main";
 import noticeListReducer from "./notice/list";
 import noticeDetailReducer from "./notice/detail";
@@ -24,7 +23,6 @@ const rootReducer = combineReducers({
   board: boardReducer,
   poster: posterReducer,
   outingCard: outingCardReducer,
-  outing: outingReducer,
   ManagementInfo,
   main: mainReducer,
   management: managementReducer,

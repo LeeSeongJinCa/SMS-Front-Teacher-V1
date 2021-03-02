@@ -16,10 +16,6 @@ export { default as CircleAllDetailContainer } from "./Circle/All/Detail/CircleA
 export { default as CircleAllContainer } from "./Circle/All/CircleAllContainer";
 export { default as CircleWantedDetailContainer } from "./Circle/Wanted/Detail/CircleWantedDetailContainer";
 
-export { default as WarningContainer } from "./Outing/WarningContainer";
-export { default as ApplyContainer } from "./Outing/ApplyContainer";
-export { default as HistoryContainer } from "./Outing/HistoryContainer";
-
 export { default as AdminOutingWaitListContainer } from "./Admin/Outing/Wait/List/AdminOutingWaitListContainer";
 export { default as AdminMainContainer } from "./Admin/Main/AdminMainContainer";
 export { default as AdminOutingNowListContainer } from "./Admin/Outing/Now/List/AdminOutingNowListContainer";
