@@ -36,8 +36,6 @@ const LoginContainer: FC<Props> = ({ loading, startLoading, endLoading }) => {
   const [autoLogin, setAutoLogin] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<ErrorState>(initErrorState);
 
-  const loginFilter = (str: string) => str.length >= 4 && str.length <= 16;
-
   const errorMessageMacro = (
     message:
       | typeof UNABLE_FORM
@@ -85,11 +83,6 @@ const LoginContainer: FC<Props> = ({ loading, startLoading, endLoading }) => {
 
   const login = useCallback(
     async (id: string, pw: string, autoLogin: boolean) => {
-      if (!(loginFilter(id) && loginFilter(pw))) {
-        errorMessageMacro(UNABLE_FORM);
-        return;
-      }
-
       startLoading();
       try {
         await teacherLogin(id, pw, autoLogin);
