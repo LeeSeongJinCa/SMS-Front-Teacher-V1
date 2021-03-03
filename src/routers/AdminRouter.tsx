@@ -17,7 +17,8 @@ import {
   PasswordChangeContainer,
   AdminOutingDoneContainer,
   AdminNoticeMineDetailContainer,
-  AdminNoticeEditContainer
+  AdminNoticeEditContainer,
+  AccountContainer
 } from "../containers";
 import { GlobalInnerBody } from "../GlobalStyle";
 import { TEACHER } from "../modules/action/header";
@@ -30,6 +31,9 @@ const AdminRouter: FC = () => {
   const { type } = useSelector((state: stateType) => state.header);
 
   useEffect(() => {
+    if (pathname === "/account") {
+      return;
+    }
     if (!(type === TEACHER || localStorage.getItem("sms-type") === TEACHER)) {
       toast.info("로그인 후 이용해주세요.");
       history.push("/login");
@@ -43,6 +47,7 @@ const AdminRouter: FC = () => {
       <Switch>
         <Route exact path="/" component={AdminMainContainer} />
         <Route exact path="/pw-change" component={PasswordChangeContainer} />
+        <Route exact path="/account" component={AccountContainer} />
         <Route exact path="/login" component={LoginContainer} />
         <Route
           exact
