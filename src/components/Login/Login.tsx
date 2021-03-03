@@ -5,7 +5,6 @@ import * as S from "./style";
 import { ErrorState } from "../../containers/Login/LoginContainer";
 import Loading from "../default/Loading/Loading";
 import { CapsLock as CapsLockIcon, Eye, EyeOff } from "../../assets";
-import { Link } from "react-router-dom";
 
 interface Props {
   loading: boolean;
