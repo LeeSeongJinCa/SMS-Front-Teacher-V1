@@ -38,35 +38,35 @@ const Account: FC<Props> = ({
 
   return (
     <S.AccountWrap>
-      <h1>SMS</h1>
+      <S.Title>SMS</S.Title>
       <div>
-        <h3>
+        <S.InputLabel>
           <label htmlFor="grade">이름</label>
-        </h3>
-        <div className="a">
+        </S.InputLabel>
+        <S.InputWrap>
           <input type="text" id="grade" onChange={handleName} value={name} />
-        </div>
+        </S.InputWrap>
       </div>
 
       <div>
-        <h3>
+        <S.InputLabel>
           <label htmlFor="group">전화번호</label>
-        </h3>
-        <div className="a">
+        </S.InputLabel>
+        <S.InputWrap>
           <input
             type="text"
             id="group"
             onChange={handlePhoneNumber}
             value={phoneNumber}
           />
-        </div>
+        </S.InputWrap>
       </div>
 
       <div>
-        <h3>
+        <S.InputLabel>
           <label htmlFor="homeroom">담임 선생님</label>
-        </h3>
-        <input
+        </S.InputLabel>
+        <S.Checkbox
           type="checkbox"
           name="homeroom"
           id="homeroom"
@@ -75,11 +75,11 @@ const Account: FC<Props> = ({
       </div>
 
       <div>
-        <h3>
+        <S.InputLabel>
           <label htmlFor="name">학년</label>
-        </h3>
-        <div className={`a ${homeroom ? "disabled" : ""}`}>
-          <select
+        </S.InputLabel>
+        <S.InputWrap className={homeroom ? "disabled" : ""}>
+          <S.Select
             name="name"
             id="name"
             disabled={homeroom}
@@ -90,16 +90,16 @@ const Account: FC<Props> = ({
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
-          </select>
-        </div>
+          </S.Select>
+        </S.InputWrap>
       </div>
 
       <div>
-        <h3>
+        <S.InputLabel>
           <label htmlFor="phoneNumber">반</label>
-        </h3>
-        <div className={`a ${homeroom ? "disabled" : ""}`}>
-          <select
+        </S.InputLabel>
+        <S.InputWrap className={homeroom ? "disabled" : ""}>
+          <S.Select
             name="phoneNumber"
             id="phoneNumber"
             disabled={homeroom}
@@ -110,39 +110,39 @@ const Account: FC<Props> = ({
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
-          </select>
-        </div>
+          </S.Select>
+        </S.InputWrap>
       </div>
 
       <div>
-        <h3>
+        <S.InputLabel>
           <label htmlFor="teacherId">아이디</label>
-        </h3>
-        <div className="a">
+        </S.InputLabel>
+        <S.InputWrap>
           <input
             type="text"
             id="teacherId"
             onChange={handleTeacherId}
             value={teacherId}
           />
-        </div>
+        </S.InputWrap>
       </div>
 
       <div>
-        <h3>
+        <S.InputLabel>
           <label htmlFor="teacherPw">비밀번호</label>
-        </h3>
-        <div className="a">
+        </S.InputLabel>
+        <S.InputWrap>
           <input
             type="password"
             id="teacherPw"
             onChange={handleTeacherPw}
             value={teacherPw}
           />
-        </div>
+        </S.InputWrap>
       </div>
 
-      <button onClick={handleApplyAccount}>계정 신청</button>
+      <S.ApplyButton onClick={handleApplyAccount}>계정 신청</S.ApplyButton>
     </S.AccountWrap>
   );
 };
