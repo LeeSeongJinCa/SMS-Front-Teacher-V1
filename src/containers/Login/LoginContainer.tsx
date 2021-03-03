@@ -6,7 +6,6 @@ import { Login } from "../../components";
 import { postLoginTeacher } from "../../lib/api/Login";
 import {
   PASSWORD_NOT_MATCHED,
-  UNABLE_FORM,
   UNAUTHORIZED
 } from "../../lib/api/payloads/Login";
 import { getAxiosError } from "../../lib/utils";
@@ -36,12 +35,7 @@ const LoginContainer: FC<Props> = ({ loading, startLoading, endLoading }) => {
   const [autoLogin, setAutoLogin] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<ErrorState>(initErrorState);
 
-  const errorMessageMacro = (
-    message:
-      | typeof UNABLE_FORM
-      | typeof UNAUTHORIZED
-      | typeof PASSWORD_NOT_MATCHED
-  ) => {
+  const errorMessageMacro = (message: string) => {
     setErrorMessage({
       status: true,
       message
@@ -98,6 +92,10 @@ const LoginContainer: FC<Props> = ({ loading, startLoading, endLoading }) => {
           errorMessageMacro(UNAUTHORIZED);
         } else if (status === 409 && (code === -402 || code === -412)) {
           errorMessageMacro(PASSWORD_NOT_MATCHED);
+        } else if (status === 409 && code === -413) {
+          errorMessageMacro(
+            "관리자에 인증 후 사용 가능합니다. 해당 상태가 지속된다면 담당 선생님께 문의해주세요."
+          );
         }
 
         setPw("");
