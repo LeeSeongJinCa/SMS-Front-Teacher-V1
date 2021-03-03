@@ -33,6 +33,7 @@ jobs:
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
           SECURITY_BASE_PLAIN: ${{ secrets.SECURITY_BASE_PLAIN }}
           SECURITY_PASS_PHRASE: ${{ secrets.SECURITY_PASS_PHRASE }}
+          CHANNEL_PLUGIN_KEY: ${{ secrets.CHANNEL_PLUGIN_KEY }}
 
       - name: Deploy to S3
         env:
