@@ -133,7 +133,9 @@ const Login: FC<Props> = ({
               <S.AutoLoginCheckbox id="auto-login-checkbox" />
               <span>자동로그인</span>
             </S.AutoLoginLabel>
-            <Link to="/account">계정 신청</Link>
+            <S.GoAccountPage to="/account">
+              아직 계정이 없으신가요?
+            </S.GoAccountPage>
           </S.AutoLogin>
         </S.LoginInputsWrap>
       </S.LoginForm>

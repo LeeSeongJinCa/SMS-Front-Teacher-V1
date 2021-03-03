@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { Check, CheckGray } from "../../assets";
@@ -88,11 +89,6 @@ export const AutoLogin = styled.div`
     box-shadow: -2px -2px 5px rgba(255, 255, 255, 1),
       3px 3px 5px rgba(0, 0, 0, 0.1);
   }
-  > a {
-    text-decoration: none;
-    color: #8e8e8e;
-    font-size: 14px;
-  }
 `;
 
 export const AutoLoginCheckbox = styled.div`
@@ -164,4 +160,10 @@ export const ErrorMessage = styled.p`
   color: red;
   font-size: 14px;
   transition: 0.3s;
+`;
+
+export const GoAccountPage = styled(Link)`
+  text-decoration: none;
+  color: #23b2ad;
+  font-size: 14px;
 `;
