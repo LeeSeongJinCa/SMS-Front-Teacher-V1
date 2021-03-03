@@ -56,7 +56,8 @@ module.exports = {
       "NAVER_CLIENT_ID",
       "NAVER_CLIENT_SECRET",
       "SECURITY_BASE_PLAIN",
-      "SECURITY_PASS_PHRASE"
+      "SECURITY_PASS_PHRASE",
+      "CHANNEL_PLUGIN_KEY"
     ])
   ],
   devServer: {
