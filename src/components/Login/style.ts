@@ -79,6 +79,7 @@ export const Eye = styled.img`
 export const AutoLogin = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   user-select: none;
   margin: 12px 0;
   #auto-login:checked ~ #auto-login-checkbox {
@@ -86,6 +87,11 @@ export const AutoLogin = styled.div`
     background-image: url(${Check});
     box-shadow: -2px -2px 5px rgba(255, 255, 255, 1),
       3px 3px 5px rgba(0, 0, 0, 0.1);
+  }
+  > a {
+    text-decoration: none;
+    color: #8e8e8e;
+    font-size: 14px;
   }
 `;
 
