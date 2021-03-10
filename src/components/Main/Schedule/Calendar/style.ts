@@ -80,15 +80,16 @@ export const CalendarDaySpan = styled.span`
   text-align: center;
 `;
 
-interface Bar {
-  weekOfMonth: number;
-  sDay: number;
-  eDay: number;
+interface ICalendarBar {
   overlap: number;
+  weekOfMonth: number;
+  day: number;
   backgroundColor: string;
+  isStart: boolean;
+  isEnd: boolean;
 }
 
-export const CalendarBar = styled.div<Bar>`
+export const CalendarBar = styled.div<ICalendarBar>`
   position: absolute;
   top: ${({ weekOfMonth, overlap }) => {
     const lineHeight = 17;
@@ -96,12 +97,14 @@ export const CalendarBar = styled.div<Bar>`
     const defaultTop = 60;
     return lineHeight * overlap + weekHeight * (weekOfMonth - 1) + defaultTop;
   }}px;
-  left: ${({ sDay }) => `calc(100% / 7 * ${sDay});`};
-  width: ${({ sDay, eDay }) => `calc((100% / 7) * (${eDay} - ${sDay} + 1))`};
-  padding-left: 2px;
-  outline: 1px solid white;
-  color: white;
+  left: ${({ day }) => `calc(100% / 7 * ${day});`};
+  width: calc(100% / 7);
+  height: 15px;
   background-color: ${({ backgroundColor }) => backgroundColor};
+  padding-left: 2px;
+  border-left: ${({ isStart }) => isStart && "1px solid white"};
+  border-right: ${({ isEnd }) => isEnd && "1px solid white"};
+  color: white;
   font-size: 8px;
   box-sizing: border-box;
   cursor: pointer;
@@ -112,6 +115,7 @@ export const CalendarBar = styled.div<Bar>`
 
 export const CalendarBarDetail = styled.p`
   width: 100%;
+  height: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
