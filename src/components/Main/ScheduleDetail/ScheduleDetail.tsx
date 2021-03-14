@@ -1,13 +1,11 @@
 import React, { FC, memo, MouseEvent, ReactElement } from "react";
-import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import * as S from "../style";
-import { stateType } from "../../../modules/reducer";
-import { UserType } from "../../../modules/action/header";
-import { setTargetUuid } from "../../../modules/action/main";
 import { Loading } from "../../default";
 import { padNum } from "../../../lib/utils";
+import useCustomSelector from "../../../lib/hooks/useCustomSelector";
+import { setTargetUuid } from "../../../modules/action/main";
 
 interface Props {
   handleShowAdd?: () => void;
@@ -28,12 +26,10 @@ const ScheduleDetail: FC<Props> = ({
   handleShowEdit,
   handleShowDelete
 }): ReactElement => {
-  const location = useLocation();
   const dispatch = useDispatch();
   const {
-    main: { schedules, scheduleLoading },
-    header: { type }
-  } = useSelector((state: stateType) => state);
+    main: { schedules, scheduleLoading }
+  } = useCustomSelector();
 
   const getLocalDate = (dateNum: number) => {
     const date = new Date(dateNum);
@@ -67,7 +63,7 @@ const ScheduleDetail: FC<Props> = ({
           <S.DetailHeadData>날짜</S.DetailHeadData>
         </S.DetailHead>
       </S.DetailHeader>
-      <S.DetailBody type={type as UserType}>
+      <S.DetailBody>
         {scheduleLoading ? (
           <S.DetailLoadingWrap>
             <Loading size="100px" />

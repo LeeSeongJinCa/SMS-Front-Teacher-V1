@@ -1,65 +1,74 @@
 import React, {
   ReactElement,
   useMemo,
-  MouseEvent,
   useCallback,
-  memo
+  memo,
+  useEffect
 } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import * as S from "./style";
+import Scheduler from "./Scheduler";
 
-import { stateType } from "../../../../modules/reducer";
-import { UserType } from "../../../../modules/action/header";
-import { getWeekOfMonth, padNum } from "../../../../lib/utils";
+import { padNum } from "../../../../lib/utils";
+import { setSelectedDate } from "../../../../modules/action/main";
+import useCustomSelector from "../../../../lib/hooks/useCustomSelector";
 
 interface Props {}
 
-enum BackgroundColor {
-  "#1e9ce2" = 0,
-  "#f2532b" = 1,
-  "#3ab57a" = 2
-}
-
 const CalendarDate: React.FC<Props> = () => {
-  const {
-    main: { schedulerDate, schedules },
-    header: { type }
-  } = useSelector((state: stateType) => state);
+  const dispatch = useDispatch();
+  const { schedulerDate } = useCustomSelector().main;
 
-  const onClickDate = (e: MouseEvent<HTMLDivElement>) => {
-    const classList = e.currentTarget.classList;
+  const handleClickDate = (target: HTMLDivElement) => {
+    const id = target.dataset.id;
+    const classList = target.classList;
+    const children = target.parentNode.children;
+
     if (classList.contains("selected")) {
+      dispatch(setSelectedDate(""));
       classList.remove("selected");
       return;
     }
-    Array.from(e.currentTarget.parentNode.children).forEach(el => {
+
+    Array.from(children).map(el => {
       el.classList.remove("selected");
     });
+
+    dispatch(setSelectedDate(id));
     classList.add("selected");
   };
 
   const getDateJSX = (
-    children: number = 0,
+    children: number,
     id: string = "",
     styling: string = ""
-  ): ReactElement => (
-    <S.CalendarDate
-      key={id}
-      className={styling}
-      onClick={styling.match("curr") ? onClickDate : () => {}}
-      type={type as UserType}
-    >
-      <S.CalendarDaySpan>{children && padNum(children)}</S.CalendarDaySpan>
-    </S.CalendarDate>
-  );
+  ): ReactElement => {
+    if (!styling) {
+      return (
+        <S.CalendarDate key={id} className={styling}>
+          <S.CalendarDaySpan>{padNum(children)}</S.CalendarDaySpan>
+        </S.CalendarDate>
+      );
+    }
+
+    return (
+      <S.CalendarDate
+        key={id}
+        data-id={id}
+        className={styling}
+        onClick={e => handleClickDate(e.currentTarget)}
+      >
+        <S.CalendarDaySpan>{padNum(children)}</S.CalendarDaySpan>
+      </S.CalendarDate>
+    );
+  };
 
   const printCalendar = useCallback((): ReactElement[] => {
     const yearCopy = schedulerDate.getFullYear();
     const monthCopy = schedulerDate.getMonth() + 1;
     const fixedMonth = padNum(monthCopy);
     const lastDay = new Date(yearCopy, monthCopy, 0).getDate();
-    const prevLastDate = new Date(yearCopy, monthCopy - 1, 0).getDate();
     const firstDay = new Date(yearCopy, monthCopy - 1, 1).getDay();
     const jsx: ReactElement[] = [];
     let startDayCount = 1;
@@ -68,13 +77,16 @@ const CalendarDate: React.FC<Props> = () => {
     for (let i = 0; i < 6; i += 1) {
       for (let j = 0; j < 7; j += 1) {
         if (i === 0 && j < firstDay) {
-          jsx.push(getDateJSX(prevLastDate - firstDay + j + 1, `${j}`, "prev"));
+          const prevLastDate = new Date(yearCopy, monthCopy - 1, 0).getDate();
+
+          jsx.push(getDateJSX(prevLastDate - firstDay + j + 1, `${j}`));
         } else if (i >= 0 && startDayCount <= lastDay) {
           const date = `${yearCopy}-${fixedMonth}-${padNum(startDayCount)}`;
           const t = new Date();
           const y = t.getFullYear();
           const m = t.getMonth() + 1;
           const d = t.getDate();
+
           date === `${y}-${padNum(m)}-${padNum(d)}`
             ? jsx.push(getDateJSX(startDayCount, date, "curr today"))
             : jsx.push(getDateJSX(startDayCount, date, "curr"));
@@ -84,106 +96,29 @@ const CalendarDate: React.FC<Props> = () => {
             +fixedMonth + 1 > 12
               ? `${+yearCopy + 1}-${1}-${padNum(nextDayCount)}`
               : `${yearCopy}-${+fixedMonth + 1}-${padNum(nextDayCount)}`;
+
           jsx.push(getDateJSX(nextDayCount, date));
           nextDayCount += 1;
         }
       }
     }
     return jsx;
-  }, [schedulerDate, type]);
+  }, [schedulerDate]);
 
   const memoizedCalendar = useMemo<ReactElement[]>(() => {
     return printCalendar();
-  }, [schedulerDate, type]);
+  }, [schedulerDate]);
 
-  const scheduling = () => {
-    const date = new Date();
-    const y = date.getFullYear();
-    const m = date.getMonth() + 1;
-    const lastDate = new Date(y, m, 0).getDate();
-    const list = [];
-    const printed = [];
-    const arr = schedules.map(
-      ({ start_date: s, end_date: e, schedule_uuid: u }) => [
-        new Date(s).getDate(),
-        new Date(e).getDate(),
-        u
-      ]
-    );
-
-    for (let i = 1; i <= lastDate; i++) {
-      for (const [s, e, u] of arr) {
-        if (s === i) {
-          const idx = list.findIndex(_ => _ === null);
-
-          if (idx === -1) list.push(u);
-          else list[idx] = u;
-        }
-
-        if (+e + 1 === i) {
-          const idx = list.findIndex(_ => _ === u);
-
-          list[idx] = null;
-        }
-      }
-
-      const date = new Date(y, m - 1, i);
-      const day = date.getDay();
-      const weekOfMonth = getWeekOfMonth(date);
-
-      printed.push(getScheduleJSX(list, weekOfMonth, day, i));
-    }
-
-    return printed;
-  };
-
-  const getScheduleJSX = (
-    uuids: string[],
-    weekOfMonth: number,
-    day: number,
-    date: number
-  ) => {
-    return uuids.map((u, i) => {
-      if (!u) return null;
-      if (i > 2) return null;
-
-      const target = schedules.find(_ => _.schedule_uuid === u);
-      const { detail: d, start_date: s, end_date: e } = target;
-      const today = new Date().getDate();
-      const isPrev = new Date(e).getDate() <= today;
-      let isStart = false;
-      let isEnd = false;
-
-      if (new Date(s).getDate() === date) {
-        isStart = true;
-      }
-
-      if (new Date(e).getDate() === date) {
-        isEnd = true;
-      }
-
-      return (
-        <S.CalendarBar
-          key={`${i}-${u}`}
-          weekOfMonth={weekOfMonth}
-          overlap={i}
-          day={day}
-          className={isPrev ? "prev" : ""}
-          backgroundColor={BackgroundColor[i]}
-          isStart={isStart}
-          isEnd={isEnd}
-        >
-          <S.CalendarBarDetail>{isStart ? d : " "}</S.CalendarBarDetail>
-        </S.CalendarBar>
-      );
-    });
-  };
+  useEffect(() => {
+    return () => {
+      dispatch(setSelectedDate(""));
+    };
+  }, []);
 
   return (
     <>
       {memoizedCalendar}
-      {console.log("ㅡㅡㅡㅡㅡ")}
-      {scheduling()}
+      <Scheduler />
     </>
   );
 };

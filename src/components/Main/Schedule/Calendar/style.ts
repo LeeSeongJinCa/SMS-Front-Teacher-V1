@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { STUDENT, UserType } from "../../../../modules/action/header";
-
 export const Calendar = styled.div`
   position: relative;
   display: flex;
@@ -27,32 +25,20 @@ export const CalendarDTemp = styled.div`
   font-size: 12px;
 `;
 
-interface DateBorderColor {
-  type: UserType;
-}
-
-export const CalendarDate = styled(CalendarDTemp)<DateBorderColor>`
+export const CalendarDate = styled(CalendarDTemp)`
   position: relative;
   height: 80px;
   border: 1.5px solid transparent;
   box-sizing: border-box;
   color: rgba(0, 0, 0, 20%);
   cursor: default;
-  &.prev {
-  }
+  z-index: 10;
   &.curr {
     color: black;
     cursor: pointer;
-    &:hover {
-      background-color: #e9e9e9;
-      & > button {
-        display: flex;
-      }
-    }
   }
   &.selected {
-    border: 1.5px solid
-      ${({ type }) => (type === STUDENT ? "#5323b2" : "#23B2AD")};
+    border: 1.5px solid #23b2ad;
   }
   &.today > span {
     color: white;
