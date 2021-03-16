@@ -57,7 +57,7 @@ export const SelectWrap = styled.div`
 `;
 
 export const HiddenWrap = styled.div`
-  width: 120px;
+  width: 140px;
   border: 2px solid #dddddd;
   padding: 10px;
   background-color: white;

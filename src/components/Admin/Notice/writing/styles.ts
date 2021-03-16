@@ -9,6 +9,7 @@ export const TitleInput = styled.input`
   color: #888888;
   border: none;
   font-size: 15px;
+  width: 100%;
 `;
 
 export const Hr = styled.hr`
