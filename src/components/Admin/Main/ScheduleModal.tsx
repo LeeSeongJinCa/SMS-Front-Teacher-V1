@@ -134,7 +134,6 @@ const ScheduleModal: FC<Props> = ({
                   setDetail(e.currentTarget.value);
                 }}
                 value={detail}
-                maxLength={100}
               />
             </S.ScheduleModalFormInnerWrap>
           </S.ScheduleModalFormDetail>

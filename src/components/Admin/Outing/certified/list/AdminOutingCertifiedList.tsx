@@ -6,8 +6,8 @@ import { OutingCardPage } from "../../../../default";
 const AdminOutingCertifiedList: FC = () => {
   return (
     <OutingCardPage
-      status={OutingStatus["선생님 거절"]}
-      title="미인증 외출증"
+      status={OutingStatus["외출 인증 승인"]}
+      title="종료된 외출증"
       isClicked={() => {}}
     />
   );

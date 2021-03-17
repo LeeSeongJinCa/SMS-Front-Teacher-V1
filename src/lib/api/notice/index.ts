@@ -43,3 +43,23 @@ export const deleteNotice = (uuid: string): Promise<AxiosResponse<{}>> => {
 export const writeNotice = (payload: ReqBoardWrite) => {
   return apiDefault().post("/announcements", payload);
 };
+
+export const searchSchoolNotice = (payload: {
+  page: number;
+  query: string;
+}): Promise<AxiosResponse<ResBoardList>> => {
+  const { query, page } = payload;
+  return apiDefault().get(
+    `/announcements/types/school/query/${query}?start=${page || 0}`
+  );
+};
+
+export const searchClubNotice = (payload: {
+  page: number;
+  query: string;
+}): Promise<AxiosResponse<ResBoardList>> => {
+  const { query, page } = payload;
+  return apiDefault().get(
+    `/announcements/types/club/query/${query}?staart=${page || 0}`
+  );
+};

@@ -27,13 +27,13 @@ interface SubUrlObj {
 }
 
 const adminUrlObj: SubUrlObj = {
-  certified: "미인증 외출증",
+  certified: "종료된 외출증",
   now: "현재 외출 학생",
   wait: "승인대기 외출증",
   all: "전체 공지",
   mine: "내가 올린 공지",
   writing: "공지사항 작성",
-  done: "종료된 외출증"
+  done: "최종 확인 대기 외출증"
 };
 
 export const getNavUrl = (url: string): PageState => {
