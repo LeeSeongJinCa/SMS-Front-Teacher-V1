@@ -108,7 +108,6 @@ export const AutoLoginLabel = styled.label`
   display: flex;
   align-items: center;
   color: #242424;
-  font-size: 14px;
   cursor: pointer;
   > input {
     all: unset;
@@ -165,5 +164,4 @@ export const ErrorMessage = styled.p`
 export const GoAccountPage = styled(Link)`
   text-decoration: none;
   color: #23b2ad;
-  font-size: 14px;
 `;
