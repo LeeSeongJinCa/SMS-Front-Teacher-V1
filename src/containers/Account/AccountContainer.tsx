@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 
 import { Account } from "../../components";
@@ -10,6 +11,7 @@ import { getAxiosError } from "../../lib/utils";
 interface Props {}
 
 const AccountContainer: FC<Props> = () => {
+  const history = useHistory();
   const accountInputs = useAccountInputs();
   const { name, phoneNumber, teacherId, teacherPw } = accountInputs;
 
@@ -45,10 +47,10 @@ const AccountContainer: FC<Props> = () => {
 
     try {
       await postTeacher(accountForm, homeroom);
-
       toast.success(
         "선생님 계정 신청이 완료되었습니다. 관리자 승인 후 사용하실 수 있습니다."
       );
+      history.push("/login");
     } catch (err) {
       const { code, status } = getAxiosError(err);
 
