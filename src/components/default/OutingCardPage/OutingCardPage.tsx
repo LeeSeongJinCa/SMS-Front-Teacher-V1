@@ -47,7 +47,7 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
             />
           ))
         ) : (
-          <S.EmptyList>불러올 {title}이 없습니다.</S.EmptyList>
+          <S.EmptyList>{title}이 존재하지 않습니다.</S.EmptyList>
         )}
       </S.CardContainer>
       <OutingCardModal />
