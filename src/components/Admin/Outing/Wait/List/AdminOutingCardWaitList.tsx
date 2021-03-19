@@ -15,7 +15,7 @@ const AdminOutingCardWaitList: FC = () => {
   return (
     <OutingCardPage
       status={OutingStatus["학부모 승인"]}
-      title="승인대기"
+      title="승인대기 외출증"
       isClicked={clickHandler}
     />
   );
