@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as S from "./styles";
@@ -23,13 +23,29 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
   const data = useSelector((state: stateType) => state.outingCard.list);
   const dispatch = useDispatch();
 
-  const filterChangeHandler = useCallback((data: OutingCardFilterType) => {
-    const filterData: ReqOutingCardFilter = {
-      ...data,
-      status
-    };
-    dispatch(getOutingCardListSaga(filterData));
-  }, []);
+  const filterChangeHandler = useCallback(
+    (data: OutingCardFilterType) => {
+      if (
+        data.floor === undefined &&
+        data.grade === undefined &&
+        data.group === undefined
+      )
+        return;
+      const deleteObj = Object.keys(data).reduce((state: {}, now: string) => {
+        if (!data[now]) {
+          return state;
+        }
+        return { ...state, [now]: data[now] };
+      }, {});
+
+      const filterData: ReqOutingCardFilter = {
+        ...deleteObj,
+        status
+      };
+      dispatch(getOutingCardListSaga(filterData));
+    },
+    [status]
+  );
 
   return (
     <S.Container>
