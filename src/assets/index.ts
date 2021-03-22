@@ -84,3 +84,4 @@ export { default as Eye } from "./PasswordChange/eye.svg";
 export { default as EyeOff } from "./PasswordChange/eyeOff.svg";
 
 export { default as Spinner } from "./default/Spinner.svg";
+export { default as lateIcon } from "./Outing/lateIcon.svg";

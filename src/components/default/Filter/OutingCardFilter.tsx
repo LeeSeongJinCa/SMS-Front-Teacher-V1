@@ -16,20 +16,10 @@ interface Props {
 const OutingCardFilter: FC<Props> = ({ onChange }) => {
   const [settingIsOpen, setSetiingIsOpen] = useState<boolean>(false);
   const [typeIsFloor, setTypeIsFloor] = useState<boolean>(false);
-  const [filterData, setFilterData] = useState<OutingCardFilter>({
-    grade: 0,
-    group: 0
-  });
+  const [filterData, setFilterData] = useState<OutingCardFilter>({});
   const [filterOn, setFilterOn] = useState<boolean>(false);
 
   useEffect(() => {
-    if (
-      filterData.grade === 0 &&
-      filterData.group === 0 &&
-      filterData.group === 0
-    )
-      return;
-    console.log(filterData);
     onChange(filterData);
   }, [filterData]);
 
@@ -41,6 +31,10 @@ const OutingCardFilter: FC<Props> = ({ onChange }) => {
       const { name, value } = e.target;
       setFilterData(prev => {
         const newState = { ...prev, [name]: Number(value) };
+        if (!newState.grade && newState.group) {
+          toast.error("학년을 선택해야 합니다");
+          return prev;
+        }
 
         return newState;
       });
@@ -49,8 +43,11 @@ const OutingCardFilter: FC<Props> = ({ onChange }) => {
   );
 
   const changeSetiingIsOpen = useCallback(() => {
-    setSetiingIsOpen(prev => !prev);
-  }, []);
+    setSetiingIsOpen(prev => {
+      if (!prev && !filterOn) return prev;
+      return !prev;
+    });
+  }, [filterOn]);
 
   const changeTypeClickHandler = useCallback(() => {
     if (typeIsFloor) {
@@ -65,6 +62,7 @@ const OutingCardFilter: FC<Props> = ({ onChange }) => {
   const filterToggle = useCallback(() => {
     if (filterOn) {
       setFilterOn(false);
+      setSetiingIsOpen(false);
       onChange({ grade: 0, group: 0 });
       return;
     }
@@ -141,7 +139,8 @@ const OutingCardFilter: FC<Props> = ({ onChange }) => {
           )}
         </S.FilterBasic>
         <S.ResetBtn onClick={filterToggle}>
-          {filterOn ? "On" : "Off"}
+          <S.ToggleBtn isActive={filterOn}>ON</S.ToggleBtn>
+          <S.ToggleBtn isActive={!filterOn}>OFF</S.ToggleBtn>
         </S.ResetBtn>
       </S.Container>
     </>

@@ -19,7 +19,8 @@ import {
   APPROVE_OUTING_CARD_SAGA,
   REJECT_OUTING_CARD_SAGA,
   CloseOutingCardModal,
-  FINISH_OUTING_CARD_SAGA
+  FINISH_OUTING_CARD_SAGA,
+  TEACHER_FINISH_OUTING_CARD_SAGA
 } from "../../action/outingCard";
 
 function* getOutingCardListSaga(
@@ -94,11 +95,30 @@ function* finishOutingCardSaga(
   }
 }
 
+function* teacherFinishOutingCardSaga(
+  action: ReturnType<typeof finishOutingCardSagaCreator>
+) {
+  try {
+    yield call(setActionOutingCard, {
+      action: "certify",
+      outing_uuid: action.payload
+    });
+    toast.success("성공적으로 종료했습니다.");
+    yield put(
+      getOutingCardListSagaCreater({ status: OutingStatus["외출 시작"] })
+    );
+  } catch (err) {
+    const axiosErr = err as AxiosError;
+    errorHandler(axiosErr.response.status, yield getContext("history"));
+  }
+}
+
 function* outingCardSaga() {
   yield takeEvery(GET_OUTING_CARD_LIST_SAGA, getOutingCardListSaga);
   yield takeEvery(APPROVE_OUTING_CARD_SAGA, approveOutingCardSaga);
   yield takeEvery(REJECT_OUTING_CARD_SAGA, rejectOutingCardSaga);
   yield takeEvery(FINISH_OUTING_CARD_SAGA, finishOutingCardSaga);
+  yield takeEvery(TEACHER_FINISH_OUTING_CARD_SAGA, teacherFinishOutingCardSaga);
 }
 
 export default outingCardSaga;
