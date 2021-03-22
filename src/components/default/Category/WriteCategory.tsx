@@ -49,8 +49,16 @@ const WriteCategory: FC<Props> = ({ onChange }) => {
         ""
       )
     );
+    if (allSelect.grade) {
+      onChange({ target_grade: 123, target_group: 1234 });
+      return;
+    }
+    if (allSelect.group) {
+      onChange({ target_grade: group, target_group: 1234 });
+      return;
+    }
     onChange({ target_group: group, target_grade: grade });
-  }, [filterData]);
+  }, [filterData, allSelect]);
 
   const allChangeHandler = useCallback(
     (e: MouseEvent<HTMLInputElement>) => {
@@ -70,8 +78,6 @@ const WriteCategory: FC<Props> = ({ onChange }) => {
   const changeHandler = useCallback(
     (e: MouseEvent<HTMLInputElement>) => {
       const { name, value: targetI, checked } = e.currentTarget;
-      if (name === "grade" && allSelect.grade) return;
-      if (name === "group" && allSelect.group) return;
 
       const [grade1, grade2, grade3] = filterData.grade;
       const isIncludeTrue = filterData.group.reduce(
@@ -91,6 +97,7 @@ const WriteCategory: FC<Props> = ({ onChange }) => {
         toast.error("학년이 전체일 경우 특정반을 선택할 수 없습니다.");
         return;
       }
+      setAllSelect(prev => ({ ...prev, [name]: false }));
       if (!checked) {
         setFilterData(prev => ({
           ...prev,
