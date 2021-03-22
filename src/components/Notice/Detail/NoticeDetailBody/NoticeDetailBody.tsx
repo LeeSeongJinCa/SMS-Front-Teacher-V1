@@ -18,7 +18,9 @@ interface Props {
 const NoticeDetailBody: FC<Props> = ({ content }) => {
   const render = useCallback(() => {
     if (!content) return "";
-    const blocks: EditerJSParserObj[] = JSON.parse(content).blocks;
+    const blocks: EditerJSParserObj[] = JSON.parse(
+      content.replace(/&nbsp;/, "")
+    ).blocks;
     return blocks.map(({ data, type }, i) => {
       switch (type) {
         case "header": {
