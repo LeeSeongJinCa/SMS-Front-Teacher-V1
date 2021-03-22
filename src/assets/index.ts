@@ -37,6 +37,8 @@ export { default as NavIconUnauthorizedBlack } from "./navigation/NavIcon-unAuth
 export { default as NavIconUnauthorizedMint } from "./navigation/NavIcon-unAuthorized-mint.svg";
 export { default as NavIconExitBlack } from "./navigation/NavIcon-exit-black.svg";
 export { default as NavIconTrashCanYellow } from "./navigation/NavIcon-trashCan-yellow.svg";
+export { default as NavIconWaitBlack } from "./navigation/NavIcon-wait-black.svg";
+export { default as NavIconWaitMint } from "./navigation/NavIcon-wait-mint.svg";
 export { default as IconWhite } from "./navigation/Icon-white.svg";
 export { default as IconBlack } from "./navigation/Icon-Black.svg";
 export { default as CloseMenu } from "./navigation/CloseMenu.svg";
