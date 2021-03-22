@@ -89,7 +89,7 @@ const OutingCardFilter: FC<Props> = ({ onChange }) => {
               {typeIsFloor ? (
                 <>
                   <S.SelectWrap>
-                    <span>동아리</span>
+                    <span>층</span>
                     <select
                       name="floor"
                       value={floor || 0}
@@ -99,7 +99,7 @@ const OutingCardFilter: FC<Props> = ({ onChange }) => {
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
-                      <option value="4">5</option>
+                      <option value="5">5</option>
                       <option value="0">전체</option>
                     </select>
                   </S.SelectWrap>
@@ -129,7 +129,7 @@ const OutingCardFilter: FC<Props> = ({ onChange }) => {
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
-                      <option value="5">4</option>
+                      <option value="4">4</option>
                       <option value="0">전체</option>
                     </select>
                   </S.SelectWrap>
