@@ -19,7 +19,7 @@ const NoticeDetailBody: FC<Props> = ({ content }) => {
   const render = useCallback(() => {
     if (!content) return "";
     const blocks: EditerJSParserObj[] = JSON.parse(
-      content.replace(/&nbsp;/, "")
+      content.replace(/&nbsp;/g, "")
     ).blocks;
     return blocks.map(({ data, type }, i) => {
       switch (type) {
