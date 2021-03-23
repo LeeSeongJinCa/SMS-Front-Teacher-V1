@@ -73,6 +73,7 @@ const AdminNoticeWriting: FC<Props> = ({ setting }) => {
       toast.error("제목을 입력해주세요");
       return;
     }
+
     if (setting.type === "school" && isIncludeEmpty(filterData)) {
       toast.error("필터를 적용해주세요");
       return;

@@ -100,7 +100,7 @@ function* teacherFinishOutingCardSaga(
 ) {
   try {
     yield call(setActionOutingCard, {
-      action: "certify",
+      action: "end",
       outing_uuid: action.payload
     });
     toast.success("성공적으로 종료했습니다.");

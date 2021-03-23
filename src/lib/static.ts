@@ -14,7 +14,9 @@ import {
   NavIconUnauthorizedMint,
   NavIconAllMint,
   NavIconWriteBlack,
-  NavIconWriteMint
+  NavIconWriteMint,
+  NavIconWaitBlack,
+  NavIconWaitMint
 } from "../assets";
 import {
   MainSubItem,
@@ -86,9 +88,9 @@ export const subNavRouter: SubNavObj = {
     },
     {
       name: "최종 확인 대기 외출증",
-      url: NavIconUnauthorizedBlack,
+      url: NavIconWaitBlack,
       route: "/out/done",
-      acitveUrl: NavIconUnauthorizedMint
+      acitveUrl: NavIconWaitMint
     },
     {
       name: "종료된 외출증",
