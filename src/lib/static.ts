@@ -16,8 +16,7 @@ import {
   NavIconWriteBlack,
   NavIconWriteMint,
   NavIconPieChart,
-  NavIconPieChartMint
-  NavIconWriteMint,
+  NavIconPieChartMint,
   NavIconWaitBlack,
   NavIconWaitMint
 } from "../assets";
