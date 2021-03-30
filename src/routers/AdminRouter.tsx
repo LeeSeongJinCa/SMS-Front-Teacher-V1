@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { PageNotFound } from "../components";
+import { PageNotFound, AdminStatistics } from "../components";
 import {
   AdminOutingCertifiedListContainer,
   AdminOutingNowListContainer,
@@ -31,9 +31,7 @@ const AdminRouter: FC = () => {
   const { type } = useSelector((state: stateType) => state.header);
 
   useEffect(() => {
-    if (pathname === "/account") {
-      return;
-    }
+    if (pathname === "/account") return;
     if (!(type === TEACHER || localStorage.getItem("sms-type") === TEACHER)) {
       toast.info("로그인 후 이용해주세요.");
       history.push("/login");
@@ -61,6 +59,7 @@ const AdminRouter: FC = () => {
           path="/out/certified"
           component={AdminOutingCertifiedListContainer}
         />
+        <Route exact path="/out/statistics" component={AdminStatistics} />
         <Route
           exact
           path="/notice/all"
