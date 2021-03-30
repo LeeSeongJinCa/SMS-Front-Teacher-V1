@@ -1,6 +1,7 @@
 import React, { FC, memo, useCallback, useMemo, useState } from "react";
 
 import * as S from "./style";
+import { Period } from "./index";
 
 import { MainArrow } from "../../../../assets";
 import { EndStudents } from "../../../../lib/hooks/useEndStudents";
@@ -19,6 +20,8 @@ enum Days {
 interface Props {
   student: string;
   subList: EndStudents[];
+  period: Period;
+  filterPeriod: (student: EndStudents) => void;
 }
 
 interface SubProps {
@@ -41,25 +44,26 @@ const SubItem: FC<SubProps> = ({ place, reason, date, situation, late }) => {
   );
 };
 
-const StudentItem: FC<Props> = ({ student: sNumber, subList }) => {
+const StudentItem: FC<Props> = ({ student, subList, period, filterPeriod }) => {
   const [isShown, setShown] = useState<boolean>(false);
-  const name = sNumber.split(" ")[0];
-  const number = sNumber.split(" ")[1];
+  const name = student.split(" ")[0];
+  const number = student.split(" ")[1];
 
   const onClickShow = useCallback(() => {
     setShown(prev => !prev);
   }, []);
 
   const displaySubList = useMemo(() => {
-    return subList.map((item, i) => {
+    return subList.filter(filterPeriod).map((item, i) => {
       const date = new Date(item.date);
       const y = date.getFullYear();
       const m = padNum(date.getMonth() + 1);
       const d = padNum(date.getDate());
       const day = Days[date.getDay()];
+
       return (
         <SubItem
-          key={`${sNumber}_${i}`}
+          key={`${student}_${i}`}
           place={item.place}
           reason={item.reason}
           date={`${y}년 ${m}월 ${d}일 (${day})`}
@@ -68,6 +72,10 @@ const StudentItem: FC<Props> = ({ student: sNumber, subList }) => {
         />
       );
     });
+  }, [subList, period]);
+
+  const outingCount = useMemo(() => {
+    return subList.reduce((prev, curr) => (curr.late ? prev + 1 : prev), 0);
   }, [subList]);
 
   return (
@@ -75,9 +83,7 @@ const StudentItem: FC<Props> = ({ student: sNumber, subList }) => {
       <span>{name}</span>
       <span>{number}</span>
       <span>{subList.length}</span>
-      <span>
-        {subList.reduce((prev, curr) => (curr.late ? prev + 1 : prev), 0)}
-      </span>
+      <span>{outingCount}</span>
 
       <img
         src={MainArrow}

@@ -79,24 +79,19 @@ export const SearchWrap = styled.div`
   }
 `;
 
-export const PeriodWrap = styled.div`
+export const PeriodWrap = styled.label`
+  position: relative;
   display: flex;
   align-items: center;
   margin-left: 16px;
   cursor: pointer;
-  > div {
-    margin-right: 6px;
+  > span {
+    margin-right: 4px;
+    font-size: 14px;
   }
-`;
-
-export const Triangle = styled.div`
-  width: 0;
-  height: 0;
-  border-top: 4px solid black;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  & + div {
-    margin-left: 5px;
+  > select {
+    border: 1px solid #dddddd;
+    cursor: pointer;
   }
 `;
 
@@ -173,4 +168,7 @@ export const StudentSubList = styled.ul<SubList>`
   }
 `;
 
-export const NoList = styled.div``;
+export const NoDisplayList = styled.div`
+  padding: 24px;
+  text-align: center;
+`;

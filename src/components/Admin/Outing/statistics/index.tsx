@@ -8,55 +8,50 @@ import GroupSelector from "./GroupSelector";
 import { SearchIcon } from "../../../../assets";
 import useStatisticsSelector from "../../../../lib/hooks/useStatisticsSelector";
 import useEndStudents from "../../../../lib/hooks/useEndStudents";
+import useSearchInput from "../../../../lib/hooks/useSearchInput";
+import usePeriod from "../../../../lib/hooks/usePeriod";
+
+export type Period = 0 | 1 | 7 | 30;
 
 interface Props {}
 
 const Statistics: FC<Props> = () => {
   const [
-    gradeSelect,
-    groupSelect,
+    gradeState,
+    groupState,
     gradeHandler,
-    groupHandler
+    groupHandler,
+    filterSelector
   ] = useStatisticsSelector();
+  const [searchInput, onChangeSearch, filterSearch] = useSearchInput();
   const [endStudents, loading] = useEndStudents();
+  const [period, handlePeriod, filterPeriod] = usePeriod();
 
   const displayStudentItem = useMemo(() => {
     return Array.from(endStudents)
-      .filter(student => {
-        const sNumber = student[0];
-        const grade = sNumber[0];
-        const group = sNumber[1];
-
-        if (!gradeSelect["grade-1"] && grade === "1") return false;
-        if (!gradeSelect["grade-2"] && grade === "2") return false;
-        if (!gradeSelect["grade-3"] && grade === "3") return false;
-
-        if (!groupSelect["group-1"] && group === "1") return false;
-        if (!groupSelect["group-2"] && group === "2") return false;
-        if (!groupSelect["group-3"] && group === "3") return false;
-        if (!groupSelect["group-4"] && group === "4") return false;
-
-        return true;
-      })
+      .filter(filterSelector)
+      .filter(filterSearch)
       .map((student, i) => {
         const numberName = student[0];
         const subList = student[1];
-        return <StudentItem key={i} student={numberName} subList={subList} />;
+        return (
+          <StudentItem
+            key={i}
+            student={numberName}
+            subList={subList}
+            period={period}
+            filterPeriod={filterPeriod}
+          />
+        );
       });
-  }, [endStudents, gradeSelect, groupSelect]);
+  }, [endStudents, gradeState, groupState, searchInput, period]);
 
   return (
     <S.StatisticsWrap>
       <aside>
         <S.SelectorWrap className="selector-wrap">
-          <GradeSelector
-            gradeSelect={gradeSelect}
-            gradeHandler={gradeHandler}
-          />
-          <GroupSelector
-            groupSelect={groupSelect}
-            groupHandler={groupHandler}
-          />
+          <GradeSelector gradeSelect={gradeState} gradeHandler={gradeHandler} />
+          <GroupSelector groupSelect={groupState} groupHandler={groupHandler} />
         </S.SelectorWrap>
         <div>
           <S.SearchWrap className="search-wrap">
@@ -66,12 +61,21 @@ const Statistics: FC<Props> = () => {
                 alt="search student"
                 title="search student"
               />
-              <input placeholder="학생 이름을 입력하세요." />
+              <input
+                placeholder="학생 이름을 입력하세요."
+                onChange={onChangeSearch}
+                value={searchInput}
+              />
             </div>
           </S.SearchWrap>
-          <S.PeriodWrap className="period-wrap">
-            <S.Triangle />
-            <span>기간</span>
+          <S.PeriodWrap className="period-wrap" htmlFor="period">
+            <span>외출 날짜 기간</span>
+            <select onChange={handlePeriod}>
+              <option value={0}>기간 없음</option>
+              <option value={1}>하루 전</option>
+              <option value={7}>일주일 전</option>
+              <option value={30}>한달 전</option>
+            </select>
           </S.PeriodWrap>
         </div>
       </aside>
@@ -86,9 +90,11 @@ const Statistics: FC<Props> = () => {
           {endStudents.size ? (
             displayStudentItem
           ) : loading ? (
-            <div>외출 통계 내역을 불러오고 있습니다. 잠시만 기다려주세요.</div>
+            <S.NoDisplayList>
+              외출 통계 내역을 불러오고 있습니다. 잠시만 기다려주세요.
+            </S.NoDisplayList>
           ) : (
-            <div>외출 통계 내역이 없습니다.</div>
+            <S.NoDisplayList>외출 통계 내역이 없습니다.</S.NoDisplayList>
           )}
         </ul>
       </section>
