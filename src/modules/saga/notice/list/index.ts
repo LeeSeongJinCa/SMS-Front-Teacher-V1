@@ -9,7 +9,10 @@ import {
   getNoticeListSuccess,
   GET_NOTICE_CLUB_LIST,
   GET_NOTICE_WRITER_LIST,
-  getNoticeWriterList
+  getNoticeWriterList,
+  searchNoticeSchoolList,
+  SEARCH_NOTICE_CLUB_LIST_SEARCH,
+  SEARCH_NOTICE_SCHOOL_LIST_SEARCH
 } from "../../../action/notice/list";
 import * as noticeApi from "../../../../lib/api/notice";
 
@@ -49,7 +52,6 @@ function* getNoticeWriterListSaga(
   yield put(startLoading(GET_NOTICE_LIST));
   try {
     const { page, uuid } = action.payload;
-    console.log(page, uuid);
     const res: AxiosResponse<ResBoardList> = yield call(
       noticeApi.getNoticeWriterList,
       uuid,
@@ -60,10 +62,40 @@ function* getNoticeWriterListSaga(
   yield put(finishLoading(GET_NOTICE_LIST));
 }
 
+function* searchNoticeSchoolListSaga(
+  action: ReturnType<typeof searchNoticeSchoolList>
+) {
+  yield put(startLoading(GET_NOTICE_LIST));
+  try {
+    const res: AxiosResponse<ResBoardList> = yield call(
+      noticeApi.searchSchoolNotice,
+      action.payload
+    );
+    yield put(getNoticeListSuccess(res.data));
+  } catch (err) {}
+  yield put(finishLoading(GET_NOTICE_LIST));
+}
+
+function* searchNoticeClubListSaga(
+  action: ReturnType<typeof searchNoticeSchoolList>
+) {
+  yield put(startLoading(GET_NOTICE_LIST));
+  try {
+    const res: AxiosResponse<ResBoardList> = yield call(
+      noticeApi.searchClubNotice,
+      action.payload
+    );
+    yield put(getNoticeListSuccess(res.data));
+  } catch (err) {}
+  yield put(finishLoading(GET_NOTICE_LIST));
+}
+
 function* noticeListSaga() {
   yield takeEvery(GET_NOTICE_SCHOOL_LIST, getNoticeSchoolListSaga);
   yield takeEvery(GET_NOTICE_CLUB_LIST, getNoticeClubListSaga);
   yield takeEvery(GET_NOTICE_WRITER_LIST, getNoticeWriterListSaga);
+  yield takeEvery(SEARCH_NOTICE_SCHOOL_LIST_SEARCH, searchNoticeSchoolListSaga);
+  yield takeEvery(SEARCH_NOTICE_CLUB_LIST_SEARCH, searchNoticeClubListSaga);
 }
 
 export default noticeListSaga;

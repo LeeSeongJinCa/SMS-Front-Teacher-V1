@@ -12,6 +12,8 @@ export const Header = styled.div`
   width: calc(100% + 20px);
   transform: translateX(-10px);
   border-bottom: 2px solid #dddddd;
+  position: relative;
+  z-index: 1;
 `;
 
 export const HeaderText = styled.div`
@@ -29,7 +31,6 @@ export const EmptyList = styled.div`
 
 export const CardContainer = styled.div`
   height: 700px;
-  position: relative;
   overflow-y: auto;
   margin-top: 20px;
   &::-webkit-scrollbar {

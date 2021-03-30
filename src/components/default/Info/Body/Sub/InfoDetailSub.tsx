@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import * as S from "./styles";
 import { RightContent } from "../../default";
 import { getImgUrl } from "../../../../../lib/utils";
@@ -19,14 +19,14 @@ const InfoDetailSub: FC<Props> = ({ imgSrc, tag, notices, baseUrl }) => {
         <img src={getImgUrl(imgSrc)} />
       </div>
       <RightContent>
-        <S.H3>태그</S.H3>
+        <S.H3>분야</S.H3>
         <S.HashTag>{tag}</S.HashTag>
       </RightContent>
       {notices && notices.length ? (
         <RightContent>
           <S.H3>공지사항</S.H3>
           {notices.map(({ announcement_uuid, title }, i) => {
-            if (i > 4) return "";
+            if (i > 2) return "";
             return (
               <S.Notice key={i}>
                 <Link to={`${baseUrl}/${announcement_uuid}`}>{title}</Link>
@@ -41,4 +41,4 @@ const InfoDetailSub: FC<Props> = ({ imgSrc, tag, notices, baseUrl }) => {
   );
 };
 
-export default InfoDetailSub;
+export default memo(InfoDetailSub);

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   flex: 7;
@@ -7,4 +7,5 @@ export const Container = styled.div`
 
 export const P = styled.p`
   font-size: 25px;
+  margin-bottom: 5px;
 `;

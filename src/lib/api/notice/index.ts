@@ -1,6 +1,11 @@
 import { AxiosResponse } from "axios";
 import { apiDefault } from "../client";
-import { ReqBoardEdit, ResBoardDetail, ResBoardList } from "../payloads/Board";
+import {
+  ReqBoardEdit,
+  ReqBoardWrite,
+  ResBoardDetail,
+  ResBoardList
+} from "../payloads/Board";
 
 export const getNoticeList = (
   type: "school" | "club",
@@ -33,4 +38,28 @@ export const editNotice = (
 
 export const deleteNotice = (uuid: string): Promise<AxiosResponse<{}>> => {
   return apiDefault().delete<{ id: string }>(`/announcements/uuid/${uuid}`);
+};
+
+export const writeNotice = (payload: ReqBoardWrite) => {
+  return apiDefault().post("/announcements", payload);
+};
+
+export const searchSchoolNotice = (payload: {
+  page: number;
+  query: string;
+}): Promise<AxiosResponse<ResBoardList>> => {
+  const { query, page } = payload;
+  return apiDefault().get(
+    `/announcements/types/school/query/${query}?start=${page || 0}`
+  );
+};
+
+export const searchClubNotice = (payload: {
+  page: number;
+  query: string;
+}): Promise<AxiosResponse<ResBoardList>> => {
+  const { query, page } = payload;
+  return apiDefault().get(
+    `/announcements/types/club/query/${query}?staart=${page || 0}`
+  );
 };

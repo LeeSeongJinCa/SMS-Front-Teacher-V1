@@ -1,10 +1,9 @@
 import axios, { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 import AES256 from "aes-everywhere";
 
 import { StudentInfo } from "../../modules/type/user";
 import { getAxiosError } from "../utils";
-import { toast } from "react-toastify";
-import { STUDENT, TEACHER, UserType } from "../../modules/action/header";
 
 export const SERVER = {
   hostUrl: process.env.HOST_URL,
@@ -16,13 +15,20 @@ export const SERVER = {
 
 export const BASE_URL = `${SERVER.hostUrl}${SERVER.version}`;
 
+const removeAllStorage = () => {
+  localStorage.removeItem("access_token");
+  localStorage.removeItem("club_uuid");
+  localStorage.removeItem("expiration");
+  localStorage.removeItem("sms-type");
+  localStorage.removeItem("sms-user");
+  localStorage.removeItem("uuid");
+};
+
 export const apiDefault = () => {
   const instance = axios.create({
     baseURL: BASE_URL
   });
-  const type: UserType = window.location.pathname.includes("admin")
-    ? TEACHER
-    : STUDENT;
+  const refreshUrl = "/login";
 
   instance.interceptors.request.use(config => {
     const accessToken = localStorage.getItem("access_token");
@@ -41,11 +47,7 @@ export const apiDefault = () => {
           "자동 로그인 세션이 만료되었습니다. 재로그인 후 다시 실행해주시기 바랍니다."
         );
 
-        if (type === TEACHER) {
-          window.location.href = "/admin/login";
-        } else {
-          window.location.href = "/login";
-        }
+        window.location.href = refreshUrl;
       }
     }
     config.headers = {
@@ -68,11 +70,11 @@ export const apiDefault = () => {
         toast.error("유효하지 않은 요청이 발생했습니다.");
       } else if (status === 401) {
         alert("로그인 후 이용해주세요.");
-        if (type === TEACHER) {
-          window.location.href = "/admin/login";
-        } else {
-          window.location.href = "/login";
-        }
+        removeAllStorage();
+        window.location.href = refreshUrl;
+      } else if (status === 403) {
+        alert("잘못된 접근 입니다.");
+        window.location.href = refreshUrl;
       } else if (status === 407) {
         toast.error("서버에 요류가 발생했습니다.");
       } else if (status === 429) {

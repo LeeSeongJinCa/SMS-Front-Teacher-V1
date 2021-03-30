@@ -34,7 +34,7 @@ const NavigationBody: FC<Props> = ({ navItemArr, mainSubArr }) => {
           name={name}
           src={mainUrl === name ? blue : white}
           route={route}
-          key={index}
+          key={route}
         />
       ))}
 
@@ -45,7 +45,7 @@ const NavigationBody: FC<Props> = ({ navItemArr, mainSubArr }) => {
           src={mainUrl === name ? blue : white}
           route={route}
           subUrl={subUrl}
-          key={index}
+          key={route}
         />
       ))}
     </S.Container>

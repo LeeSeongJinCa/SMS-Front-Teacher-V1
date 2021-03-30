@@ -1,6 +1,7 @@
 import {
   ReqBoardDelete,
   ReqBoardEdit,
+  ReqBoardWrite,
   ResBoardDetail
 } from "../../../../lib/api/payloads/Board";
 
@@ -10,6 +11,7 @@ export const GET_NOTICE_DETAIL_FAIL = "notice/GET_NOTICE_DETAIL_FAIL" as const;
 
 export const EDIT_NOTICE = "notice/EDIT_NOTICE" as const;
 export const DELETE_NOTICE = "notice/DELETE_NOTICE" as const;
+export const WRITE_NOTICE = "notice/WRITE_NOTICE" as const;
 
 export const getNoticeDetail = (uuid: string) => ({
   type: GET_NOTICE_DETAIL,
@@ -27,8 +29,14 @@ export const editNotice = (payload: ReqBoardEdit) => ({
   type: EDIT_NOTICE,
   payload
 });
+
 export const deleteNotice = (payload: ReqBoardDelete) => ({
   type: DELETE_NOTICE,
+  payload
+});
+
+export const writeNotice = (payload: ReqBoardWrite) => ({
+  type: WRITE_NOTICE,
   payload
 });
 

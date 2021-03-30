@@ -3,9 +3,7 @@ import {
   CLOSE_OUTING_CARD_MODAL,
   GET_OUTING_CARD_LIST,
   OutingCardAction,
-  SHOW_OUTING_CARD_MODAL,
-  UPDATE_OUTING_CARD_LIST,
-  UPDATE_OUTING_CARD_MODAL
+  SHOW_OUTING_CARD_MODAL
 } from "../../action/outingCard";
 
 interface OutingCardState {

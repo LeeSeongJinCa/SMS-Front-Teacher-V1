@@ -4,14 +4,15 @@ import subNavReducer from "./subNav/subNav";
 import headerReducer from "./header";
 import boardReducer from "./board";
 import posterReducer from "./poster";
-import outingCardReducer from "./outingCard";
-import ManagementInfo from "./management/info";
-import outingReducer from "./outing";
+import outingCardReducer from "./OutingCard";
 import mainReducer from "./main";
 import noticeListReducer from "./notice/list";
-import managementReducer from "./management";
-import loadingReducer from "./loading";
 import noticeDetailReducer from "./notice/detail";
+import recruitmentListReducer from "./recruitment/list";
+import recruitmentDetailReducer from "./recruitment/detail";
+import clubListReducer from "./club/list";
+import clubDetailReducer from "./club/detail";
+import loadingReducer from "./loading";
 
 const rootReducer = combineReducers({
   page: pageReducer,
@@ -20,13 +21,14 @@ const rootReducer = combineReducers({
   board: boardReducer,
   poster: posterReducer,
   outingCard: outingCardReducer,
-  outing: outingReducer,
-  ManagementInfo,
   main: mainReducer,
-  management: managementReducer,
   noticeList: noticeListReducer,
   noticeDetail: noticeDetailReducer,
-  loading: loadingReducer
+  loading: loadingReducer,
+  recruitmentList: recruitmentListReducer,
+  recruitmentDetail: recruitmentDetailReducer,
+  clubList: clubListReducer,
+  clubDetail: clubDetailReducer
 });
 
 export type stateType = ReturnType<typeof rootReducer>;

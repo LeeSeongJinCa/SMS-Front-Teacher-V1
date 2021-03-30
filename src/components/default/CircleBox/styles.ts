@@ -21,6 +21,7 @@ export const Container = styled.div`
     height: 100%;
     opacity: 0;
     transition: 0.7s opacity;
+    object-fit: cover;
   }
 
   &:hover {

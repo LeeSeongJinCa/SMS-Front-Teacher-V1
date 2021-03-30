@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { call, getContext, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery } from "redux-saga/effects";
 
 import { apiDefault } from "../../../lib/api/client";
 import {
@@ -34,13 +34,9 @@ function* fetchTimetables(action: ReturnType<typeof getTimetablesSaga>) {
 
     yield put(setTimetables(data));
   } catch (err) {
-    const history = yield getContext("history");
     const { status } = getAxiosError(err);
 
-    if (status === 403) {
-      toast.error("학생 계정이 아닙니다.");
-      history.push("/login");
-    } else if (status === 404) {
+    if (status === 404) {
       toast.error("시간표를 불러올 수 없습니다.");
     }
   }
@@ -66,13 +62,9 @@ function* fetchSchedules(action: ReturnType<typeof getSchedulesSaga>) {
 
     yield put(setSchedules(schedules));
   } catch (err) {
-    const history = yield getContext("history");
     const { status } = getAxiosError(err);
 
-    if (status === 403) {
-      toast.error("학생 계정이 아닙니다.");
-      history.push("/login");
-    } else if (status === 404) {
+    if (status === 404) {
       toast.error("일정을 불러올 수 없습니다.");
     }
   }

@@ -189,11 +189,7 @@ export const DetailHeadData = styled.span`
   }
 `;
 
-interface DetailScrollColor {
-  type: UserType;
-}
-
-export const DetailBody = styled.div<DetailScrollColor>`
+export const DetailBody = styled.div`
   height: 470px;
   overflow-y: scroll;
   ::-webkit-scrollbar {
@@ -203,7 +199,7 @@ export const DetailBody = styled.div<DetailScrollColor>`
     background: white;
   }
   ::-webkit-scrollbar-thumb {
-    background: ${({ type }) => (type === STUDENT ? "#5323b2" : "#23B2AD")};
+    background: #23b2ad;
     border-radius: 16px;
   }
 `;

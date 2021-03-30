@@ -14,9 +14,9 @@ const AdminNoticeMineDetail: FC = () => {
     isMine: true,
     imgSrc: NavIconNoticeMint,
     title: "내가 올린 공지사항",
-    href: "/admin/notice/mine",
+    href: "/notice/mine",
     color: "#23B2AD",
-    editHref: "/admin/notice/edit"
+    editHref: "/notice/edit"
   };
   return (
     <NoticeDetail

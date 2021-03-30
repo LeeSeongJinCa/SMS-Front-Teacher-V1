@@ -4,7 +4,7 @@ import * as S from "./style";
 import Schedule from "./Schedule/Schedule";
 import ScheduleDetail from "./ScheduleDetail/ScheduleDetail";
 import Outing from "./Outing/Outing";
-import Timetable from "./Timetable/Timetable";
+import TimeTable from "./Timetable/Timetable";
 
 interface Props {}
 
@@ -13,7 +13,7 @@ const Main: FC<Props> = (): ReactElement => {
     <S.MainWrap>
       <S.MainLeft>
         <Schedule />
-        <Timetable />
+        <TimeTable />
       </S.MainLeft>
       <S.MainRight>
         <ScheduleDetail />

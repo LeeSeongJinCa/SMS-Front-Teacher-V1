@@ -13,6 +13,7 @@ export interface ResOutingCardListItem {
   grade: number;
   group: number;
   number: number;
+  arrival_time?: number;
   place: string;
   reason: string;
   start_time: number;

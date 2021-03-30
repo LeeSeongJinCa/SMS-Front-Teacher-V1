@@ -8,7 +8,7 @@ import { FacebookIcon } from "../../../../assets";
 
 const AllHeader: FC = () => {
   const { name, link, club_concept } = useSelector(
-    (state: stateType) => state.poster.all.detail
+    (state: stateType) => state.clubDetail
   );
   return (
     <>

@@ -28,7 +28,7 @@ const DetailPageHeader: FC<NoticeDetailHeaderSet> = ({
     ]);
     if (!confirmRes) return;
 
-    const type: BoardType = href.includes("admin") ? "school" : "club";
+    const type: BoardType = "school";
     const payload: ReqBoardDelete = { uuid, type };
     dispatch(deleteNotice(payload));
   }, [uuid, href]);

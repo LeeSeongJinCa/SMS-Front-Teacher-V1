@@ -1,19 +1,29 @@
 import React, { FC } from "react";
 import { CircleWantedDetail } from "../../../../components";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { PosterActionCreater } from "../../../../modules/action/poster";
+import { useDispatch, useSelector } from "react-redux";
 import { RouteChildrenProps } from "react-router-dom";
 import { getNoticeClubList } from "../../../../modules/action/notice/list";
+import { getRecruitMentDetail } from "../../../../modules/action/recruitment/detail";
+import { stateType } from "../../../../modules/reducer";
+import { getClubDetail } from "../../../../modules/action/club/detail";
 
 const CircleWantedDetailContainer: FC<RouteChildrenProps> = ({ match }) => {
   const dispatch = useDispatch();
+  const clubUuid: string = useSelector(
+    (state: stateType) => state.recruitmentDetail.club_uuid
+  );
 
-  const recruitmentUuid = (match.params as any).id;
+  const recruitmentUuid: string = (match.params as any).id;
   useEffect(() => {
-    dispatch(PosterActionCreater.getWantedInfoDetailSaga(recruitmentUuid));
+    dispatch(getRecruitMentDetail(recruitmentUuid));
     dispatch(getNoticeClubList(0));
   }, []);
+
+  useEffect(() => {
+    if (!clubUuid) return;
+    dispatch(getClubDetail(clubUuid));
+  }, [clubUuid]);
 
   return <CircleWantedDetail />;
 };

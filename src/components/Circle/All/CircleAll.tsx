@@ -21,7 +21,7 @@ import { setAllFilter } from "../../../modules/action/poster";
 const CircleAll: FC = () => {
   const dispatch = useDispatch();
   const { data, filterField } = useSelector((store: stateType) => ({
-    data: store.poster.all.list,
+    data: store.clubList.clubs,
     filterField: store.poster.all.field
   }));
 

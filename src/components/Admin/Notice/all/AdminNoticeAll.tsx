@@ -1,12 +1,17 @@
-import React, { FC } from "react";
-import { useSelector } from "react-redux";
+import React, { ChangeEvent, FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavIconNoticeMint } from "../../../../assets";
+import {
+  getNoticeSchoolList,
+  searchNoticeSchoolList
+} from "../../../../modules/action/notice/list";
 import { stateType } from "../../../../modules/reducer";
 import NoticeList, {
   NoticeListSet
 } from "../../../default/NoticeList/NoticeList";
 
 const AdminNoticeAll: FC = () => {
+  const dispatch = useDispatch();
   const { announcements, size, loading } = useSelector((state: stateType) => ({
     ...state.noticeList,
     loading: state.loading["notice/GET_NOTICE_LIST"]

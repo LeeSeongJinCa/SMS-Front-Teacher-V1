@@ -20,6 +20,11 @@ export const HashTag = styled.div`
 export const Notice = styled.div`
   > a {
     text-decoration: none;
+    color: #242424;
+
+    &:hover {
+      color: #5323b2;
+    }
   }
 `;
 

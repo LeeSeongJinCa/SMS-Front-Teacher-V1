@@ -74,6 +74,11 @@ export const GlobalStyle: GlobalStyleComponent<
     height:495px;
     overflow-y:auto;
 
+    .ce-block__content {
+      max-width:650px;
+      margin:0 auto;
+    }
+
     h1,
   h2,
   h3,

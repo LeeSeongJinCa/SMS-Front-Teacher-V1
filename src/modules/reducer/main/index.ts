@@ -8,7 +8,8 @@ import {
   START_TIMETABLE,
   END_TIMETABLE,
   START_SCHEDULE,
-  END_SCHEDULE
+  END_SCHEDULE,
+  SET_SELECTED_DATE
 } from "../../action/main";
 
 export interface TimetableState {
@@ -18,6 +19,7 @@ export interface TimetableState {
   schedules: ResSchedule[];
   schedulerDate: Date;
   targetUuid: string;
+  selectedDate: string;
 }
 
 const initialState: TimetableState = {
@@ -34,7 +36,8 @@ const initialState: TimetableState = {
   },
   schedules: [],
   schedulerDate: new Date(),
-  targetUuid: ""
+  targetUuid: "",
+  selectedDate: ""
 };
 
 const ManagementInfoReduce = (
@@ -81,6 +84,11 @@ const ManagementInfoReduce = (
       return {
         ...state,
         scheduleLoading: false
+      };
+    case SET_SELECTED_DATE:
+      return {
+        ...state,
+        selectedDate: action.payload.localDate
       };
     default:
       return state;

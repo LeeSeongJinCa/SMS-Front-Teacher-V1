@@ -1,6 +1,6 @@
 @keyframes slideIn {
   0% {
-    transform: translateY(50px);
+    transform: translateY(30px);
     opacity: 0;
   }
   100% {
@@ -35,6 +35,8 @@
 }
 .confirm-text {
   font-weight: bold;
+  width: 250px;
+  text-align: center;
 }
 .confirm-button-wrap {
   text-align: center;

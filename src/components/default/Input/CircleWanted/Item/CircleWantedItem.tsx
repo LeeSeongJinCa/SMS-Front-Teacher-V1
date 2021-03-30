@@ -1,9 +1,13 @@
 import React, { ChangeEvent, FC, MouseEvent, useMemo } from "react";
 import { memo } from "react";
 import { deleteBtn } from "../../../../../assets";
-import { WantedManagement } from "../../../../Management/Wanted/Main/Content/Left/ManagementWantedContentLeft";
+import { WantedObj } from "../../../../../modules/type/poster";
 import * as S from "../styles";
 
+export interface WantedManagement extends WantedObj {
+  id: number;
+  menuIsOpen: boolean;
+}
 interface Props extends WantedManagement {
   changeMenuIsOpen: (id: number) => void;
   changeGrade: (id: number, grade: number) => void;

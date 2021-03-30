@@ -4,8 +4,7 @@ import { AxiosError } from "axios";
 import { History } from "history";
 
 import { ResDefault } from "./api/payloads";
-import { ResStudentInfo } from "./api/payloads/Login";
-import { ResStudents } from "./api/payloads/Management";
+import { BoardType } from "./api/payloads/Board";
 
 import { PageState } from "../modules/reducer/page";
 import { stateType } from "../modules/reducer";
@@ -17,80 +16,33 @@ interface UrlObj {
   [key: string]: valueType;
 }
 
-const urlObj: UrlObj = {
-  home: ["홈", ""],
-  notice: ["공지", ""],
-  circles: ["동아리", "공지사항"],
-  outing: ["외출신청", "유의사항"]
-};
-
 const adminObj: UrlObj = {
-  home: ["학사 일정", ""],
+  "": ["학사 일정", ""],
   out: ["외출 관리", "승인대기 외출증"],
   notice: ["공지사항", "전체 공지"]
-};
-
-const managementObj: UrlObj = {
-  edit: ["정보수정", ""],
-  wanted: ["모집관리", ""],
-  notice: ["공지 관리", ""]
-};
-
-const urlObjWrap = {
-  admin: adminObj,
-  management: managementObj
 };
 
 interface SubUrlObj {
   [key: string]: string;
 }
 
-const managementUrlObj: SubUrlObj = {
-  edit: "none",
-  wanted: "none",
-  notice: "none"
-};
-
-const subUrlObj: SubUrlObj = {
-  notice: "공지사항",
-  wanted: "부원 모집",
-  all: "동아리 전체보기",
-  warning: "유의사항",
-  apply: "외출신청",
-  history: "내 외출신청 내역"
-};
-
-const subUrlObjWrap = {
-  admin: subUrlObj,
-  management: managementUrlObj
-};
-
 const adminUrlObj: SubUrlObj = {
-  certified: "미인증 외출증",
+  certified: "종료된 외출증",
   now: "현재 외출 학생",
   wait: "승인대기 외출증",
   all: "전체 공지",
   mine: "내가 올린 공지",
   writing: "공지사항 작성",
-  done: "종료된 외출증"
+  done: "최종 확인 대기 외출증"
 };
 
 export const getNavUrl = (url: string): PageState => {
-  const stringArr = url.split("/");
-  const filterStr = stringArr[1] as "home" | "notice" | "circles" | "outing";
-  const urlArr = urlObj[filterStr] ||
-    (urlObjWrap[stringArr[1]] && urlObjWrap[stringArr[1]][stringArr[2]]) || [
-      "",
-      ""
-    ];
+  const splitUrl = url.split("/");
+  const urlArr = adminObj[splitUrl[1]] || ["", ""];
+
   return {
     mainUrl: urlArr[0],
-    subUrl:
-      adminUrlObj[stringArr[3]] ||
-      subUrlObj[stringArr[2]] ||
-      (subUrlObjWrap[stringArr[1]] &&
-        subUrlObjWrap[stringArr[1]][stringArr[2]]) ||
-      urlArr[1]
+    subUrl: adminUrlObj[splitUrl[2]] || urlArr[1]
   };
 };
 
@@ -106,7 +58,8 @@ export const makeFilterFunc = <T>(
   return (keyword: string) => data.filter(item => callback(item, keyword));
 };
 
-export const getImgUrl = url => `${SERVER.s3Url}/${url}`;
+export const getImgUrl = url =>
+  `${SERVER.s3Url}/${url}?timestamps=${Date.now()}`;
 
 export const makeQuery = (object: any) => {
   return Object.keys(object).reduce(
@@ -160,25 +113,14 @@ export const getWeekOfMonth = (d: Date) => {
   // return week === weeksInMonth ? index + 5 : week;
 };
 
-export const padNum = (n: number) => n + "".padStart(2, "0");
-
-export const formattingStudent = (student: ResStudents | ResStudentInfo) => {
-  return `${student.grade}${student.group}${padNum(student.student_number)}`;
-};
-
-export const sorting = (student1: ResStudents, student2: ResStudents) => {
-  return formattingStudent(student1) > formattingStudent(student2) ? 1 : -1;
-};
+export const padNum = (n: number) => (n + "").padStart(2, "0");
 
 export const errorHandler = (errStatus: number, history: History): void => {
   switch (errStatus) {
     case 401:
     case 403: {
-      toast.dark("로그인을 다시 진행해주세요");
-      const href = history.location.pathname;
-      if (href.includes("admin")) {
-        history.push("/admin/login");
-      } else history.push("/login");
+      toast.error("로그인을 다시 진행해주세요");
+      history.push("/login");
       return;
     }
   }
@@ -190,3 +132,6 @@ export const getAxiosError = (err: AxiosError<ResDefault>) => {
   const { status, code } = err.response.data;
   return { status, code };
 };
+
+export const getSuccessHistory = (type: BoardType) =>
+  type === "school" ? "/notice/mine" : "/management/notice";

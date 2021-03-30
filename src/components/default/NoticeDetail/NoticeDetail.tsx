@@ -37,4 +37,4 @@ const NoticeDetail: FC<Props> = ({ boardData, loading, headerData }) => {
   );
 };
 
-export default memo(NoticeDetail);
+export default NoticeDetail;

@@ -8,6 +8,7 @@ export const Container = styled.div`
     display: flex;
     align-items: flex-end;
     > p {
+      margin-left: 10px;
       transform: translateY(-5px);
     }
   }

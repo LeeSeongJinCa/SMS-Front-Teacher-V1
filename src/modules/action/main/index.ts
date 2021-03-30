@@ -14,6 +14,8 @@ export const SET_SCHEDULER_DATE = "main/SET_SCHEDULER_DATE" as const;
 
 export const SET_TARGET_UUID = "main/SET_TARGET_UUID" as const;
 
+export const SET_SELECTED_DATE = "main/SET_SELECTED_DATE" as const;
+
 export const getSchedulesSaga = (year: number, month: number) => ({
   type: GET_SCHEDULES_SAGA,
   payload: { year, month }
@@ -54,6 +56,10 @@ export const startScheduleLoading = () => ({
 export const endScheduleLoading = () => ({
   type: END_SCHEDULE
 });
+export const setSelectedDate = (localDate: string) => ({
+  type: SET_SELECTED_DATE,
+  payload: { localDate }
+});
 export type TimetableAction = ReturnType<
   | typeof getSchedulesSaga
   | typeof setTimetables
@@ -65,4 +71,5 @@ export type TimetableAction = ReturnType<
   | typeof endTimetableLoading
   | typeof startScheduleLoading
   | typeof endScheduleLoading
+  | typeof setSelectedDate
 >;

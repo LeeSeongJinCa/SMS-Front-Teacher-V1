@@ -14,7 +14,7 @@ import List from "@editorjs/list";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { editNotice } from "../../../modules/action/notice/detail";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { BoardWriteFilter } from "../../../lib/api/payloads/Board";
 import WriteCategory from "../Category/WriteCategory";
 import { isIncludeEmpty } from "../../../lib/utils";
@@ -23,6 +23,7 @@ export interface NoticeEditSet {
   color: string;
   imgSrc: string;
   title: string;
+  cancelHref: string;
   type: "school" | "club";
 }
 
@@ -37,6 +38,7 @@ interface Props {
 const NoticeEdit: FC<Props> = ({ editData, setting }) => {
   const dispatch = useDispatch();
   const editerRef = useRef<EditerJS>();
+  const history = useHistory();
 
   const id: string = useParams<{ id: string }>().id;
 
@@ -68,6 +70,10 @@ const NoticeEdit: FC<Props> = ({ editData, setting }) => {
   const changeTitle = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setNewTitle(e.target.value);
   }, []);
+
+  const cancelEdit = useCallback(() => {
+    history.push(`${setting.cancelHref}/${id}`);
+  }, [id]);
 
   const saveHandler = useCallback(async () => {
     const { type } = setting;
@@ -122,6 +128,7 @@ const NoticeEdit: FC<Props> = ({ editData, setting }) => {
           color="white"
           borderColor="#DDDDDD"
           backgroundColor={setting.color}
+          onClick={cancelEdit}
         >
           취소
         </S.Button>

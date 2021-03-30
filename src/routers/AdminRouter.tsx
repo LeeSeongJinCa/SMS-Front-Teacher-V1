@@ -1,6 +1,9 @@
-import React, { FC } from "react";
-import { Redirect, Route, Switch, useLocation } from "react-router-dom";
+import React, { FC, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Route, Switch, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
+import { PageNotFound } from "../components";
 import {
   AdminOutingCertifiedListContainer,
   AdminOutingNowListContainer,
@@ -14,80 +17,77 @@ import {
   PasswordChangeContainer,
   AdminOutingDoneContainer,
   AdminNoticeMineDetailContainer,
-  ManagementNoticeEditContainer,
-  AdminNoticeEditContainer
+  AdminNoticeEditContainer,
+  AccountContainer
 } from "../containers";
 import { GlobalInnerBody } from "../GlobalStyle";
+import { TEACHER } from "../modules/action/header";
+import { stateType } from "../modules/reducer";
 
-const AdminRouter: FC<{}> = () => {
-  const location = useLocation();
-  const pathname = location.pathname;
-  const noWhiteBack: string[] = ["login", "home", "pw-change"];
+const AdminRouter: FC = () => {
+  const history = useHistory();
+  const pathname = history.location.pathname;
+  const needWhite: string[] = ["out", "notice"];
+  const { type } = useSelector((state: stateType) => state.header);
+
+  useEffect(() => {
+    if (pathname === "/account") {
+      return;
+    }
+    if (!(type === TEACHER || localStorage.getItem("sms-type") === TEACHER)) {
+      toast.info("로그인 후 이용해주세요.");
+      history.push("/login");
+    }
+  }, []);
 
   return (
     <GlobalInnerBody
-      isBackNeed={!noWhiteBack.some(path => pathname.includes(path))}
+      isBackNeed={needWhite.some(path => pathname.includes(path))}
     >
       <Switch>
+        <Route exact path="/" component={AdminMainContainer} />
+        <Route exact path="/pw-change" component={PasswordChangeContainer} />
+        <Route exact path="/account" component={AccountContainer} />
+        <Route exact path="/login" component={LoginContainer} />
         <Route
           exact
-          path="/admin/pw-change"
-          component={PasswordChangeContainer}
-        />
-        <Route exact path="/admin/login" component={LoginContainer} />
-        <Route exact path="/admin/home" component={AdminMainContainer} />
-        <Route exact path="/admin/schedule" />
-        <Route
-          exact
-          path="/admin/out/wait"
+          path="/out/wait"
           component={AdminOutingWaitListContainer}
         />
+        <Route exact path="/out/now" component={AdminOutingNowListContainer} />
+        <Route exact path="/out/done" component={AdminOutingDoneContainer} />
         <Route
           exact
-          path="/admin/out/now"
-          component={AdminOutingNowListContainer}
-        />
-        <Route
-          exact
-          path="/admin/out/done"
-          component={AdminOutingDoneContainer}
-        />
-        <Route
-          exact
-          path="/admin/out/certified"
+          path="/out/certified"
           component={AdminOutingCertifiedListContainer}
         />
         <Route
           exact
-          path="/admin/notice/all"
+          path="/notice/all"
           component={AdminNoticeAllListContainer}
         />
         <Route
           exact
-          path="/admin/notice/all/:id"
+          path="/notice/all/:id"
           component={AdminNoticeAllDetailContainer}
         />
+        <Route exact path="/notice/mine" component={AdminNoticeMineContainer} />
         <Route
           exact
-          path="/admin/notice/mine"
-          component={AdminNoticeMineContainer}
-        />
-        <Route
-          exact
-          path="/admin/notice/edit/:id"
+          path="/notice/edit/:id"
           component={AdminNoticeEditContainer}
         />
         <Route
           exact
-          path="/admin/notice/mine/:id"
+          path="/notice/mine/:id"
           component={AdminNoticeMineDetailContainer}
         />
         <Route
           exact
-          path="/admin/notice/writing"
+          path="/notice/writing"
           component={AdminNoticeWritingContainer}
         />
-        <Redirect path="/admin" to="/admin/home" />
+        <Route path="*" component={PageNotFound} />
       </Switch>
     </GlobalInnerBody>
   );

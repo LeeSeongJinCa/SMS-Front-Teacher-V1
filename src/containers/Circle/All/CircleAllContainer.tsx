@@ -1,12 +1,12 @@
 import React, { FC, useEffect } from "react";
 import { CircleAll } from "../../../components";
 import { useDispatch } from "react-redux";
-import { getCircleInfoListSaga } from "../../../modules/action/poster";
+import { getClubList } from "../../../modules/action/club/list";
 
 const CircleAllContainer: FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCircleInfoListSaga());
+    dispatch(getClubList());
   }, []);
   return <CircleAll />;
 };

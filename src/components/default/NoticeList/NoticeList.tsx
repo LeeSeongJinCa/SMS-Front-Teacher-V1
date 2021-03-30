@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, ChangeEvent } from "react";
+import React, { FC, useState, useCallback, ChangeEvent, memo } from "react";
 import { Board, ListPageHeader } from "../../default";
 import * as S from "./styles";
 import { makeFilterFunc } from "../../../lib/utils";

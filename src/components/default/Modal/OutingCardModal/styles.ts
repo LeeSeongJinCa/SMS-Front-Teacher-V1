@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { ModalClose } from '../../../../assets';
+import styled from "styled-components";
+import { ModalClose } from "../../../../assets";
 
 export const Container = styled.div`
   width: 100vw;
@@ -19,8 +19,7 @@ export const Modal = styled.div`
   position: relative;
   background-color: #ffffff;
   box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.25);
-  width: 700px;
-  height: 300px;
+  width: 730px;
   border-radius: 5px;
   box-sizing: border-box;
   padding: 50px 70px;
@@ -60,7 +59,7 @@ export const Content = styled.div`
 
 export const Button = styled.button<{ color: string }>`
   padding: 5px 23px;
-  background: ${(props) => props.color};
+  background: ${props => props.color};
   color: white;
   border-radius: 3px;
   border: none;

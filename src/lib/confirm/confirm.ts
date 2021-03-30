@@ -19,7 +19,6 @@ class Confirm {
   public static confirm = function (
     message: [string, string, string]
   ): Promise<boolean> {
-    console.log(1);
     return new Promise((resolve, reject) => {
       if (Confirm.isOpen) {
         reject(new Error("Confirm is Open"));

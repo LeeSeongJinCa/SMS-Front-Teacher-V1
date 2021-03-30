@@ -7,9 +7,15 @@ import { useSelector } from "react-redux";
 import { stateType } from "../../../../modules/reducer";
 
 const InfoHeader: FC = () => {
-  const { name, club_concept, start_period, link } = useSelector(
-    (state: stateType) => state.poster.wanted.detail
-  );
+  const {
+    name,
+    club_concept,
+    start_period,
+    link
+  } = useSelector((state: stateType) => ({
+    ...state.clubDetail,
+    ...state.recruitmentDetail
+  }));
   return (
     <>
       <S.Container>

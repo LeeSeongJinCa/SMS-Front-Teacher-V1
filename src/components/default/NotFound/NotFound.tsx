@@ -26,7 +26,7 @@ const NotFound: FC<Props> = () => {
         />
         <S.NotFoundAnyThing>아무것도 없네요!</S.NotFoundAnyThing>
         <S.NotFoundGoHome>
-          <Link to="/home" onClick={moveHome}>
+          <Link to="/" onClick={moveHome}>
             홈으로
           </Link>
         </S.NotFoundGoHome>
