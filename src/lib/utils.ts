@@ -33,7 +33,8 @@ const adminUrlObj: SubUrlObj = {
   all: "전체 공지",
   mine: "내가 올린 공지",
   writing: "공지사항 작성",
-  done: "최종 확인 대기 외출증"
+  done: "최종 확인 대기 외출증",
+  statistics: "외출 통계"
 };
 
 export const getNavUrl = (url: string): PageState => {
