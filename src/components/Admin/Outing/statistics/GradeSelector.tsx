@@ -1,8 +1,9 @@
 import React, { ChangeEvent, FC, memo, useCallback } from "react";
 
-import { GradeIds } from "../../../../lib/hooks/useGradeSelector";
+import { GradeIds, GradeState } from "../../../../lib/hooks/useGradeSelector";
 
 interface Props {
+  gradeSelect: GradeState;
   gradeHandler: (id: string) => void;
 }
 
@@ -12,10 +13,6 @@ interface Selectors {
 }
 
 const selectors: Selectors[] = [
-  {
-    id: "grade-all",
-    text: "전체"
-  },
   {
     id: "grade-1",
     text: "1학년"
@@ -30,7 +27,7 @@ const selectors: Selectors[] = [
   }
 ];
 
-const GradeSelector: FC<Props> = ({ gradeHandler }) => {
+const GradeSelector: FC<Props> = ({ gradeSelect, gradeHandler }) => {
   const onChangeGrade = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     gradeHandler(e.currentTarget.id);
   }, []);
@@ -45,7 +42,7 @@ const GradeSelector: FC<Props> = ({ gradeHandler }) => {
               <input
                 type="checkbox"
                 id={id}
-                defaultChecked={id === "grade-all"}
+                defaultChecked={gradeSelect[id]}
                 onChange={onChangeGrade}
               />
               <span>{text}</span>

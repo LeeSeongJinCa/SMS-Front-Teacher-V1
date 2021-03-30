@@ -16,11 +16,11 @@ export const StatisticsWrap = styled.main`
     > ul > li:first-of-type {
       padding: 8px;
       border-bottom: 1px solid #dddddd;
+      font-weight: bold;
       > span {
         display: inline-block;
         width: 150px;
         text-align: center;
-        font-weight: 500;
       }
     }
   }
@@ -113,7 +113,6 @@ export const StudentItemWrap = styled.li`
     display: inline-block;
     width: 150px;
     text-align: center;
-    font-weight: 300;
   }
   > img {
     position: absolute;
@@ -129,6 +128,7 @@ export const StudentItemWrap = styled.li`
     }
   }
   > div {
+    width: 95%;
     overflow: hidden;
   }
 `;
@@ -139,20 +139,21 @@ interface SubList {
 
 export const StudentSubList = styled.ul<SubList>`
   transition: all 600ms;
-  height: 300px;
+  max-height: 300px;
   overflow-y: scroll;
   ${({ isShown }) => (isShown ? "display: block;" : "display: none;")};
   > li {
     display: flex;
     padding: 8px 0;
-    &:first-of-type > span {
-      font-weight: 400;
+    &:first-of-type {
+      font-size: 13px;
+      margin-top: 8px;
+      border-bottom: 1px solid #cccccc;
     }
     > span {
       flex-grow: 1;
       text-align: center;
       font-size: 12px;
-      font-weight: 300;
       &.place {
         width: 30%;
       }
@@ -171,3 +172,5 @@ export const StudentSubList = styled.ul<SubList>`
     }
   }
 `;
+
+export const NoList = styled.div``;

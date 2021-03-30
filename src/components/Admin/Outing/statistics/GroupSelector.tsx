@@ -1,8 +1,9 @@
 import React, { ChangeEvent, FC, memo, useCallback } from "react";
 
-import { GroupIds } from "../../../../lib/hooks/useGroupSelector";
+import { GroupIds, GroupState } from "../../../../lib/hooks/useGroupSelector";
 
 interface Props {
+  groupSelect: GroupState;
   groupHandler: (id: string) => void;
 }
 
@@ -12,10 +13,6 @@ interface Selectors {
 }
 
 const selectors: Selectors[] = [
-  {
-    id: "group-all",
-    text: "전체"
-  },
   {
     id: "group-1",
     text: "1반"
@@ -27,10 +24,14 @@ const selectors: Selectors[] = [
   {
     id: "group-3",
     text: "3반"
+  },
+  {
+    id: "group-4",
+    text: "4반"
   }
 ];
 
-const GroupSelector: FC<Props> = ({ groupHandler }) => {
+const GroupSelector: FC<Props> = ({ groupSelect, groupHandler }) => {
   const onChangeGroup = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     groupHandler(e.currentTarget.id);
   }, []);
@@ -45,7 +46,7 @@ const GroupSelector: FC<Props> = ({ groupHandler }) => {
               <input
                 type="checkbox"
                 id={id}
-                defaultChecked={id === "group-all"}
+                defaultChecked={groupSelect[id]}
                 onChange={onChangeGroup}
               />
               <span>{text}</span>
