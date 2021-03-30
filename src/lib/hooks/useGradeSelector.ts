@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 
-export type GradeIds = "grade-all" | "grade-1" | "grade-2" | "grade-3";
+export type GradeIds = "grade-1" | "grade-2" | "grade-3";
 
 export type GradeState = Record<GradeIds, boolean>;
 
@@ -18,10 +18,9 @@ const reducer: GradeReducer<GradeState, GradeAction> = (state, action) => {
 };
 
 const initialState: GradeState = {
-  "grade-all": true,
-  "grade-1": false,
-  "grade-2": false,
-  "grade-3": false
+  "grade-1": true,
+  "grade-2": true,
+  "grade-3": true
 };
 
 const useGradeSelector = () => {

@@ -1,6 +1,6 @@
 import useCustomReducer from "./useCustomReducer";
 
-export type GroupIds = "group-all" | "group-1" | "group-2" | "group-3";
+export type GroupIds = "group-1" | "group-2" | "group-3" | "group-4";
 
 export type GroupState = Record<GroupIds, boolean>;
 
@@ -16,10 +16,10 @@ const reducer = (state: GroupState, action: GroupAction) => {
 };
 
 const initialState: GroupState = {
-  "group-all": true,
-  "group-1": false,
-  "group-2": false,
-  "group-3": false
+  "group-1": true,
+  "group-2": true,
+  "group-3": true,
+  "group-4": true
 };
 
 const useGroupSelector = () => {
