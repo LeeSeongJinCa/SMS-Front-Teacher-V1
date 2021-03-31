@@ -1,6 +1,5 @@
-import React, { memo, useCallback } from "react";
+import React, { memo } from "react";
 import { FC } from "react";
-import { useDispatch } from "react-redux";
 
 import * as S from "./styles";
 
@@ -64,10 +63,10 @@ const OutingCard: FC<Props> = ({
                     data-name="!"
                     transform="translate(8 10.096)"
                     fill="#fff"
-                    font-size="9"
-                    font-family="NotoSansCJKkr-Medium, Noto Sans CJK KR"
-                    font-weight="500"
-                    letter-spacing="-0.02em"
+                    fontSize="9"
+                    fontFamily="NotoSansCJKkr-Medium, Noto Sans CJK KR"
+                    fontWeight="500"
+                    letterSpacing="-0.02em"
                   >
                     <tspan x="-3.087" y="0">
                       !
@@ -81,17 +80,17 @@ const OutingCard: FC<Props> = ({
             ""
           )}
           {arrival_time && arrival_time > end_time ? (
-            <S.LateIocnWrap name="지각">
+            <S.LateIconWrap name="지각">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="44"
                 height="44"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="#2c3e50"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <circle cx="12" cy="13" r="7" />
@@ -100,7 +99,7 @@ const OutingCard: FC<Props> = ({
                 <line x1="17" y1="4" x2="19.75" y2="6" />
               </svg>
               <S.Arrow />
-            </S.LateIocnWrap>
+            </S.LateIconWrap>
           ) : (
             ""
           )}
