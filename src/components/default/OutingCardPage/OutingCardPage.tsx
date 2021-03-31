@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as S from "./styles";
@@ -42,10 +42,44 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
         ...deleteObj,
         status
       };
+
       dispatch(getOutingCardListSaga(filterData));
     },
     [status]
   );
+
+  const getFilterData = useCallback(() => {
+    const list = data.filter(outing => {
+      const time = +new Date();
+      if (outing.end_time * 1000 < time) return false;
+      return true;
+    });
+
+    return list;
+  }, [data]);
+
+  const displayOutingCard = useMemo(() => {
+    const filterData = getFilterData();
+    let displayData: typeof data = [];
+
+    if (title === "승인대기 외출증") {
+      if (filterData.length === 0) {
+        return <S.EmptyList>{title}이 존재하지 않습니다.</S.EmptyList>;
+      }
+
+      displayData = filterData;
+    } else {
+      if (data.length === 0) {
+        return <S.EmptyList>{title}이 존재하지 않습니다.</S.EmptyList>;
+      }
+
+      displayData = data;
+    }
+
+    return displayData.map(data => (
+      <OutingCard key={data.outing_uuid} {...data} isClicked={isClicked} />
+    ));
+  }, [data, title]);
 
   return (
     <S.Container>
@@ -53,19 +87,7 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
         <S.HeaderText>{title}</S.HeaderText>
         <OutingCardFilter onChange={filterChangeHandler} />
       </S.Header>
-      <S.CardContainer>
-        {data.length ? (
-          data.map(data => (
-            <OutingCard
-              key={data.outing_uuid}
-              {...data}
-              isClicked={isClicked}
-            />
-          ))
-        ) : (
-          <S.EmptyList>{title}이 존재하지 않습니다.</S.EmptyList>
-        )}
-      </S.CardContainer>
+      <S.CardContainer>{displayOutingCard}</S.CardContainer>
       <OutingCardModal />
     </S.Container>
   );
