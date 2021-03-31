@@ -29,7 +29,6 @@ const useEndStudents = () => {
         setEndOutings(res.data.outings);
       })
       .catch(err => {
-        console.log(err);
         const { status } = getAxiosError(err);
 
         if (status === 403) {
