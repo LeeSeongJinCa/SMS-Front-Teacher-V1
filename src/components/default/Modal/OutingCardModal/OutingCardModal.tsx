@@ -1,16 +1,17 @@
-import React from "react";
-import { FC } from "react";
-import * as S from "./styles";
+import React, { useCallback, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+
+import * as S from "./styles";
+
 import { stateType } from "../../../../modules/reducer";
-import { useCallback } from "react";
 import {
   approveOutingCardSaga,
   CloseOutingCardModal,
   rejectOutingCardSaga
 } from "../../../../modules/action/outingCard";
-import { getOutingCardTime } from "../../../../lib/utils";
-import { ToastContainer } from "react-toastify";
+import { getOutingCardTime, padNum } from "../../../../lib/utils";
+import useEndTime from "../../../../lib/hooks/useEndTime";
 
 const OutingCardModal: FC = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,25 @@ const OutingCardModal: FC = () => {
     },
     isOpen: state.outingCard.modalIsOpen
   }));
+  const {
+    grade,
+    name,
+    group,
+    number,
+    start_time,
+    end_time,
+    place,
+    reason,
+    outing_uuid
+  } = data;
+  const [date, startTime, endTime] = getOutingCardTime(start_time, end_time);
+  const [
+    endHour,
+    endMin,
+    handleEndHour,
+    handleEndMin,
+    onClickChangeOutTime
+  ] = useEndTime(outing_uuid, start_time, end_time, endTime);
 
   const approveOutingCard = useCallback(() => {
     dispatch(approveOutingCardSaga(data.outing_uuid));
@@ -45,18 +65,19 @@ const OutingCardModal: FC = () => {
     dispatch(CloseOutingCardModal());
   }, []);
 
-  const {
-    grade,
-    name,
-    group,
-    number,
-    start_time,
-    end_time,
-    place,
-    reason
-  } = data;
+  const makeOption = (number: number, getValue: (i: number) => string) => {
+    return Array(number)
+      .fill(0)
+      .map((_, i) => {
+        const value = getValue(i);
 
-  const [date, startTime, endTime] = getOutingCardTime(start_time, end_time);
+        return (
+          <option key={value} value={value}>
+            {value}
+          </option>
+        );
+      });
+  };
 
   return (
     <>
@@ -87,7 +108,7 @@ const OutingCardModal: FC = () => {
                 <div>
                   <strong>시간</strong>
                   <span>
-                    {startTime} : {endTime}
+                    오후 {startTime} - {endTime}
                   </span>
                 </div>
                 <div>
@@ -99,6 +120,24 @@ const OutingCardModal: FC = () => {
                   <span>{reason}</span>
                 </div>
               </div>
+              <section>
+                <p>외출 종료 시간 변경</p>
+                <div>
+                  <span>오후</span>
+                  <label>
+                    <select value={endHour} onChange={handleEndHour}>
+                      {makeOption(5, (i: number) => padNum(i + 4))}
+                    </select>
+                  </label>
+                  {" : "}
+                  <label>
+                    <select value={endMin} onChange={handleEndMin}>
+                      {makeOption(6, (i: number) => padNum(i * 10))}
+                    </select>
+                  </label>
+                </div>
+                <button onClick={onClickChangeOutTime}>변경</button>
+              </section>
               <div>
                 <S.Button color="#242424" onClick={approveOutingCard}>
                   승인

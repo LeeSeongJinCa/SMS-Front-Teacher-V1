@@ -112,7 +112,7 @@ export const StudentItemWrap = styled.li`
   > img {
     position: absolute;
     top: 30px;
-    right: 12px;
+    left: 12px;
     display: none;
     width: 20px;
     transform: rotate(90deg);
