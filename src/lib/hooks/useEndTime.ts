@@ -1,8 +1,11 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 
+import { getOutingCardListSaga } from "../../modules/action/outingCard";
 import { patchEndTime } from "../api/Outing";
+import { OutingStatus } from "../api/payloads/Outing";
 import { getAxiosError } from "../utils";
 
 const useEndTime = (
@@ -23,6 +26,8 @@ const useEndTime = (
     setEndMin(e.currentTarget.value);
   };
 
+  const dispatch = useDispatch();
+
   const onClickChangeOutTime = async () => {
     const end = new Date(end_time * 1000);
     end.setHours(+endHour + 12, +endMin);
@@ -42,6 +47,7 @@ const useEndTime = (
 
     try {
       await patchEndTime(outingUuid, end.getTime() / 1000);
+      dispatch(getOutingCardListSaga({ status: OutingStatus["학부모 승인"] }));
       toast.success("종료 시간을 변경했습니다.");
     } catch (err) {
       const { status } = getAxiosError(err);
