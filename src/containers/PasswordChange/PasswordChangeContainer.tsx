@@ -3,12 +3,8 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { PasswordChange } from "../../components";
-import {
-  putStudentPassword,
-  putTeacherPassword
-} from "../../lib/api/PasswordChange";
+import { putTeacherPassword } from "../../lib/api/PasswordChange";
 import { getAxiosError } from "../../lib/utils";
-import { STUDENT, TEACHER, UserType } from "../../modules/action/header";
 import WithLoadingContainer, {
   LoadingProps
 } from "../Loading/WithLoadingContainer";
@@ -23,16 +19,12 @@ const PasswordChangeContainer: FC<Props> = ({
   const history = useHistory();
 
   const changePassword = useCallback(
-    async (type: UserType, currentPw: string, revisionPw: string) => {
+    async (currentPw: string, revisionPw: string) => {
       const uuid = localStorage.getItem(`uuid`);
 
       startLoading();
       try {
-        if (type === STUDENT) {
-          await putStudentPassword(uuid, currentPw, revisionPw);
-        } else if (type === TEACHER) {
-          await putTeacherPassword(uuid, currentPw, revisionPw);
-        }
+        await putTeacherPassword(uuid, currentPw, revisionPw);
 
         toast.success("비밀번호를 변경했습니다.");
         history.push("/");

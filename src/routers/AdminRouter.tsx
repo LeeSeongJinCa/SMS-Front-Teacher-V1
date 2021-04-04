@@ -1,7 +1,5 @@
-import React, { FC, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { FC } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
 
 import { PageNotFound, AdminStatistics } from "../components";
 import {
@@ -21,22 +19,11 @@ import {
   AccountContainer
 } from "../containers";
 import { GlobalInnerBody } from "../GlobalStyle";
-import { TEACHER } from "../modules/action/header";
-import { stateType } from "../modules/reducer";
 
 const AdminRouter: FC = () => {
   const history = useHistory();
   const pathname = history.location.pathname;
   const needWhite: string[] = ["out", "notice"];
-  const { type } = useSelector((state: stateType) => state.header);
-
-  useEffect(() => {
-    if (pathname === "/account") return;
-    if (!(type === TEACHER || localStorage.getItem("sms-type") === TEACHER)) {
-      toast.info("로그인 후 이용해주세요.");
-      history.push("/login");
-    }
-  }, []);
 
   return (
     <GlobalInnerBody

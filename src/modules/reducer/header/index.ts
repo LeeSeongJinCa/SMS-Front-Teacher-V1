@@ -1,7 +1,6 @@
 import { ResStudentInfo } from "../../../lib/api/payloads/Login";
 import {
   HeaderAction,
-  UserType,
   SET_GRADE,
   SET_GROUP,
   SET_NUMBER,
@@ -19,12 +18,10 @@ export interface PageState {
 }
 
 export interface HeaderState extends ResStudentInfo {
-  type: UserType | "";
   clubUuid: string;
 }
 
-const initialState: HeaderState = {
-  type: "",
+export const initialState: HeaderState = {
   grade: 0,
   group: 0,
   name: "",
@@ -43,7 +40,6 @@ const headerReducer = (
       return {
         ...state,
         ...action.payload.user,
-        type: action.payload.type,
         clubUuid: action.payload.clubUuid
       };
     case SET_GRADE:
@@ -60,11 +56,6 @@ const headerReducer = (
       return {
         ...state,
         student_number: action.payload.number
-      };
-    case SET_TYPE:
-      return {
-        ...state,
-        type: action.payload.type
       };
     case SET_NAME:
       return {
