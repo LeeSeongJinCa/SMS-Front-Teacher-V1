@@ -11,7 +11,7 @@ export const HeaderWrap = styled.header`
   border-bottom: 1px solid #dddddd;
 `;
 
-export const Logout = styled.button`
+export const Logout = styled(Link)`
   border: 0;
   color: #ff5555;
   background-color: transparent;
@@ -24,7 +24,7 @@ export const UserInfo = styled.span`
   font-size: 14px;
 `;
 
-export const MovePasswordChange = styled.span`
+export const MovePasswordChange = styled(Link)`
   display: inline-block;
   margin: 0 16px;
   color: #838383;
