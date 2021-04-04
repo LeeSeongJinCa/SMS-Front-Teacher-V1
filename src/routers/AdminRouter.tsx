@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 
-import { PageNotFound, AdminStatistics } from "../components";
+import { PageNotFound, AdminStatistics, MyPage } from "../components";
 import {
   AdminOutingCertifiedListContainer,
   AdminOutingNowListContainer,
@@ -34,6 +34,7 @@ const AdminRouter: FC = () => {
         <Route exact path="/pw-change" component={PasswordChangeContainer} />
         <Route exact path="/account" component={AccountContainer} />
         <Route exact path="/login" component={LoginContainer} />
+        <Route exact path="/user" component={MyPage} />
         <Route
           exact
           path="/out/wait"
