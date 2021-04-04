@@ -4,7 +4,6 @@ import {
   SET_GRADE,
   SET_GROUP,
   SET_NUMBER,
-  SET_TYPE,
   SET_NAME,
   SET_PHONE,
   SET_PROFILE_URI,

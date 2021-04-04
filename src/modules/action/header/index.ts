@@ -4,7 +4,6 @@ import {
 } from "../../../lib/api/payloads/Login";
 
 export const SET_INIT = "header/SET_INIT" as const;
-export const SET_TYPE = "header/SET_TYPE" as const;
 export const SET_GRADE = "header/SET_GRADE" as const;
 export const SET_GROUP = "header/SET_GROUP" as const;
 export const SET_NUMBER = "header/SET_NUMBER" as const;
