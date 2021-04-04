@@ -1,12 +1,10 @@
 import React, { FC, useCallback, useState } from "react";
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import * as S from "./style";
 import PasswordInput from "./PasswordInput";
 
-import { stateType } from "../../../modules/reducer";
-import { Loading } from "../";
+import { Loading } from "../default";
 
 interface Props {
   loading: boolean;
