@@ -9,14 +9,18 @@ export const HeaderWrap = styled.header`
   margin-bottom: 12px;
   padding: 12px 0;
   border-bottom: 1px solid #dddddd;
+  > * {
+    margin-left: 16px;
+  }
 `;
 
-export const Logout = styled(Link)`
+export const Account = styled(Link)`
   border: 0;
   color: #ff5555;
   background-color: transparent;
   font-size: 14px;
   font-weight: bold;
+  text-decoration: none;
 `;
 
 export const UserInfo = styled.span`
@@ -24,9 +28,8 @@ export const UserInfo = styled.span`
   font-size: 14px;
 `;
 
-export const MovePasswordChange = styled(Link)`
+export const MovePageWithLink = styled(Link)`
   display: inline-block;
-  margin: 0 16px;
   color: #838383;
   font-size: 14px;
   text-decoration: none;
