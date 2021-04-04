@@ -5,8 +5,7 @@ import { ToastContainer } from "react-toastify";
 
 import "./lib/confirm/confirm.css";
 import { GlobalStyle, GlobalContainer, GlobalBody } from "./GlobalStyle";
-import { PageNotFound, Navigation } from "./components";
-import { HeaderContainer } from "./containers";
+import { PageNotFound, Navigation, Header } from "./components";
 import { AdminRouter } from "./routers";
 import { history } from "./modules/store";
 import Channel from "./lib/channel.js";
@@ -22,7 +21,7 @@ const App: FC<{}> = () => {
         <ToastContainer autoClose={2000} />
         <Navigation />
         <GlobalBody>
-          <HeaderContainer />
+          <Header />
           <Switch>
             <Route path="/" component={AdminRouter} />
             <Route path="*" component={PageNotFound} />
