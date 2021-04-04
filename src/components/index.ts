@@ -6,6 +6,10 @@ export { default as Header } from "./Header/Header";
 
 export { default as Account } from "./Account/Account";
 
+export { default as MyPage } from "./MyPage/MyPage";
+
+export { default as PasswordChange } from "./PasswordChange/PasswordChange";
+
 export { default as Navigation } from "./Navigation/Navigation";
 
 export { default as NoticeList } from "./Notice/List/NoticeList";
