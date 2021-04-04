@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 
 import * as S from "./style";
 
-import { AccountInputs } from "./useAccountInputs";
+import { AccountInputs } from "../../lib/hooks/useAccountInputs";
 
 import { ResTeacher } from "../../lib/api/payloads/Account";
 

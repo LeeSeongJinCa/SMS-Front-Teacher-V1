@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 
 import { Account } from "../../components";
-import useAccountInputs from "../../components/Account/useAccountInputs";
+import useAccountInputs from "../../lib/hooks/useAccountInputs";
 import { postTeacher } from "../../lib/api/Account";
 import { ResTeacher } from "../../lib/api/payloads/Account";
 import { getAxiosError } from "../../lib/utils";
