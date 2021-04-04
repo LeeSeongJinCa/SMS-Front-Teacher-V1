@@ -21,7 +21,7 @@ const Header: FC<Props> = () => {
     <S.HeaderWrap>
       <S.UserInfo>{name} 선생님</S.UserInfo>
       <S.MovePasswordChange to="/pw-change">비밀번호 변경</S.MovePasswordChange>
-      <S.Logout to="/logout" onClick={logout}>
+      <S.Logout to="/login" onClick={logout}>
         로그아웃
       </S.Logout>
     </S.HeaderWrap>
