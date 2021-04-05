@@ -1,14 +1,17 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
+import useCustomSelector from "../../lib/hooks/useCustomSelector";
+
 import * as S from "./style";
 
 interface Props {}
 
 const Banner: FC<Props> = () => {
   const bannerRef = useRef<HTMLElement>(null);
-  const [show, setShow] = useState<boolean>(true);
+  const [show, setShow] = useState<boolean>(false);
   const [check, setCheck] = useState<boolean>(false);
+  const { phone_number, name } = useCustomSelector().header;
 
   const toggleCheck = () => {
     setCheck(prev => !prev);
@@ -27,11 +30,12 @@ const Banner: FC<Props> = () => {
 
   useEffect(() => {
     const d = +new Date();
-    const until = +localStorage.getItem("banner");
-    if (d < until) {
-      setShow(false);
-    }
-  }, []);
+    const until = +localStorage.getItem("banner") || 0;
+
+    if (name === "") return;
+
+    if (!phone_number && d > until) setShow(true);
+  }, [name, phone_number]);
 
   return (
     <>
