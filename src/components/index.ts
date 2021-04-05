@@ -2,11 +2,13 @@ export { default as Main } from "./Main/Main";
 
 export { default as Login } from "./Login/Login";
 
+export { default as MyPage } from "./MyPage/MyPage";
+
+export { default as Banner } from "./Banner/Banner";
+
 export { default as Header } from "./Header/Header";
 
 export { default as Account } from "./Account/Account";
-
-export { default as MyPage } from "./MyPage/MyPage";
 
 export { default as PasswordChange } from "./PasswordChange/PasswordChange";
 
