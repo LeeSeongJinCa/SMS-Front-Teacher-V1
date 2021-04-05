@@ -18,11 +18,10 @@ const MyPage: FC<Props> = () => {
   const [phone, onChangePhone] = useMyPage();
 
   const submitPhoneNum = async () => {
-    if (phone.length !== 11 && isNaN(+phone)) {
+    if (phone.length !== 11 || isNaN(+phone)) {
       toast.error("전화번호를 알맞게 입력해주세요.");
       return;
     }
-
     if (phone === phone_number) {
       toast.error("전화번호를 변경해주세요.");
       return;
@@ -30,7 +29,6 @@ const MyPage: FC<Props> = () => {
 
     try {
       await patchTeacher(localStorage.getItem("uuid"), phone);
-
       toast.success("전화번호를 변경했습니다.");
     } catch (err) {
       const { status, code } = getAxiosError(err);
@@ -48,14 +46,35 @@ const MyPage: FC<Props> = () => {
     <S.MyPageWrap>
       <h1>내 계정</h1>
       <div>
-        <MyPageInput id="name" text="성함" value={name} />
-        <MyPageInput id="grade" text="학년" value={grade} />
-        <MyPageInput id="group" text="반" value={group} />
         <MyPageInput
-          id="phone_number"
+          inputOption={{
+            id: "name",
+            defaultValue: name
+          }}
+          text="성함"
+        />
+        <MyPageInput
+          inputOption={{
+            id: "grade",
+            defaultValue: grade === 0 ? "X" : grade
+          }}
+          text="학년"
+        />
+        <MyPageInput
+          inputOption={{
+            id: "group",
+            defaultValue: group === 0 ? "X" : group
+          }}
+          text="반"
+        />
+        <MyPageInput
+          inputOption={{
+            id: "phone_number",
+            value: phone === "0" ? "" : phone,
+            placeholder: "전화번호를 입력해주세요.",
+            onChange: onChangePhone
+          }}
           text="전화번호"
-          value={phone}
-          onChange={onChangePhone}
         />
         <button onClick={submitPhoneNum}>계정 정보 변경</button>
       </div>

@@ -1,7 +1,7 @@
 import React, {
-  ChangeEvent,
   FC,
   FocusEvent,
+  InputHTMLAttributes,
   useCallback,
   useRef,
   useState
@@ -10,13 +10,11 @@ import React, {
 import * as S from "./style";
 
 interface Props {
-  id: string;
   text: string;
-  value: string | number;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  inputOption?: InputHTMLAttributes<HTMLInputElement>;
 }
 
-const MyPageInput: FC<Props> = ({ id, text, value, onChange }) => {
+const MyPageInput: FC<Props> = ({ text, inputOption }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
@@ -47,31 +45,16 @@ const MyPageInput: FC<Props> = ({ id, text, value, onChange }) => {
 
   return (
     <S.InputWrap>
-      {onChange ? (
-        <S.Input
-          type="text"
-          id={id}
-          ref={inputRef}
-          value={value}
-          onFocus={onFocus}
-          onBlur={handleBlur}
-          onChange={onChange}
-        />
-      ) : (
-        <S.Input
-          type="text"
-          id={id}
-          ref={inputRef}
-          defaultValue={value}
-          onFocus={onFocus}
-          onBlur={handleBlur}
-          disabled={true}
-        />
-      )}
+      <S.Input
+        type="text"
+        ref={inputRef}
+        {...inputOption}
+        onFocus={onFocus}
+        onBlur={handleBlur}
+        disabled={text !== "전화번호"}
+      />
       <S.ErrorMessage>{message}</S.ErrorMessage>
-      <S.Text id="text" onClick={onClickFocus}>
-        {text}
-      </S.Text>
+      <S.Text onClick={onClickFocus}>{text}</S.Text>
       <S.InputDefaultLine />
       <S.InputLine id="line" bgColor={error ? "#ff5555" : "#038fff"} />
     </S.InputWrap>
