@@ -3,6 +3,7 @@ import React, {
   FocusEvent,
   InputHTMLAttributes,
   useCallback,
+  useEffect,
   useRef,
   useState
 } from "react";
@@ -41,6 +42,10 @@ const MyPageInput: FC<Props> = ({ text, inputOption }) => {
 
   const onClickFocus = useCallback(() => {
     inputRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    if (text === "전화번호") inputRef.current.focus();
   }, []);
 
   return (

@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 
@@ -9,11 +10,13 @@ import useCustomSelector from "../../lib/hooks/useCustomSelector";
 import { patchTeacher } from "../../lib/api/Account";
 import { getAxiosError } from "../../lib/utils";
 import useMyPage from "../../lib/hooks/useMyPage";
+import { getTeacherInfoSaga } from "../../modules/action/header";
 
 interface Props {}
 
 const MyPage: FC<Props> = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const { grade, group, name, phone_number } = useCustomSelector().header;
   const [phone, onChangePhone] = useMyPage();
 
@@ -28,7 +31,10 @@ const MyPage: FC<Props> = () => {
     }
 
     try {
-      await patchTeacher(localStorage.getItem("uuid"), phone);
+      const uuid = localStorage.getItem("uuid");
+
+      await patchTeacher(uuid, phone);
+      dispatch(getTeacherInfoSaga(uuid));
       toast.success("전화번호를 변경했습니다.");
     } catch (err) {
       const { status, code } = getAxiosError(err);
