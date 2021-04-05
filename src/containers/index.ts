@@ -1,7 +1,5 @@
 export { default as MainContainer } from "./Main/MainContainer";
 
-export { default as LoginContainer } from "./Login/LoginContainer";
-
 export { default as AccountContainer } from "./Account/AccountContainer";
 
 export { default as PasswordChangeContainer } from "./PasswordChange/PasswordChangeContainer";
