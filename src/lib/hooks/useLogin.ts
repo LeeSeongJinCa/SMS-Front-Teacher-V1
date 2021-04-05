@@ -1,38 +1,30 @@
-import React, { ChangeEvent, FC, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router";
 
-import { Login } from "../../components";
-import { postLoginTeacher } from "../../lib/api/Login";
-import {
-  PASSWORD_NOT_MATCHED,
-  UNAUTHORIZED
-} from "../../lib/api/payloads/Login";
-import { getAxiosError } from "../../lib/utils";
+import useLoginInputs from "./useLoginInputs";
+import useLoginToggle from "./useLoginToggle";
+
 import { getTeacherInfoSaga } from "../../modules/action/header";
-import { pageMove } from "../../modules/action/page";
-import WithLoadingContainer, {
-  LoadingProps
-} from "../Loading/WithLoadingContainer";
+import { postLoginTeacherWithPick } from "../api/Login";
+import { PASSWORD_NOT_MATCHED, UNAUTHORIZED } from "../api/payloads/Login";
+import { getAxiosError } from "../utils";
 
-interface Props extends LoadingProps {}
-
-export interface ErrorState {
+interface ErrorState {
   status: boolean;
   message: string;
 }
 
-const initErrorState = {
+const initErrorState: ErrorState = {
   status: false,
   message: ""
 };
 
-const LoginContainer: FC<Props> = ({ loading, startLoading, endLoading }) => {
-  const dispatch = useDispatch();
+const useLogin = (startLoading: () => void, endLoading: () => void) => {
   const history = useHistory();
-  const [id, setId] = useState<string>("");
-  const [pw, setPw] = useState<string>("");
-  const [autoLogin, setAutoLogin] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const [id, pw, handleId, handlePw] = useLoginInputs();
+  const [showPw, autoLogin, toggleEye, toggleAutoLogin] = useLoginToggle();
   const [errorMessage, setErrorMessage] = useState<ErrorState>(initErrorState);
 
   const errorMessageMacro = (message: string) => {
@@ -59,7 +51,7 @@ const LoginContainer: FC<Props> = ({ loading, startLoading, endLoading }) => {
 
   const getTeacherLoginInfo = useCallback(
     async (id: string, pw: string, autoLogin: boolean) => {
-      const { data } = await postLoginTeacher(id, pw);
+      const { data } = await postLoginTeacherWithPick(id, pw);
       const { access_token, teacher_uuid } = data;
 
       storageHandler(autoLogin, access_token, teacher_uuid);
@@ -71,7 +63,6 @@ const LoginContainer: FC<Props> = ({ loading, startLoading, endLoading }) => {
 
   const teacherLogin = async (id: string, pw: string, autoLogin: boolean) => {
     const teacherUuid = await getTeacherLoginInfo(id, pw, autoLogin);
-    localStorage.removeItem("club_uuid");
     dispatch(getTeacherInfoSaga(teacherUuid));
   };
 
@@ -81,7 +72,6 @@ const LoginContainer: FC<Props> = ({ loading, startLoading, endLoading }) => {
       try {
         await teacherLogin(id, pw, autoLogin);
         setErrorMessage(initErrorState);
-        dispatch(pageMove("홈"));
         history.push("/");
       } catch (err) {
         const { status, code } = getAxiosError(err);
@@ -98,38 +88,24 @@ const LoginContainer: FC<Props> = ({ loading, startLoading, endLoading }) => {
           );
         }
 
-        setPw("");
         endLoading();
       }
     },
     []
   );
 
-  const handleId = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setId(e.currentTarget.value);
-  }, []);
-
-  const handlePw = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setPw(e.currentTarget.value);
-  }, []);
-
-  const toggleAutoLogin = useCallback(() => {
-    setAutoLogin(prev => !prev);
-  }, [autoLogin]);
-
-  return (
-    <Login
-      loading={loading}
-      id={id}
-      pw={pw}
-      autoLogin={autoLogin}
-      errorMessage={errorMessage}
-      handleId={handleId}
-      handlePw={handlePw}
-      toggleAutoLogin={toggleAutoLogin}
-      login={login}
-    />
-  );
+  return [
+    id,
+    pw,
+    showPw,
+    autoLogin,
+    errorMessage,
+    handleId,
+    handlePw,
+    toggleEye,
+    toggleAutoLogin,
+    login
+  ] as const;
 };
 
-export default WithLoadingContainer(LoginContainer);
+export default useLogin;
