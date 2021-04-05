@@ -11,6 +11,16 @@ export const postLoginTeacher = (id: string, pw: string) => {
   });
 };
 
+export const postLoginTeacherWithPick = (id: string, pw: string) => {
+  return apiDefault().post<ResTeacherLoginWithDefault>(
+    "/login/teacher/with-pick",
+    {
+      teacher_id: id,
+      teacher_pw: pw
+    }
+  );
+};
+
 export const getTeacherInfo = (teacherUuid: string) => {
   return apiDefault().get<ResTeacherInfoWithDefault>(
     `/teachers/uuid/${teacherUuid}`
