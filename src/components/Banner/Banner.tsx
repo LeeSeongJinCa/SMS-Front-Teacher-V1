@@ -42,7 +42,10 @@ const Banner: FC<Props> = () => {
       {show && (
         <S.BannerWrap ref={bannerRef}>
           <p>
-            전화번호가 입력되어있지 않습니다. <Link to="/user">여기</Link>
+            전화번호가 입력되어있지 않습니다.{" "}
+            <Link to="/user" onClick={close}>
+              여기
+            </Link>
             에서 전화번호를 입력해 학생 외출에 관한 알림 문자를 받으세요.
           </p>
           <label htmlFor="check">

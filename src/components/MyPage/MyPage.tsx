@@ -76,7 +76,7 @@ const MyPage: FC<Props> = () => {
         <MyPageInput
           inputOption={{
             id: "phone_number",
-            value: phone === "0" ? "" : phone,
+            value: phone,
             placeholder: "전화번호를 입력해주세요.",
             onChange: onChangePhone
           }}
