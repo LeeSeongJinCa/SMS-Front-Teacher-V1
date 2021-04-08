@@ -36,4 +36,5 @@ export interface SetOutingCard {
 
 export interface ReqOutingCardFilter extends OutingCardFilter {
   status: number;
+  start?: number;
 }

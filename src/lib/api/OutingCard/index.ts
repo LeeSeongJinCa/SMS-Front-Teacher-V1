@@ -10,7 +10,7 @@ export const getOutingCardList = (filterObj: ReqOutingCardFilter) => {
   const query: string = makeQuery(filterObj);
 
   return apiDefault().get<{ outings: ResOutingCardListItem[] }>(
-    `/outings/with-filter?${query}`
+    `/outings/with-filter?${query}count=8`
   );
 };
 

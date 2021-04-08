@@ -13,11 +13,6 @@ const AdminOutingNowListContainer: FC = () => {
 
   useEffect(() => {
     dispatch(setOutingCardList([]));
-    dispatch(
-      getOutingCardListSaga({
-        status: OutingStatus["외출 종료"]
-      })
-    );
   }, []);
 
   return <AdminOutingDone />;

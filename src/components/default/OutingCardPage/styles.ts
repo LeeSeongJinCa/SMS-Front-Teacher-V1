@@ -41,3 +41,17 @@ export const CardContainer = styled.div`
     border-radius: 5px;
   }
 `;
+
+export const MoreBtn = styled.button`
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  padding: 0;
+  font-weight: bold;
+  padding: 10px 0;
+  transition: 125ms all;
+
+  &:hover {
+    background-color: rgb(217, 217, 217);
+  }
+`;

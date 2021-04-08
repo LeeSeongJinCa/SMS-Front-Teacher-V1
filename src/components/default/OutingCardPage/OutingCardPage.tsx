@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as S from "./styles";
@@ -11,7 +11,10 @@ import {
   OutingCardFilter as OutingCardFilterType,
   ReqOutingCardFilter
 } from "../../../lib/api/payloads/OutingCard";
-import { getOutingCardListSaga } from "../../../modules/action/outingCard";
+import {
+  addOutingCardListSaga,
+  getOutingCardListSaga
+} from "../../../modules/action/outingCard";
 
 interface Props {
   title: string;
@@ -20,8 +23,29 @@ interface Props {
 }
 
 const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
-  const data = useSelector((state: stateType) => state.outingCard.list);
+  const { data, readMore } = useSelector((state: stateType) => ({
+    data: state.outingCard.list,
+    readMore: state.outingCard.readMore
+  }));
+  const [filterState, setFilterState] = useState<ReqOutingCardFilter>({
+    status
+  });
+  const [startCount, setStartCount] = useState<number>(0);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOutingCardListSaga(filterState));
+  }, [
+    filterState.floor,
+    filterState.grade,
+    filterState.group,
+    filterState.status
+  ]);
+
+  useEffect(() => {
+    if (startCount === 0) return;
+    dispatch(addOutingCardListSaga({ ...filterState, start: startCount }));
+  }, [startCount]);
 
   const filterChangeHandler = useCallback(
     (data: OutingCardFilterType) => {
@@ -43,7 +67,8 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
         status
       };
 
-      dispatch(getOutingCardListSaga(filterData));
+      setFilterState(filterData);
+      setStartCount(0);
     },
     [status]
   );
@@ -81,6 +106,10 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
     ));
   }, [data, title]);
 
+  const getMoreCard = useCallback(() => {
+    setStartCount(prev => prev + 8);
+  }, []);
+
   return (
     <S.Container>
       <S.Header>
@@ -88,6 +117,7 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
         <OutingCardFilter onChange={filterChangeHandler} />
       </S.Header>
       <S.CardContainer>{displayOutingCard}</S.CardContainer>
+      {readMore && <S.MoreBtn onClick={getMoreCard}>더보기</S.MoreBtn>}
       <OutingCardModal />
     </S.Container>
   );
