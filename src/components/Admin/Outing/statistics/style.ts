@@ -12,7 +12,7 @@ export const StatisticsWrap = styled.main`
   }
   > section {
     max-height: 600px;
-    overflow-y: scroll;
+    overflow-y: auto;
     > ul > li:first-of-type {
       padding: 8px;
       border-bottom: 1px solid #dddddd;
@@ -98,6 +98,7 @@ export const PeriodWrap = styled.label`
 export const StudentItemWrap = styled.li`
   position: relative;
   padding: 24px 8px;
+  cursor: pointer;
   &:nth-child(2n - 1) {
     background-color: #fbfbfb;
   }
@@ -117,7 +118,6 @@ export const StudentItemWrap = styled.li`
     width: 20px;
     transform: rotate(90deg);
     transition: transform 300ms;
-    cursor: pointer;
     &.spread {
       transform: rotate(180deg);
     }
@@ -135,11 +135,12 @@ interface SubList {
 export const StudentSubList = styled.ul<SubList>`
   transition: all 600ms;
   max-height: 300px;
-  overflow-y: scroll;
+  overflow-y: auto;
   ${({ isShown }) => (isShown ? "display: block;" : "display: none;")};
   > li {
     display: flex;
     padding: 8px 0;
+    border-bottom: 1px dashed #aaaaaa;
     &:first-of-type {
       font-size: 13px;
       margin-top: 8px;

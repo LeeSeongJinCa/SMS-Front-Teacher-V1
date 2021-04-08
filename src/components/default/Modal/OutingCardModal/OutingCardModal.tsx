@@ -55,11 +55,12 @@ const OutingCardModal: FC = () => {
   ] = useEndTime(outing_uuid, start_time, end_time, endTime);
 
   const approveOutingCard = useCallback(() => {
-    dispatch(approveOutingCardSaga(data.outing_uuid));
-  }, [data.outing_uuid]);
+    dispatch(approveOutingCardSaga(outing_uuid));
+  }, [outing_uuid]);
+
   const rejectOutingCard = useCallback(() => {
-    dispatch(rejectOutingCardSaga(data.outing_uuid));
-  }, [data.outing_uuid]);
+    dispatch(rejectOutingCardSaga(outing_uuid));
+  }, [outing_uuid]);
 
   const closeModal = useCallback(() => {
     dispatch(CloseOutingCardModal());
@@ -135,8 +136,8 @@ const OutingCardModal: FC = () => {
                       {makeOption(6, (i: number) => padNum(i * 10))}
                     </select>
                   </label>
+                  <button onClick={onClickChangeOutTime}>변경</button>
                 </div>
-                <button onClick={onClickChangeOutTime}>변경</button>
               </section>
               <div>
                 <S.Button color="#242424" onClick={approveOutingCard}>

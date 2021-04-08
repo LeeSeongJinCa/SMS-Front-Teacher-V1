@@ -60,23 +60,22 @@ export const Content = styled.div`
         position: relative;
         margin: 0 4px;
         > select {
+          display: inline-block;
           width: 40px;
           padding: 0;
           border: 1px solid #23b2ad;
           color: #23b2ad;
         }
       }
-    }
-    > button {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      padding: 4px 20px;
-      background: #23b2ad;
-      color: white;
-      border-radius: 3px;
-      border: none;
-      box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.1);
+      > button {
+        float: right;
+        padding: 2px 14px;
+        background: #23b2ad;
+        color: white;
+        border-radius: 3px;
+        border: none;
+        box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.1);
+      }
     }
   }
   strong {

@@ -22,7 +22,7 @@ export const getEndOutingFiltered = (period: number) => {
   const d = date.getDate();
 
   const end = Math.floor(+new Date(y, m, d + 1) / 1000);
-  const start = end - ONE_DAY_SECOND * period;
+  const start = end - ONE_DAY_SECOND * period - ONE_DAY_SECOND;
 
   return apiDefault().get<{ outings: ResOutingCardListItem[] }>(
     `/outings/with-filter?start_time=${start}&end_time=${end}&count=0`
