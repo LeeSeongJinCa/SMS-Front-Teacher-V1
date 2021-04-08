@@ -8,6 +8,7 @@ export const Container = styled.div`
 export const TitleInput = styled.input`
   color: #888888;
   border: none;
+  width:100%;
   font-size: 15px;
 `;
 
