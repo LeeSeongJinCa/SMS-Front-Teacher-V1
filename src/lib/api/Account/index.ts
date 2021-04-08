@@ -1,4 +1,5 @@
 import { apiDefault } from "../client";
+import { ResDefault } from "../payloads";
 
 import { ResTeacher, ResTeacherWithDefault } from "../payloads/Account";
 
@@ -17,4 +18,10 @@ export const postTeacher = (account: ResTeacher, homeroom: boolean) => {
   }
 
   return apiDefault().post<ResTeacherWithDefault>("/teachers", accountForm);
+};
+
+export const patchTeacher = (teacherUuid: string, phoneNumber: string) => {
+  return apiDefault().patch<ResDefault>(`/teachers/uuid/${teacherUuid}`, {
+    phone_number: phoneNumber
+  });
 };

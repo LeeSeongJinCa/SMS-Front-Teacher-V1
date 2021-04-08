@@ -1,7 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { all, call, getContext, put, takeEvery } from "redux-saga/effects";
-import { apiDefault } from "../../../lib/api/client";
+import { call, getContext, put, takeEvery } from "redux-saga/effects";
 import {
   getOutingCardList,
   setActionOutingCard

@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import React, { FC, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as S from "./styles";

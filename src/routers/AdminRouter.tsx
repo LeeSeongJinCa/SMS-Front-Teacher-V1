@@ -1,9 +1,7 @@
-import React, { FC, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { FC } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
 
-import { PageNotFound, AdminStatistics } from "../components";
+import { PageNotFound, AdminStatistics, MyPage, Login } from "../components";
 import {
   AdminOutingCertifiedListContainer,
   AdminOutingNowListContainer,
@@ -13,7 +11,6 @@ import {
   AdminNoticeAllDetailContainer,
   AdminNoticeMineContainer,
   AdminNoticeWritingContainer,
-  LoginContainer,
   PasswordChangeContainer,
   AdminOutingDoneContainer,
   AdminNoticeMineDetailContainer,
@@ -21,22 +18,11 @@ import {
   AccountContainer
 } from "../containers";
 import { GlobalInnerBody } from "../GlobalStyle";
-import { TEACHER } from "../modules/action/header";
-import { stateType } from "../modules/reducer";
 
 const AdminRouter: FC = () => {
   const history = useHistory();
   const pathname = history.location.pathname;
   const needWhite: string[] = ["out", "notice"];
-  const { type } = useSelector((state: stateType) => state.header);
-
-  useEffect(() => {
-    if (pathname === "/account") return;
-    if (!(type === TEACHER || localStorage.getItem("sms-type") === TEACHER)) {
-      toast.info("로그인 후 이용해주세요.");
-      history.push("/login");
-    }
-  }, []);
 
   return (
     <GlobalInnerBody
@@ -46,7 +32,8 @@ const AdminRouter: FC = () => {
         <Route exact path="/" component={AdminMainContainer} />
         <Route exact path="/pw-change" component={PasswordChangeContainer} />
         <Route exact path="/account" component={AccountContainer} />
-        <Route exact path="/login" component={LoginContainer} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/user" component={MyPage} />
         <Route
           exact
           path="/out/wait"

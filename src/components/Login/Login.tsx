@@ -1,54 +1,29 @@
-import React, { ChangeEvent, FC, KeyboardEvent, useState } from "react";
+import React, { FC } from "react";
 
 import * as S from "./style";
 
-import { ErrorState } from "../../containers/Login/LoginContainer";
 import Loading from "../default/Loading/Loading";
-import { CapsLock as CapsLockIcon, Eye, EyeOff } from "../../assets";
+import { Eye, EyeOff } from "../../assets";
+import useLogin from "../../lib/hooks/useLogin";
+import WithLoadingContainer, {
+  LoadingProps
+} from "../../containers/Loading/WithLoadingContainer";
 
-interface Props {
-  loading: boolean;
-  id: string;
-  pw: string;
-  autoLogin: boolean;
-  errorMessage: ErrorState;
-  handleId: (e: ChangeEvent<HTMLInputElement>) => void;
-  handlePw: (e: ChangeEvent<HTMLInputElement>) => void;
-  toggleAutoLogin: () => void;
-  login: (id: string, pw: string, autoLogin: boolean) => Promise<any>;
-}
+interface Props extends LoadingProps {}
 
-const Login: FC<Props> = ({
-  loading,
-  id,
-  pw,
-  handleId,
-  handlePw,
-  autoLogin,
-  toggleAutoLogin,
-  errorMessage,
-  login
-}) => {
-  const [capsLock, setCapsLock] = useState<boolean>(false);
-  const [showPw, setShowPw] = useState<boolean>(false);
-
-  const handleCapsLock = (e: KeyboardEvent<HTMLInputElement>) => {
-    const key = e.key;
-    const shiftKey = e.shiftKey;
-
-    if (
-      (key >= "A" && key <= "Z" && !shiftKey) ||
-      (key >= "a" && key <= "z" && shiftKey)
-    ) {
-      setCapsLock(true);
-      return;
-    }
-    setCapsLock(false);
-  };
-
-  const toggleEye = () => {
-    setShowPw(prev => !prev);
-  };
+const Login: FC<Props> = ({ startLoading, endLoading, loading }) => {
+  const [
+    id,
+    pw,
+    showPw,
+    autoLogin,
+    errorMessage,
+    handleId,
+    handlePw,
+    toggleEye,
+    toggleAutoLogin,
+    login
+  ] = useLogin(startLoading, endLoading);
 
   return (
     <S.LoginWrap>
@@ -73,38 +48,15 @@ const Login: FC<Props> = ({
               type={showPw ? "text" : "password"}
               placeholder="비밀번호"
               id="current-password"
-              onKeyPress={e => {
-                if (e.key === "Enter") {
-                  login(id, pw, autoLogin);
-                  return;
-                }
-                handleCapsLock(e);
-              }}
               onChange={handlePw}
               value={pw}
             />
-            {showPw ? (
-              <S.Eye
-                src={Eye}
-                alt="see password"
-                title="see password"
-                onClick={toggleEye}
-              />
-            ) : (
-              <S.Eye
-                src={EyeOff}
-                alt="Don't see password"
-                title="Don't see password"
-                onClick={toggleEye}
-              />
-            )}
-            {capsLock && (
-              <S.CapsLockImg
-                src={CapsLockIcon}
-                alt="caps lock is on"
-                title="caps lock is on"
-              />
-            )}
+            <S.Eye
+              src={showPw ? Eye : EyeOff}
+              alt="eye"
+              title="eye"
+              onClick={toggleEye}
+            />
           </S.LoginLabel>
           <S.ErrorMessage>{errorMessage.message}</S.ErrorMessage>
           {loading && <Loading />}
@@ -142,4 +94,4 @@ const Login: FC<Props> = ({
   );
 };
 
-export default Login;
+export default WithLoadingContainer(Login);

@@ -9,7 +9,6 @@ import { SearchIcon } from "../../../../assets";
 import useStatisticsSelector from "../../../../lib/hooks/useStatisticsSelector";
 import useEndStudents from "../../../../lib/hooks/useEndStudents";
 import useSearchInput from "../../../../lib/hooks/useSearchInput";
-import usePeriod from "../../../../lib/hooks/usePeriod";
 
 export type Period = 0 | 1 | 7 | 30;
 
@@ -24,8 +23,7 @@ const Statistics: FC<Props> = () => {
     filterSelector
   ] = useStatisticsSelector();
   const [searchInput, onChangeSearch, filterSearch] = useSearchInput();
-  const [endStudents, loading] = useEndStudents();
-  const [period, handlePeriod, filterPeriod] = usePeriod();
+  const [endStudents, loading, period, handlePeriod] = useEndStudents();
 
   const displayStudentItem = useMemo(() => {
     return Array.from(endStudents)
@@ -34,15 +32,7 @@ const Statistics: FC<Props> = () => {
       .map((student, i) => {
         const numberName = student[0];
         const subList = student[1];
-        return (
-          <StudentItem
-            key={i}
-            student={numberName}
-            subList={subList}
-            period={period}
-            filterPeriod={filterPeriod}
-          />
-        );
+        return <StudentItem key={i} student={numberName} subList={subList} />;
       });
   }, [endStudents, gradeState, groupState, searchInput, period]);
 

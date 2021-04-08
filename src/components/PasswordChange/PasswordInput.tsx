@@ -2,7 +2,7 @@ import React, { FC, FocusEvent, useRef, useState } from "react";
 
 import * as S from "./style";
 
-import { Eye, EyeOff } from "../../../assets";
+import { Eye, EyeOff } from "../../assets";
 
 interface Props {
   id: string;
