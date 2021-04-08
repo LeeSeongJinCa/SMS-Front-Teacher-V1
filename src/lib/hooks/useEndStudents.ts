@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 
-import { getEndOutings } from "../api/Outing";
+import usePeriod from "./usePeriod";
+
+import { getEndOutingFiltered, getEndOutings } from "../api/Outing";
 import { ResOutingCardListItem } from "../api/payloads/OutingCard";
 import { getAxiosError, padNum } from "../utils";
 
@@ -16,29 +18,33 @@ export interface EndStudents {
 
 const useEndStudents = () => {
   const history = useHistory();
+  const [period, handlePeriod] = usePeriod();
   const [loading, setLoading] = useState<boolean>(false);
   const [endOutings, setEndOutings] = useState<ResOutingCardListItem[]>([]);
   const [endStudents, setEndStudents] = useState<Map<string, EndStudents[]>>(
     new Map()
   );
 
+  const fetchOutings = async () => {
+    try {
+      const res = await getEndOutings();
+
+      setEndOutings(res.data.outings);
+    } catch (err) {
+      const { status } = getAxiosError(err);
+
+      if (status === 403) {
+        toast.error("선생님 계정으로 로그인해주세요.");
+        history.push("/login");
+      }
+    }
+  };
+
   useEffect(() => {
     setLoading(true);
-    getEndOutings()
-      .then(res => {
-        setEndOutings(res.data.outings);
-      })
-      .catch(err => {
-        const { status } = getAxiosError(err);
-
-        if (status === 403) {
-          toast.error("선생님 계정으로 로그인해주세요.");
-          history.push("/login");
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    fetchOutings().finally(() => {
+      setLoading(false);
+    });
   }, []);
   useEffect(() => {
     if (!endOutings) return;
@@ -62,8 +68,23 @@ const useEndStudents = () => {
 
     setEndStudents(map);
   }, [endOutings]);
+  useEffect(() => {
+    setLoading(true);
+    if (period === 0) {
+      fetchOutings();
+    } else {
+      const fetchFilteredOutings = async () => {
+        const res = await getEndOutingFiltered(period);
 
-  return [endStudents, loading] as const;
+        setEndOutings(res.data.outings);
+      };
+
+      fetchFilteredOutings();
+    }
+    setLoading(false);
+  }, [period]);
+
+  return [endStudents, loading, period, handlePeriod] as const;
 };
 
 export default useEndStudents;

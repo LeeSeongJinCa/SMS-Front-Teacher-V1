@@ -20,8 +20,6 @@ enum Days {
 interface Props {
   student: string;
   subList: EndStudents[];
-  period: Period;
-  filterPeriod: (student: EndStudents) => void;
 }
 
 interface SubProps {
@@ -44,7 +42,7 @@ const SubItem: FC<SubProps> = ({ place, reason, date, situation, late }) => {
   );
 };
 
-const StudentItem: FC<Props> = ({ student, subList, period, filterPeriod }) => {
+const StudentItem: FC<Props> = ({ student, subList }) => {
   const [isShown, setShown] = useState<boolean>(false);
   const name = student.split(" ")[0];
   const number = student.split(" ")[1];
@@ -54,7 +52,7 @@ const StudentItem: FC<Props> = ({ student, subList, period, filterPeriod }) => {
   }, []);
 
   const displaySubList = useMemo(() => {
-    return subList.filter(filterPeriod).map((item, i) => {
+    return subList.map((item, i) => {
       const date = new Date(item.date);
       const y = date.getFullYear();
       const m = padNum(date.getMonth() + 1);
@@ -72,7 +70,7 @@ const StudentItem: FC<Props> = ({ student, subList, period, filterPeriod }) => {
         />
       );
     });
-  }, [subList, period]);
+  }, [subList]);
 
   const outingCount = useMemo(() => {
     return subList.reduce((prev, curr) => (curr.late ? prev + 1 : prev), 0);
