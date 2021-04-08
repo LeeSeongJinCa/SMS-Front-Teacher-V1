@@ -1,6 +1,13 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { toast } from "react-toastify";
-import { call, getContext, put, takeEvery } from "redux-saga/effects";
+import {
+  call,
+  delay,
+  getContext,
+  put,
+  takeEvery,
+  takeLatest
+} from "redux-saga/effects";
 import {
   getOutingCardList,
   setActionOutingCard
@@ -19,7 +26,10 @@ import {
   REJECT_OUTING_CARD_SAGA,
   CloseOutingCardModal,
   FINISH_OUTING_CARD_SAGA,
-  TEACHER_FINISH_OUTING_CARD_SAGA
+  TEACHER_FINISH_OUTING_CARD_SAGA,
+  ADD_OUTING_CARD_LIST,
+  ADD_OUTING_CARD_LIST_SAGA,
+  addOutingCardList
 } from "../../action/outingCard";
 
 function* getOutingCardListSaga(
@@ -32,6 +42,23 @@ function* getOutingCardListSaga(
     );
 
     yield put(getOutingCardListCreater(res.data.outings));
+  } catch (err) {
+    const axiosErr = err as AxiosError;
+    errorHandler(axiosErr.response.status, yield getContext("history"));
+  }
+}
+
+function* addOutingCardListSaga(
+  action: ReturnType<typeof getOutingCardListSagaCreater>
+) {
+  try {
+    const res: AxiosResponse<{ outings: ResOutingCardListItem[] }> = yield call(
+      getOutingCardList,
+      action.payload
+    );
+
+    yield put(addOutingCardList(res.data.outings));
+    yield delay(1000);
   } catch (err) {
     const axiosErr = err as AxiosError;
     errorHandler(axiosErr.response.status, yield getContext("history"));
@@ -114,6 +141,7 @@ function* teacherFinishOutingCardSaga(
 
 function* outingCardSaga() {
   yield takeEvery(GET_OUTING_CARD_LIST_SAGA, getOutingCardListSaga);
+  yield takeEvery(ADD_OUTING_CARD_LIST_SAGA, addOutingCardListSaga);
   yield takeEvery(APPROVE_OUTING_CARD_SAGA, approveOutingCardSaga);
   yield takeEvery(REJECT_OUTING_CARD_SAGA, rejectOutingCardSaga);
   yield takeEvery(FINISH_OUTING_CARD_SAGA, finishOutingCardSaga);

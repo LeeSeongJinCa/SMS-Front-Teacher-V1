@@ -1,5 +1,6 @@
 import { ResOutingCardListItem } from "../../../lib/api/payloads/OutingCard";
 import {
+  ADD_OUTING_CARD_LIST,
   CLOSE_OUTING_CARD_MODAL,
   GET_OUTING_CARD_LIST,
   OutingCardAction,
@@ -11,11 +12,13 @@ interface OutingCardState {
   list: ResOutingCardListItem[];
   outingUuid: string;
   modalIsOpen: boolean;
+  readMore: boolean;
 }
 const initialState: OutingCardState = {
   list: [],
   outingUuid: "",
-  modalIsOpen: false
+  modalIsOpen: false,
+  readMore: false
 };
 
 const OutingCardReducer = (
@@ -29,10 +32,22 @@ const OutingCardReducer = (
         list: action.payload.outingCard
       };
     }
-    case GET_OUTING_CARD_LIST: {
+    case ADD_OUTING_CARD_LIST: {
+      let readMore = true;
+      if (action.payload.length < 8) readMore = false;
       return {
         ...state,
-        list: action.payload
+        list: [...state.list, ...action.payload],
+        readMore
+      };
+    }
+    case GET_OUTING_CARD_LIST: {
+      let readMore = true;
+      if (action.payload.length < 8) readMore = false;
+      return {
+        ...state,
+        list: action.payload,
+        readMore
       };
     }
     case SHOW_OUTING_CARD_MODAL: {
