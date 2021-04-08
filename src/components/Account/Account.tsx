@@ -1,39 +1,39 @@
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { FC, useState } from "react";
 
 import * as S from "./style";
+
+import { AccountInputs } from "../../lib/hooks/useAccountInputs";
 
 import { ResTeacher } from "../../lib/api/payloads/Account";
 
 interface Props {
-  accountForm: ResTeacher;
-  handleName: (e: ChangeEvent<HTMLInputElement>) => void;
-  handlePhoneNumber: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleGrade: (e: ChangeEvent<HTMLSelectElement>) => void;
-  handleGroup: (e: ChangeEvent<HTMLSelectElement>) => void;
-  handleTeacherId: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleTeacherPw: (e: ChangeEvent<HTMLInputElement>) => void;
+  accountInputs: AccountInputs;
   applyAccount: (accountForm: ResTeacher, homeroom: boolean) => void;
 }
 
-const Account: FC<Props> = ({
-  accountForm,
-  handleName,
-  handlePhoneNumber,
-  handleGrade,
-  handleGroup,
-  handleTeacherId,
-  handleTeacherPw,
-  applyAccount
-}) => {
+const Account: FC<Props> = ({ accountInputs, applyAccount }) => {
   const [homeroom, setHomeroom] = useState<boolean>(true);
-  const { name, phoneNumber, grade, group, teacherId, teacherPw } = accountForm;
+  const {
+    name,
+    phoneNumber,
+    grade,
+    group,
+    teacherId,
+    teacherPw,
+    handleName,
+    handlePhoneNumber,
+    handleGrade,
+    handleGroup,
+    handleTeacherId,
+    handleTeacherPw
+  } = accountInputs;
 
   const toggleHomeroom = () => {
     setHomeroom(prev => !prev);
   };
 
   const handleApplyAccount = () => {
-    applyAccount(accountForm, homeroom);
+    applyAccount(accountInputs, homeroom);
   };
 
   return (
@@ -44,7 +44,13 @@ const Account: FC<Props> = ({
           <label htmlFor="grade">이름</label>
         </S.InputLabel>
         <S.InputWrap>
-          <input type="text" id="grade" onChange={handleName} value={name} />
+          <input
+            type="text"
+            id="grade"
+            onChange={handleName}
+            value={name}
+            maxLength={4}
+          />
         </S.InputWrap>
       </div>
 
@@ -58,6 +64,7 @@ const Account: FC<Props> = ({
             id="group"
             onChange={handlePhoneNumber}
             value={phoneNumber}
+            maxLength={11}
           />
         </S.InputWrap>
       </div>
@@ -85,7 +92,6 @@ const Account: FC<Props> = ({
             disabled={homeroom}
             onChange={handleGrade}
             value={grade}
-            defaultValue="학년"
           >
             <option value="1">1</option>
             <option value="2">2</option>
@@ -124,6 +130,7 @@ const Account: FC<Props> = ({
             id="teacherId"
             onChange={handleTeacherId}
             value={teacherId}
+            maxLength={16}
           />
         </S.InputWrap>
       </div>
@@ -138,6 +145,7 @@ const Account: FC<Props> = ({
             id="teacherPw"
             onChange={handleTeacherPw}
             value={teacherPw}
+            maxLength={16}
           />
         </S.InputWrap>
       </div>

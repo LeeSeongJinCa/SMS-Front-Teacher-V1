@@ -19,7 +19,7 @@ export const Modal = styled.div`
   position: relative;
   background-color: #ffffff;
   box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.25);
-  width: 730px;
+  width: 840px;
   border-radius: 5px;
   box-sizing: border-box;
   padding: 50px 70px;
@@ -37,19 +37,50 @@ export const Modal = styled.div`
 export const Content = styled.div`
   > div {
     margin-top: 5px;
+    &:nth-child(1) {
+      flex: 4;
+    }
+    &:nth-child(3) {
+      flex: 3;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
   }
-  > div:nth-child(1) {
-    flex: 7;
-  }
-  > div:nth-child(2) {
+  > section {
     flex: 3;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
+    font-size: 14px;
+    position: relative;
+    > p {
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    > div {
+      > label {
+        position: relative;
+        margin: 0 4px;
+        > select {
+          width: 40px;
+          padding: 0;
+          border: 1px solid #23b2ad;
+          color: #23b2ad;
+        }
+      }
+    }
+    > button {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 4px 20px;
+      background: #23b2ad;
+      color: white;
+      border-radius: 3px;
+      border: none;
+      box-shadow: 0px 0px 10px 1px rgb(0, 0, 0, 0.1);
+    }
   }
   strong {
     font-weight: bold;
-
     & + * {
       margin-left: 20px;
     }

@@ -15,6 +15,8 @@ import {
   NavIconAllMint,
   NavIconWriteBlack,
   NavIconWriteMint,
+  NavIconPieChart,
+  NavIconPieChartMint,
   NavIconWaitBlack,
   NavIconWaitMint
 } from "../assets";
@@ -97,6 +99,12 @@ export const subNavRouter: SubNavObj = {
       url: NavIconUnauthorizedBlack,
       route: "/out/certified",
       acitveUrl: NavIconUnauthorizedMint
+    },
+    {
+      name: "외출 통계",
+      url: NavIconPieChart,
+      route: "/out/statistics",
+      acitveUrl: NavIconPieChartMint
     }
   ],
   공지사항: [

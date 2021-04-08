@@ -6,7 +6,8 @@ import Calendar from "./Calendar/Calendar";
 import * as S from "../style";
 import {
   getSchedulesSaga,
-  setSchedulerDate
+  setSchedulerDate,
+  setSchedules
 } from "../../../modules/action/main";
 import { stateType } from "../../../modules/reducer";
 import { padNum } from "../../../lib/utils";
@@ -18,6 +19,7 @@ const Schedule: FC<Props> = (): ReactElement => {
   const { schedulerDate } = useSelector((state: stateType) => state.main);
 
   const onClickNextMonth = () => {
+    dispatch(setSchedules([]));
     const next = new Date(
       schedulerDate.getFullYear(),
       schedulerDate.getMonth() + 1
@@ -26,6 +28,7 @@ const Schedule: FC<Props> = (): ReactElement => {
   };
 
   const onClickPrevMonth = () => {
+    dispatch(setSchedules([]));
     const prev = new Date(
       schedulerDate.getFullYear(),
       schedulerDate.getMonth() - 1

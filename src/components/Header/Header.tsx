@@ -1,23 +1,18 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
 
 import * as S from "./style";
 
-import { stateType } from "../../modules/reducer";
+import useHeader from "../../lib/hooks/useHeader";
 
-interface Props {
-  logout: () => void;
-  moveLogin: () => void;
-  movePasswordChange: () => void;
-}
+interface Props {}
 
-const Header: FC<Props> = ({ logout, moveLogin, movePasswordChange }) => {
-  const { type, name } = useSelector((state: stateType) => state.header);
+const Header: FC<Props> = () => {
+  const [name, logout] = useHeader();
 
-  if (!type) {
+  if (!name) {
     return (
       <S.HeaderWrap>
-        <S.Logout onClick={moveLogin}>로그인</S.Logout>
+        <S.Account to="/login">로그인</S.Account>
       </S.HeaderWrap>
     );
   }
@@ -25,17 +20,11 @@ const Header: FC<Props> = ({ logout, moveLogin, movePasswordChange }) => {
   return (
     <S.HeaderWrap>
       <S.UserInfo>{name} 선생님</S.UserInfo>
-      <S.MovePasswordChange onClick={movePasswordChange}>
-        비밀번호 변경
-      </S.MovePasswordChange>
-      <S.Logout
-        onClick={() => {
-          logout();
-          moveLogin();
-        }}
-      >
+      <S.MovePageWithLink to="/user">내 정보 변경</S.MovePageWithLink>
+      <S.MovePageWithLink to="/pw-change">비밀번호 변경</S.MovePageWithLink>
+      <S.Account to="/login" onClick={logout}>
         로그아웃
-      </S.Logout>
+      </S.Account>
     </S.HeaderWrap>
   );
 };

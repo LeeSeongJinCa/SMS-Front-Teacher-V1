@@ -64,7 +64,6 @@ const WriteCategory: FC<Props> = ({ onChange }) => {
     (e: MouseEvent<HTMLInputElement>) => {
       const { name } = e.currentTarget;
 
-      console.log(name, filterData.group.includes(1));
       if (name === "grade" && filterData.group.includes(1)) {
         toast.error("학년이 전체일 경우 특정반을 선택할 수 없습니다.");
         return;

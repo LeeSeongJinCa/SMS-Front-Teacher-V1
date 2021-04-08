@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { STUDENT, UserType } from "../../modules/action/header";
-
 export const MainWrap = styled.div`
   display: flex;
   justify-content: center;

@@ -33,7 +33,8 @@ const adminUrlObj: SubUrlObj = {
   all: "전체 공지",
   mine: "내가 올린 공지",
   writing: "공지사항 작성",
-  done: "최종 확인 대기 외출증"
+  done: "최종 확인 대기 외출증",
+  statistics: "외출 통계"
 };
 
 export const getNavUrl = (url: string): PageState => {
@@ -69,10 +70,10 @@ export const makeQuery = (object: any) => {
 };
 
 export const getHourMinute = (date: Date): string => {
-  const hour = `${date.getHours()}`.padStart(2, "0");
-  const minute = `${date.getMinutes()}`.padStart(2, "0");
+  const h = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+  const m = date.getMinutes();
 
-  return `${hour}:${minute}`;
+  return `${padNum(h)}:${padNum(m)}`;
 };
 
 export const getOutingCardTime = (
@@ -87,7 +88,7 @@ export const getOutingCardTime = (
   const date1Time: string = getHourMinute(date1);
   const date2Time: string = getHourMinute(date2);
 
-  const dateStr = `${year}년${month}월${date}일`;
+  const dateStr = `${year}년 ${padNum(+month)}월 ${padNum(+date)}일`;
   return [dateStr, date1Time, date2Time];
 };
 

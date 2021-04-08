@@ -3,6 +3,7 @@ import {
   CLOSE_OUTING_CARD_MODAL,
   GET_OUTING_CARD_LIST,
   OutingCardAction,
+  SET_OUTING_CARD_LIST,
   SHOW_OUTING_CARD_MODAL
 } from "../../action/outingCard";
 
@@ -22,6 +23,12 @@ const OutingCardReducer = (
   action: OutingCardAction
 ): OutingCardState => {
   switch (action.type) {
+    case SET_OUTING_CARD_LIST: {
+      return {
+        ...state,
+        list: action.payload.outingCard
+      };
+    }
     case GET_OUTING_CARD_LIST: {
       return {
         ...state,

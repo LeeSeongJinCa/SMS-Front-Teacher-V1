@@ -42,7 +42,7 @@ export const Arrow = styled.div`
   display: none;
 `;
 
-export const LateIocnWrap = styled.div<{ name: string }>`
+export const LateIconWrap = styled.div<{ name: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,7 +100,7 @@ export const LateIocnWrap = styled.div<{ name: string }>`
   margin-right: 10px;
 `;
 
-export const EmergencyIconWrap = styled(LateIocnWrap)`
+export const EmergencyIconWrap = styled(LateIconWrap)`
   width: 25px;
   height: 25px;
 `;

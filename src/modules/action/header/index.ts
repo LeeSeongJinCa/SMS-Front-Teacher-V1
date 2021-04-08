@@ -4,7 +4,6 @@ import {
 } from "../../../lib/api/payloads/Login";
 
 export const SET_INIT = "header/SET_INIT" as const;
-export const SET_TYPE = "header/SET_TYPE" as const;
 export const SET_GRADE = "header/SET_GRADE" as const;
 export const SET_GROUP = "header/SET_GROUP" as const;
 export const SET_NUMBER = "header/SET_NUMBER" as const;
@@ -16,20 +15,12 @@ export const SET_CLUB_UUID = "header/SET_CLUB_UUID" as const;
 export const GET_STUDENT_INFO_SAGA = "header/GET_STUDENT_INFO_SAGA" as const;
 export const GET_TEACHER_INFO_SAGA = "header/GET_TEACHER_INFO_SAGA" as const;
 
-export const STUDENT = "student" as const;
-export const TEACHER = "teacher" as const;
-
 export const setInit = (
-  type: UserType | "",
   user: ResStudentInfo | ResTeacherInfo,
   clubUuid: string
 ) => ({
   type: SET_INIT,
-  payload: { type, user, clubUuid }
-});
-export const setType = (type: UserType) => ({
-  type: SET_TYPE,
-  payload: { type }
+  payload: { user, clubUuid }
 });
 export const setGrade = (grade: number) => ({
   type: SET_GRADE,
@@ -68,10 +59,7 @@ export const setClubUuid = (clubUuid: string) => ({
   payload: { clubUuid }
 });
 
-export type UserType = typeof STUDENT | typeof TEACHER;
-
 export type HeaderAction = ReturnType<
-  | typeof setType
   | typeof setGrade
   | typeof setGroup
   | typeof setName
