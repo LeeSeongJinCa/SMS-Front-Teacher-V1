@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 
 import usePeriod from "./usePeriod";
+import useDidMountEffect from "./useDidMountEffect";
 
 import { getEndOutingFiltered, getEndOutings } from "../api/Outing";
 import { ResOutingCardListItem } from "../api/payloads/OutingCard";
@@ -68,7 +69,7 @@ const useEndStudents = () => {
 
     setEndStudents(map);
   }, [endOutings]);
-  useEffect(() => {
+  useDidMountEffect(() => {
     setLoading(true);
     if (period === 0) {
       fetchOutings();
