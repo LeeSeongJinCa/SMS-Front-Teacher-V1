@@ -13,11 +13,6 @@ const AdminOutingCertifiedListContainer: FC = () => {
 
   useEffect(() => {
     dispatch(setOutingCardList([]));
-    dispatch(
-      getOutingCardListSaga({
-        status: OutingStatus["외출 인증 승인"]
-      })
-    );
   }, []);
 
   return <AdminOutingCertifiedList />;
