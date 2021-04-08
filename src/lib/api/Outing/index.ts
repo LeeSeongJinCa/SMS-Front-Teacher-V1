@@ -26,6 +26,5 @@ export const getEndOutingFiltered = (period: number) => {
 
   return apiDefault().get<{ outings: ResOutingCardListItem[] }>(
     `/outings/with-filter?start_time=${start}&end_time=${end}&count=0`
-    // `/outings/with-filter?status=5`
   );
 };
