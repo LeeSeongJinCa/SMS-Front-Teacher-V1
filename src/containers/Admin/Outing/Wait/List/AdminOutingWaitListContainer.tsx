@@ -13,11 +13,6 @@ const AdminOutingWaitListContainer: FC = () => {
 
   useEffect(() => {
     dispatch(setOutingCardList([]));
-    dispatch(
-      getOutingCardListSaga({
-        status: OutingStatus["학부모 승인"]
-      })
-    );
   }, []);
 
   return <AdminOutingCardWaitList />;

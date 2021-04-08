@@ -13,6 +13,9 @@ export interface OutingCard {
   reason: string;
 }
 
+export const ADD_OUTING_CARD_LIST = "outingCard/ADD_OUTING_CARD_LIST" as const;
+export const ADD_OUTING_CARD_LIST_SAGA = "outingCard/ADD_OUTING_CARD_LIST_SAGA" as const;
+
 export const UPDATE_OUTING_CARD_LIST = "outingCard/UPDATE_OUTING_CARD_LIST" as const;
 export const UPDATE_OUTING_CARD_MODAL = "outingCard/UPDATE_OUTING_CARD_MODAL" as const;
 
@@ -47,6 +50,14 @@ export const approveOutingCardSaga = (payload: string) => ({
 });
 export const getOutingCardList = (payload: ResOutingCardListItem[]) => ({
   type: GET_OUTING_CARD_LIST,
+  payload
+});
+export const addOutingCardList = (payload: ResOutingCardListItem[]) => ({
+  type: ADD_OUTING_CARD_LIST,
+  payload
+});
+export const addOutingCardListSaga = (payload: ReqOutingCardFilter) => ({
+  type: ADD_OUTING_CARD_LIST_SAGA,
   payload
 });
 export const setOutingCardList = (outingCard: ResOutingCardListItem[]) => ({
@@ -84,4 +95,5 @@ export type OutingCardAction =
   | ReturnType<typeof ShowOutingCardModal>
   | ReturnType<typeof CloseOutingCardModal>
   | ReturnType<typeof rejectOutingCardSaga>
-  | ReturnType<typeof approveOutingCardSaga>;
+  | ReturnType<typeof approveOutingCardSaga>
+  | ReturnType<typeof addOutingCardList>;
