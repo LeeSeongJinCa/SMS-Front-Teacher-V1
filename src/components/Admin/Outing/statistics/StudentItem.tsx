@@ -77,7 +77,7 @@ const StudentItem: FC<Props> = ({ student, subList }) => {
   }, [subList]);
 
   return (
-    <S.StudentItemWrap>
+    <S.StudentItemWrap onClick={onClickShow}>
       <span>{name}</span>
       <span>{number}</span>
       <span>{subList.length}</span>
@@ -88,7 +88,6 @@ const StudentItem: FC<Props> = ({ student, subList }) => {
         className={isShown ? "spread" : ""}
         alt="more"
         title="more"
-        onClick={onClickShow}
       />
 
       <div>
