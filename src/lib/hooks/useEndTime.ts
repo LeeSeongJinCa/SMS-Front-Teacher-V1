@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { getOutingCardListSaga } from "../../modules/action/outingCard";
 import { patchEndTime } from "../api/Outing";
 import { OutingStatus } from "../api/payloads/Outing";
-import { getAxiosError } from "../utils";
+import { getAxiosError, padNum } from "../utils";
 
 const useEndTime = (
   outingUuid: string,
@@ -30,6 +30,14 @@ const useEndTime = (
 
   const onClickChangeOutTime = async () => {
     const end = new Date(end_time * 1000);
+    const newEnd = `${padNum(end.getHours() - 12)}:${padNum(end.getMinutes())}`;
+    const oldEnd = `${endHour}:${endMin}`;
+
+    if (newEnd === oldEnd) {
+      toast.error("종료 시간을 바꿔주세요.");
+      return;
+    }
+
     end.setHours(+endHour + 12, +endMin);
 
     if (+end < +new Date()) {
