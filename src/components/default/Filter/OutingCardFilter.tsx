@@ -73,7 +73,7 @@ const OutingCardFilter: FC<Props> = ({ onChange }) => {
   const { floor, grade, group } = filterData;
 
   return (
-    <>
+    <S.CenterDiv>
       <S.Container>
         <S.FilterBasic>
           <S.FilterWrap onClick={changeSetiingIsOpen}>
@@ -143,7 +143,7 @@ const OutingCardFilter: FC<Props> = ({ onChange }) => {
           <S.ToggleBtn isActive={!filterOn}>OFF</S.ToggleBtn>
         </S.ResetBtn>
       </S.Container>
-    </>
+    </S.CenterDiv>
   );
 };
 
