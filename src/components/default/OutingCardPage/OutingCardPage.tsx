@@ -1,5 +1,6 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Refresh } from "../../../assets";
 
 import * as S from "./styles";
 
@@ -32,6 +33,9 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
   });
   const [startCount, setStartCount] = useState<number>(0);
   const dispatch = useDispatch();
+  const refresh = useCallback(() => {
+    dispatch(getOutingCardListSaga({ status }));
+  }, []);
 
   useEffect(() => {
     dispatch(getOutingCardListSaga(filterState));
@@ -113,7 +117,10 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
   return (
     <S.Container>
       <S.Header>
-        <S.HeaderText>{title}</S.HeaderText>
+        <S.HeaderText>
+          {title}
+          <S.RefreshIcon onClick={refresh} src={Refresh} />
+        </S.HeaderText>
         <OutingCardFilter onChange={filterChangeHandler} />
       </S.Header>
       <S.CardContainer>{displayOutingCard}</S.CardContainer>
