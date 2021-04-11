@@ -7,7 +7,12 @@ import useLoginToggle from "./useLoginToggle";
 
 import { getTeacherInfoSaga } from "../../modules/action/header";
 import { postLoginTeacherWithPick } from "../api/Login";
-import { PASSWORD_NOT_MATCHED, UNAUTHORIZED } from "../api/payloads/Login";
+import {
+  PASSWORD_NOT_MATCHED,
+  UNABLE_FORM,
+  NEED_ADMIN_ACCEPT,
+  CAN_NOT_FOUND_ACCOUNT
+} from "../api/payloads/Login";
 import { getAxiosError } from "../utils";
 
 interface ErrorState {
@@ -68,6 +73,11 @@ const useLogin = (startLoading: () => void, endLoading: () => void) => {
 
   const login = useCallback(
     async (id: string, pw: string, autoLogin: boolean) => {
+      if (id.length < 4 || id.length > 16 || pw.length < 4 || pw.length > 16) {
+        errorMessageMacro(UNABLE_FORM);
+        return;
+      }
+
       startLoading();
       try {
         await teacherLogin(id, pw, autoLogin);
@@ -76,16 +86,12 @@ const useLogin = (startLoading: () => void, endLoading: () => void) => {
       } catch (err) {
         const { status, code } = getAxiosError(err);
 
-        if (status === 404) {
-          errorMessageMacro(UNAUTHORIZED);
-        } else if (status === 409 && (code === -401 || code === -411)) {
-          errorMessageMacro(UNAUTHORIZED);
-        } else if (status === 409 && (code === -402 || code === -412)) {
+        if (status === 409 && code === -412) {
           errorMessageMacro(PASSWORD_NOT_MATCHED);
         } else if (status === 409 && code === -413) {
-          errorMessageMacro(
-            "관리자에 인증 후 사용 가능합니다. 해당 상태가 지속된다면 담당 선생님께 문의해주세요."
-          );
+          errorMessageMacro(NEED_ADMIN_ACCEPT);
+        } else if (status === 409 && code === -414) {
+          errorMessageMacro(CAN_NOT_FOUND_ACCOUNT);
         }
 
         endLoading();
