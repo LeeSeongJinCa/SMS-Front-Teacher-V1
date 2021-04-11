@@ -50,8 +50,6 @@ const WriteCategory: FC<Props> = ({ onChange }) => {
       )
     );
 
-    console.log(grade, group);
-
     if (allSelect.grade) {
       onChange({ target_grade: 123, target_group: 1234 });
       return;
