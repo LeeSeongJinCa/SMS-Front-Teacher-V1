@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Refresh } from "../../../assets";
+import { Refresh, Spinner } from "../../../assets";
 
 import * as S from "./styles";
 
@@ -24,9 +24,10 @@ interface Props {
 }
 
 const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
-  const { data, readMore } = useSelector((state: stateType) => ({
+  const { data, readMore, loading } = useSelector((state: stateType) => ({
     data: state.outingCard.list,
-    readMore: state.outingCard.readMore
+    readMore: state.outingCard.readMore,
+    loading: state.loading["outingCard/GET_OUTING_CARD_LIST"]
   }));
   const [filterState, setFilterState] = useState<ReqOutingCardFilter>({
     status
@@ -123,7 +124,9 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
         </S.HeaderText>
         <OutingCardFilter onChange={filterChangeHandler} />
       </S.Header>
-      <S.CardContainer>{displayOutingCard}</S.CardContainer>
+      <S.CardContainer>
+        {loading ? <S.LoadingImg src={Spinner} /> : displayOutingCard}
+      </S.CardContainer>
       {readMore && <S.MoreBtn onClick={getMoreCard}>더보기</S.MoreBtn>}
       <OutingCardModal />
     </S.Container>
