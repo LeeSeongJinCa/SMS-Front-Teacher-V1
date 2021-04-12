@@ -12,6 +12,11 @@ export const FilterWrap = styled.div`
   cursor: pointer;
 `;
 
+export const CenterDiv = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const FilterBasic = styled.div`
   position: relative;
 `;

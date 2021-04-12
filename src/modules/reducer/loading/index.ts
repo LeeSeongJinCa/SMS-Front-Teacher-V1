@@ -6,6 +6,7 @@ import LoadingAction, {
 } from "../../action/loading";
 import { GET_NOTICE_DETAIL } from "../../action/notice/detail";
 import { GET_NOTICE_LIST } from "../../action/notice/list";
+import { GET_OUTING_CARD_LIST } from "../../action/outingCard";
 import { GET_RECRUITMENT_LIST } from "../../action/recruitment/list";
 
 interface LoadingReducerState {
@@ -14,6 +15,7 @@ interface LoadingReducerState {
   [GET_RECRUITMENT_LIST]: boolean;
   [GET_CLUB_LIST]: boolean;
   [GET_CLUB_DETAIL]: boolean;
+  [GET_OUTING_CARD_LIST]: boolean;
 }
 
 const initialState: LoadingReducerState = {
@@ -21,7 +23,8 @@ const initialState: LoadingReducerState = {
   [GET_NOTICE_DETAIL]: false,
   [GET_RECRUITMENT_LIST]: false,
   [GET_CLUB_LIST]: false,
-  [GET_CLUB_DETAIL]: false
+  [GET_CLUB_DETAIL]: false,
+  [GET_OUTING_CARD_LIST]: false
 };
 
 const loadingReducer = (

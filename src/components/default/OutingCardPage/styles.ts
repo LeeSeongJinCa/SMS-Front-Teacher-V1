@@ -18,7 +18,24 @@ export const Header = styled.div`
 
 export const HeaderText = styled.div`
   flex: 1;
+  display: flex;
+  align-items: center;
   font-weight: bold;
+`;
+
+export const RefreshIcon = styled.img`
+  width: 22px;
+  height: 22px;
+  object-fit: cover;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 5px;
+  transition: 250ms all;
+
+  &:hover {
+    background-color: rgb(226, 226, 226);
+  }
 `;
 
 export const EmptyList = styled.div`
@@ -29,6 +46,10 @@ export const EmptyList = styled.div`
   align-items: center;
 `;
 
+export const LoadingImg = styled.img`
+  width: 50px;
+  height: 50px;
+`;
 export const CardContainer = styled.div`
   height: 700px;
   overflow-y: auto;
@@ -40,6 +61,8 @@ export const CardContainer = styled.div`
     background: #dddddd;
     border-radius: 5px;
   }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 `;
 
 export const MoreBtn = styled.button`

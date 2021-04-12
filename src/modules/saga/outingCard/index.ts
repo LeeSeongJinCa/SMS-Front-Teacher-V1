@@ -15,6 +15,7 @@ import {
 import { OutingStatus } from "../../../lib/api/payloads/Outing";
 import { ResOutingCardListItem } from "../../../lib/api/payloads/OutingCard";
 import { errorHandler } from "../../../lib/utils";
+import { finishLoading, startLoading } from "../../action/loading";
 import {
   getOutingCardListSaga as getOutingCardListSagaCreater,
   GET_OUTING_CARD_LIST_SAGA,
@@ -27,14 +28,15 @@ import {
   CloseOutingCardModal,
   FINISH_OUTING_CARD_SAGA,
   TEACHER_FINISH_OUTING_CARD_SAGA,
-  ADD_OUTING_CARD_LIST,
   ADD_OUTING_CARD_LIST_SAGA,
-  addOutingCardList
+  addOutingCardList,
+  GET_OUTING_CARD_LIST
 } from "../../action/outingCard";
 
 function* getOutingCardListSaga(
   action: ReturnType<typeof getOutingCardListSagaCreater>
 ) {
+  yield put(startLoading(GET_OUTING_CARD_LIST));
   try {
     const res: AxiosResponse<{ outings: ResOutingCardListItem[] }> = yield call(
       getOutingCardList,
@@ -46,6 +48,7 @@ function* getOutingCardListSaga(
     const axiosErr = err as AxiosError;
     errorHandler(axiosErr.response.status, yield getContext("history"));
   }
+  yield put(finishLoading(GET_OUTING_CARD_LIST));
 }
 
 function* addOutingCardListSaga(

@@ -11,7 +11,6 @@ export const LateAnimate = keyframes`
 `;
 
 export const Container = styled.div`
-  width: 290px;
   height: 240px;
   box-sizing: border-box;
   border: 1px solid #dddddd;
