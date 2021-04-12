@@ -46,6 +46,10 @@ export const EmptyList = styled.div`
   align-items: center;
 `;
 
+export const LoadingImg = styled.img`
+  width: 50px;
+  height: 50px;
+`;
 export const CardContainer = styled.div`
   height: 700px;
   overflow-y: auto;
