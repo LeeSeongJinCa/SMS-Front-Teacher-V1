@@ -56,6 +56,9 @@ export const LoginInput = styled.input`
   padding: 12px 24px 12px 16px;
   border: 0;
   box-sizing: border-box;
+  &::-ms-reveal {
+    display: none;
+  }
   &:focus {
     outline: 1px solid rgb(133, 133, 133);
   }
