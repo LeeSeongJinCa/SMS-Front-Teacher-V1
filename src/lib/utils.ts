@@ -83,12 +83,14 @@ export const getOutingCardTime = (
   const date1: Date = new Date(timestamp1 * 1000);
   const date2: Date = new Date(timestamp2 * 1000);
 
-  const [year, month, date] = date1.toLocaleDateString().split(".");
+  const year: number = date1.getFullYear();
+  const month: number = date1.getMonth() + 1;
+  const date: number = date1.getDate();
 
   const date1Time: string = getHourMinute(date1);
   const date2Time: string = getHourMinute(date2);
 
-  const dateStr = `${year}년 ${padNum(+month)}월 ${padNum(+date)}일`;
+  const dateStr = `${year}년 ${padNum(month)}월 ${padNum(date)}일`;
   return [dateStr, date1Time, date2Time];
 };
 
