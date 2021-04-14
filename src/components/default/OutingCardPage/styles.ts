@@ -40,7 +40,8 @@ export const RefreshIcon = styled.img`
 
 export const EmptyList = styled.div`
   height: 100%;
-  text-align: center;
+  position: absolute;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,6 +53,7 @@ export const LoadingImg = styled.img`
 `;
 export const CardContainer = styled.div`
   height: 700px;
+  position: relative;
   overflow-y: auto;
   margin-top: 20px;
   &::-webkit-scrollbar {
