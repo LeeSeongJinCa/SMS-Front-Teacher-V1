@@ -28,6 +28,7 @@ interface SubUrlObj {
 
 const adminUrlObj: SubUrlObj = {
   certified: "종료된 외출증",
+  approved: "승인된 외출증",
   now: "현재 외출 학생",
   wait: "승인대기 외출증",
   all: "전체 공지",

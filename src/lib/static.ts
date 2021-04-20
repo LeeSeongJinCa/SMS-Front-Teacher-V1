@@ -18,7 +18,9 @@ import {
   NavIconPieChart,
   NavIconPieChartMint,
   NavIconWaitBlack,
-  NavIconWaitMint
+  NavIconWaitMint,
+  NavIconApprovedBlack,
+  NavIconApprovedMint
 } from "../assets";
 import {
   MainSubItem,
@@ -64,7 +66,7 @@ interface SubNavItem {
   name: string;
   route: string;
   url: string;
-  acitveUrl: string;
+  activeUrl: string;
 }
 
 export type SubNavObj = {
@@ -79,51 +81,57 @@ export const subNavRouter: SubNavObj = {
     {
       name: "승인대기 외출증",
       url: NavIconOutingBlack,
-      acitveUrl: NavIconOutingMint,
+      activeUrl: NavIconOutingMint,
       route: "/out/wait"
+    },
+    {
+      name: "승인된 외출증",
+      url: NavIconApprovedBlack,
+      activeUrl: NavIconApprovedMint,
+      route: "/out/approved"
     },
     {
       name: "현재 외출 학생",
       url: NavIconCircleBlack,
       route: "/out/now",
-      acitveUrl: NavIconCircleMint
+      activeUrl: NavIconCircleMint
     },
     {
       name: "최종 확인 대기 외출증",
       url: NavIconWaitBlack,
       route: "/out/done",
-      acitveUrl: NavIconWaitMint
+      activeUrl: NavIconWaitMint
     },
     {
       name: "종료된 외출증",
       url: NavIconUnauthorizedBlack,
       route: "/out/certified",
-      acitveUrl: NavIconUnauthorizedMint
+      activeUrl: NavIconUnauthorizedMint
     },
     {
       name: "외출 통계",
       url: NavIconPieChart,
       route: "/out/statistics",
-      acitveUrl: NavIconPieChartMint
+      activeUrl: NavIconPieChartMint
     }
   ],
   공지사항: [
     {
       name: "전체 공지",
       url: NavIconAllBlack,
-      acitveUrl: NavIconAllMint,
+      activeUrl: NavIconAllMint,
       route: "/notice/all"
     },
     {
       name: "내가 올린 공지",
       url: NavIconNoticeBlack,
-      acitveUrl: NavIconNoticeMint,
+      activeUrl: NavIconNoticeMint,
       route: "/notice/mine"
     },
     {
       name: "공지사항 작성",
       url: NavIconWriteBlack,
-      acitveUrl: NavIconWriteMint,
+      activeUrl: NavIconWriteMint,
       route: "/notice/writing"
     }
   ]

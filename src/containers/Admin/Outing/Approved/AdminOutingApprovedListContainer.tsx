@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { AdminOutingCertifiedList } from "../../../../components";
+import { AdminOutingApprovedList } from "../../../../components";
 import { setOutingCardList } from "../../../../modules/action/outingCard";
 
 const AdminOutingApprovedListContainer: FC = () => {
@@ -11,7 +11,7 @@ const AdminOutingApprovedListContainer: FC = () => {
     dispatch(setOutingCardList([]));
   }, []);
 
-  return <AdminOutingCertifiedList />;
+  return <AdminOutingApprovedList />;
 };
 
 export default AdminOutingApprovedListContainer;
