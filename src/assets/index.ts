@@ -41,6 +41,8 @@ export { default as NavIconPieChartMint } from "./navigation/NavIcon-pieChart-mi
 export { default as NavIconPieChart } from "./navigation/NavIcon-pieChart.svg";
 export { default as NavIconWaitBlack } from "./navigation/NavIcon-wait-black.svg";
 export { default as NavIconWaitMint } from "./navigation/NavIcon-wait-mint.svg";
+export { default as NavIconApprovedBlack } from "./navigation/NavIcon-approved-black.svg";
+export { default as NavIconApprovedMint } from "./navigation/NavIcon-approved-mint.svg";
 export { default as IconWhite } from "./navigation/Icon-white.svg";
 export { default as IconBlack } from "./navigation/Icon-Black.svg";
 export { default as CloseMenu } from "./navigation/CloseMenu.svg";
