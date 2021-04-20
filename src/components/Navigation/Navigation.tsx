@@ -1,8 +1,10 @@
 import React, { FC, memo } from "react";
-import NavigationMain from "./Main/NavigationMain";
-import * as S from "./styles";
-import NavigationSub from "./Sub/NavigationSub";
 import { Route, Switch } from "react-router";
+
+import * as S from "./styles";
+import NavigationMain from "./Main/NavigationMain";
+import NavigationSub from "./Sub/NavigationSub";
+
 import { adminRouter, subNavRouter } from "../../lib/static";
 
 const Navigation: FC = () => {

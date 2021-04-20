@@ -1,17 +1,19 @@
-import React, { FC, useCallback } from 'react';
-import { stateType } from '../../../../modules/reducer';
-import { useSelector, useDispatch } from 'react-redux';
-import { PageType, SubNavObj } from '../../../../lib/static';
-import * as S from './styles';
-import { subPageMove } from '../../../../modules/action/page';
-import { useHistory } from 'react-router';
-import { changeSubNavOpen } from '../../../../modules/action/subNav';
+import React, { FC } from "react";
+import { useHistory } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+
+import * as S from "./styles";
+
+import { PageType, SubNavObj } from "../../../../lib/static";
+import { stateType } from "../../../../modules/reducer";
+import { subPageMove } from "../../../../modules/action/page";
+import { changeSubNavOpen } from "../../../../modules/action/subNav";
 
 interface Props {
   subRouteData: SubNavObj;
 }
 
-const CloseNavigatin: FC<Props> = ({ subRouteData }) => {
+const CloseNavigation: FC<Props> = ({ subRouteData }) => {
   const { mainUrl, subUrl } = useSelector((store: stateType) => store.page);
   const data = subRouteData[mainUrl as PageType];
   const dispatch = useDispatch();
@@ -19,7 +21,7 @@ const CloseNavigatin: FC<Props> = ({ subRouteData }) => {
 
   return (
     <S.Container>
-      {data.map(({ name, acitveUrl, url, route }) => (
+      {data.map(({ name, activeUrl, url, route }) => (
         <S.ImgWrap
           isActive={name === subUrl}
           onClick={() => {
@@ -28,11 +30,11 @@ const CloseNavigatin: FC<Props> = ({ subRouteData }) => {
             history.push(route);
           }}
         >
-          <S.Img src={name === subUrl ? acitveUrl : url} />
+          <S.Img src={name === subUrl ? activeUrl : url} />
         </S.ImgWrap>
       ))}
     </S.Container>
   );
 };
 
-export default CloseNavigatin;
+export default CloseNavigation;

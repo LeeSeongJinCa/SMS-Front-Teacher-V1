@@ -1,10 +1,12 @@
 import React, { FC, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+
 import * as S from "./styles";
 import NavigationSubHeader from "./Header/NavigationSubHeader";
 import NavigationSubBody from "./Body/NavigationSubBody";
-import { useSelector } from "react-redux";
+import CloseNavigation from "./Close/CloseNavigation";
+
 import { stateType } from "../../../modules/reducer";
-import CloseNavigatin from "./Close/CloseNavigation";
 import { customSelector } from "../../../lib/utils";
 import { SubNavObj } from "../../../lib/static";
 
@@ -58,7 +60,7 @@ const NavigationSub: FC<Props> = ({ subRouteData }) => {
         </>
       )}
 
-      {isClose && isActive && <CloseNavigatin subRouteData={subRouteData} />}
+      {isClose && isActive && <CloseNavigation subRouteData={subRouteData} />}
     </S.Container>
   );
 };

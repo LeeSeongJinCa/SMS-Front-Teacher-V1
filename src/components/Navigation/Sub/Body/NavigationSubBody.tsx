@@ -1,9 +1,11 @@
-import React, { FC, useEffect } from 'react';
-import * as S from './styles';
-import SubNavigationItemContainer from '../../Item/SubNavigationItemContainer';
-import { useSelector } from 'react-redux';
-import { stateType } from '../../../../modules/reducer';
-import { PageType, SubNavObj } from '../../../../lib/static';
+import React, { FC } from "react";
+import { useSelector } from "react-redux";
+
+import * as S from "./styles";
+
+import { stateType } from "../../../../modules/reducer";
+import { PageType, SubNavObj } from "../../../../lib/static";
+import SubNavigationItemContainer from "../../Item/SubNavigationItemContainer";
 
 interface Props {
   page: string;
@@ -15,15 +17,15 @@ const NavigationSubBody: FC<Props> = ({ page, subRouteData }) => {
   return (
     <S.Container>
       {subRouteData[page as PageType].map(
-        ({ name, url, acitveUrl, route }, index) => (
+        ({ name, url, activeUrl, route }, index) => (
           <SubNavigationItemContainer
             isActive={subUrl === name}
             name={name}
-            src={subUrl === name ? acitveUrl : url}
+            src={subUrl === name ? activeUrl : url}
             route={route}
             key={index}
           />
-        ),
+        )
       )}
     </S.Container>
   );

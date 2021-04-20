@@ -1,9 +1,11 @@
-import React, { FC, useCallback, memo } from 'react';
-import NavigationItem from './NavigationItem';
-import { useHistory } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
-import { subPageMove } from '../../../modules/action/page';
-import { changeSubNavOpen } from '../../../modules/action/subNav';
+import React, { FC, useCallback, memo } from "react";
+import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+
+import NavigationItem from "./NavigationItem";
+
+import { subPageMove } from "../../../modules/action/page";
+import { changeSubNavOpen } from "../../../modules/action/subNav";
 
 interface Props {
   name: string;
@@ -16,7 +18,7 @@ const SubNavigationItemContainer: FC<Props> = ({
   isActive,
   name,
   src,
-  route,
+  route
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
