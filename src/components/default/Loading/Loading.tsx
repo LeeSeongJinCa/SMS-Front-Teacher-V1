@@ -9,11 +9,11 @@ interface Props {
 
 const SpinnerWrap = styled.img<Props>`
   display: inline-block;
-  width: ${({ size }) => (size ? size : "40px")};
-  height: ${({ size }) => (size ? size : "40px")};
+  width: ${({ size }) => size};
+  height: ${({ size }) => size};
 `;
 
-const Loading: FC<Props> = ({ size }) => {
+const Loading: FC<Props> = ({ size = "40px" }) => {
   return (
     <SpinnerWrap src={Spinner} alt="loading" title="loading" size={size} />
   );
