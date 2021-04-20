@@ -1,10 +1,10 @@
 import React, { FC, useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-import { OutingStatus } from "../../../../../lib/api/payloads/Outing";
-import Confirm from "../../../../../lib/confirm/confirm";
-import { teacherFinishOutingCardSaga } from "../../../../../modules/action/outingCard";
-import { OutingCardPage } from "../../../../default";
+import { OutingStatus } from "../../../../lib/api/payloads/Outing";
+import Confirm from "../../../../lib/confirm/confirm";
+import { teacherFinishOutingCardSaga } from "../../../../modules/action/outingCard";
+import { OutingCardPage } from "../../../default";
 
 const AdminOutingNowList: FC = () => {
   const dispatch = useDispatch();

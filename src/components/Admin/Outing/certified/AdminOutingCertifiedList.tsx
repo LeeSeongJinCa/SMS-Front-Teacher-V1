@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
-import { OutingStatus } from "../../../../../lib/api/payloads/Outing";
-import { OutingCardPage } from "../../../../default";
+import { OutingStatus } from "../../../../lib/api/payloads/Outing";
+import { OutingCardPage } from "../../../default";
 
 const AdminOutingCertifiedList: FC = () => {
   return (

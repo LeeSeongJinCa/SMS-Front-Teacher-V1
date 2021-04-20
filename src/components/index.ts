@@ -36,8 +36,8 @@ export { default as AdminNoticeAllDetail } from "./Admin/Notice/all/AdminNoticeA
 export { default as AdminNoticeMineDetail } from "./Admin/Notice/mine/AdminNoticeMineDetail";
 
 export { default as AdminStatistics } from "./Admin/Outing/statistics";
-export { default as AdminOutingDone } from "./Admin/Outing/Done/AdminOutingDone";
+export { default as AdminOutingDone } from "./Admin/Outing/done/AdminOutingDone";
 export { default as AdminNoticeWriting } from "./Admin/Notice/writing/AdminNoticeWriting";
-export { default as AdminOutingNowList } from "./Admin/Outing/now/list/AdminOutingNowList";
-export { default as AdminOutingWaitList } from "./Admin/Outing/Wait/List/AdminOutingCardWaitList";
-export { default as AdminOutingCertifiedList } from "./Admin/Outing/certified/list/AdminOutingCertifiedList";
+export { default as AdminOutingNowList } from "./Admin/Outing/now/AdminOutingNowList";
+export { default as AdminOutingWaitList } from "./Admin/Outing/wait/AdminOutingCardWaitList";
+export { default as AdminOutingCertifiedList } from "./Admin/Outing/certified/AdminOutingCertifiedList";

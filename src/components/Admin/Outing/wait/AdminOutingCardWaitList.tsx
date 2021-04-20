@@ -1,9 +1,9 @@
 import React, { useCallback, FC } from "react";
 import { useDispatch } from "react-redux";
 
-import { OutingStatus } from "../../../../../lib/api/payloads/Outing";
-import { ShowOutingCardModal } from "../../../../../modules/action/outingCard";
-import { OutingCardPage } from "../../../../default";
+import { OutingStatus } from "../../../../lib/api/payloads/Outing";
+import { ShowOutingCardModal } from "../../../../modules/action/outingCard";
+import { OutingCardPage } from "../../../default";
 
 const AdminOutingCardWaitList: FC = () => {
   const dispatch = useDispatch();
