@@ -20,7 +20,6 @@ const AdminOutingCertifiedList: FC = () => {
     }
   }, []);
 
-  console.log(123);
 
   return (
     <OutingCardPage

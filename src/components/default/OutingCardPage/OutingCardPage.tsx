@@ -78,7 +78,7 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
     [status]
   );
 
-  const getFilterData = useCallback(() => {
+  const getWaitData = useCallback(() => {
     const list = data.filter(outing => {
       const time = +new Date();
       if (outing.end_time * 1000 < time) return false;
@@ -88,24 +88,38 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
     return list;
   }, [data]);
 
+  const getApprovedData = useCallback(() => {
+    const list = data.filter(outing => {
+      const target = {
+        m: new Date(outing.start_time * 1000).getMonth(),
+        d: new Date(outing.start_time * 1000).getDate()
+      };
+      const now = {
+        m: new Date().getMonth(),
+        d: new Date().getDate()
+      };
+
+      if (target.m === now.m && target.d === now.d) return true;
+      return false;
+    });
+
+    return list;
+  }, [data]);
+
   const displayOutingCard = useMemo(() => {
-    const filterData = getFilterData();
     let displayData: typeof data = [];
 
     if (title === "승인대기 외출증") {
-      if (filterData.length === 0) {
-        return <S.EmptyList>{title}이 존재하지 않습니다.</S.EmptyList>;
-      }
-
-      displayData = filterData;
+      displayData = getWaitData();
+    } else if (title === "승인된 외출증") {
+      displayData = getApprovedData();
     } else {
-      if (data.length === 0) {
-        return <S.EmptyList>{title}이 존재하지 않습니다.</S.EmptyList>;
-      }
-
       displayData = data;
     }
 
+    if (displayData.length === 0) {
+      return <S.EmptyList>{title}이 존재하지 않습니다.</S.EmptyList>;
+    }
     return displayData.map(data => (
       <OutingCard key={data.outing_uuid} {...data} isClicked={isClicked} />
     ));
