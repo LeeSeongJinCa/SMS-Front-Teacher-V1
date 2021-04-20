@@ -1,11 +1,11 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, Suspense, useEffect } from "react";
 import { Switch, Router, Route } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 import "./lib/confirm/confirm.css";
 import { GlobalStyle, GlobalContainer, GlobalBody } from "./GlobalStyle";
-import { PageNotFound, Navigation, Header, Banner } from "./components";
+import { Navigation, Header, Banner, Loading } from "./components";
 import { AdminRouter } from "./routers";
 import { history } from "./modules/store";
 import Channel from "./lib/channel.js";
@@ -24,10 +24,11 @@ const App: FC<{}> = () => {
         <GlobalBody>
           <Header />
           <Banner />
-          <Switch>
-            <Route path="/" component={AdminRouter} />
-            <Route path="*" component={PageNotFound} />
-          </Switch>
+          <Suspense fallback={<Loading />}>
+            <Switch>
+              <Route path="/" component={AdminRouter} />
+            </Switch>
+          </Suspense>
         </GlobalBody>
       </Router>
     </GlobalContainer>
