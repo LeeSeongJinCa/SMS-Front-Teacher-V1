@@ -45,7 +45,7 @@
     "styled-components": "^5.1.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --hot --port 3000",
+    "start": "webpack-dev-server -p --open --hot --port 3000",
     "build": "webpack --mode production"
   }
 }
