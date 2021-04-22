@@ -153,17 +153,20 @@ export const StudentSubList = styled.ul<SubList>`
       &.place {
         width: 30%;
       }
-      &.date {
-        width: 20%;
-      }
-      &.situation {
-        width: 15%;
-      }
       &.reason {
         width: 20%;
       }
+      &.date {
+        width: 20%;
+      }
+      &.arrive {
+        width: 10%;
+      }
+      &.situation {
+        width: 10%;
+      }
       &.late {
-        width: 15%;
+        width: 10%;
       }
     }
   }

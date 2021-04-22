@@ -8,19 +8,21 @@ import useDidMountEffect from "./useDidMountEffect";
 import { getEndOutingFiltered, getEndOutings } from "../api/Outing";
 import { ResOutingCardListItem } from "../api/payloads/OutingCard";
 import { getAxiosError, padNum } from "../utils";
+import useLoading from "./common/useLoading";
 
 export interface EndStudents {
   place: string;
   reason: string;
   date: Date;
   situation: "일반 외출" | "질병 외출";
+  arrive: Date;
   late: boolean;
 }
 
 const useEndStudents = () => {
   const history = useHistory();
   const [period, handlePeriod] = usePeriod();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, startLoading, endLoading] = useLoading();
   const [endOutings, setEndOutings] = useState<ResOutingCardListItem[]>([]);
   const [endStudents, setEndStudents] = useState<Map<string, EndStudents[]>>(
     new Map()
@@ -42,9 +44,9 @@ const useEndStudents = () => {
   };
 
   useEffect(() => {
-    setLoading(true);
+    startLoading();
     fetchOutings().finally(() => {
-      setLoading(false);
+      endLoading();
     });
   }, []);
   useEffect(() => {
@@ -53,15 +55,27 @@ const useEndStudents = () => {
     const map = new Map();
 
     endOutings.forEach(outing => {
-      const { grade, group, number, name } = outing;
-      const isNormal = outing.outing_situation.toLocaleLowerCase() === "normal";
+      const {
+        grade,
+        group,
+        number,
+        name,
+        place,
+        reason,
+        start_time,
+        is_late,
+        arrival_time,
+        outing_situation
+      } = outing;
+      const isNormal = outing_situation.toLocaleLowerCase() === "normal";
       const student = `${grade}${group}${padNum(number)} ${name}`;
       const sInfo: EndStudents = {
-        place: outing.place,
-        reason: outing.reason,
-        date: new Date(outing.start_time * 1000),
+        place,
+        reason,
+        date: new Date(start_time * 1000),
         situation: isNormal ? "일반 외출" : "질병 외출",
-        late: outing.is_late
+        arrive: new Date(arrival_time * 1000),
+        late: is_late
       };
 
       map.set(student, [...(map.get(student) || []), sInfo]);
@@ -70,7 +84,7 @@ const useEndStudents = () => {
     setEndStudents(map);
   }, [endOutings]);
   useDidMountEffect(() => {
-    setLoading(true);
+    startLoading();
     if (period === 0) {
       fetchOutings();
     } else {
@@ -82,7 +96,7 @@ const useEndStudents = () => {
 
       fetchFilteredOutings();
     }
-    setLoading(false);
+    endLoading();
   }, [period]);
 
   return [endStudents, loading, period, handlePeriod] as const;

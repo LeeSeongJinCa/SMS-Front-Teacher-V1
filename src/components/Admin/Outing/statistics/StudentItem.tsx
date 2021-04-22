@@ -1,11 +1,32 @@
-import React, { FC, memo, useCallback, useMemo, useState } from "react";
+import React, { FC, memo, useMemo } from "react";
 
 import * as S from "./style";
-import { Period } from "./index";
 
 import { MainArrow } from "../../../../assets";
 import { EndStudents } from "../../../../lib/hooks/useEndStudents";
 import { padNum } from "../../../../lib/utils";
+import useToggle from "../../../../lib/hooks/common/useToggle";
+
+const getLocalDate = (date: Date) => {
+  const y = date.getFullYear();
+  const m = padNum(date.getMonth() + 1);
+  const d = padNum(date.getDate());
+  const day = Days[date.getDay()];
+
+  return `${y}년 ${m}월 ${d}일 (${day})`;
+};
+
+const getLocalTime = (date: Date) => {
+  let h = padNum(date.getHours());
+  const m = padNum(date.getMinutes());
+
+  if (h > "12") {
+    h = padNum(+h - 12);
+    return `오후 ${h}:${m}`;
+  }
+
+  return `오전 ${h}:${m}`;
+};
 
 enum Days {
   "일",
@@ -27,15 +48,24 @@ interface SubProps {
   reason: string;
   date: string;
   situation: string;
+  arrive: string;
   late: string;
 }
 
-const SubItem: FC<SubProps> = ({ place, reason, date, situation, late }) => {
+const SubItem: FC<SubProps> = ({
+  place,
+  reason,
+  date,
+  situation,
+  arrive,
+  late
+}) => {
   return (
     <li>
       <span className="place">{place}</span>
       <span className="reason">{reason}</span>
       <span className="date">{date}</span>
+      <span className="arrive">{arrive}</span>
       <span className="situation">{situation}</span>
       <span className="late">{late}</span>
     </li>
@@ -43,29 +73,23 @@ const SubItem: FC<SubProps> = ({ place, reason, date, situation, late }) => {
 };
 
 const StudentItem: FC<Props> = ({ student, subList }) => {
-  const [isShown, setShown] = useState<boolean>(false);
+  const [isShown, toggleShow] = useToggle();
   const name = student.split(" ")[0];
   const number = student.split(" ")[1];
 
-  const onClickShow = useCallback(() => {
-    setShown(prev => !prev);
-  }, []);
-
   const displaySubList = useMemo(() => {
     return subList.map((item, i) => {
-      const date = new Date(item.date);
-      const y = date.getFullYear();
-      const m = padNum(date.getMonth() + 1);
-      const d = padNum(date.getDate());
-      const day = Days[date.getDay()];
+      const date = getLocalDate(item.date);
+      const arriveDate = getLocalTime(item.arrive);
 
       return (
         <SubItem
           key={`${student}_${i}`}
           place={item.place}
           reason={item.reason}
-          date={`${y}년 ${m}월 ${d}일 (${day})`}
+          date={date}
           situation={item.situation}
+          arrive={arriveDate}
           late={item.late ? "O" : "X"}
         />
       );
@@ -77,7 +101,7 @@ const StudentItem: FC<Props> = ({ student, subList }) => {
   }, [subList]);
 
   return (
-    <S.StudentItemWrap onClick={onClickShow}>
+    <S.StudentItemWrap onClick={toggleShow}>
       <span>{name}</span>
       <span>{number}</span>
       <span>{subList.length}</span>
@@ -97,6 +121,7 @@ const StudentItem: FC<Props> = ({ student, subList }) => {
             reason="사유"
             date="날짜"
             situation="상태"
+            arrive="도착 시간"
             late="지각 여부"
           />
           {displaySubList}
