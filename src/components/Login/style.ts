@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { Check, CheckGray } from "../../assets";
-
 export const LoginWrap = styled.div`
   width: 500px;
   margin: 200px auto 0;
@@ -83,42 +81,8 @@ export const Eye = styled.img`
 export const AutoLogin = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  user-select: none;
+  justify-content: flex-end;
   margin: 12px 0;
-  #auto-login:checked ~ #auto-login-checkbox {
-    background-color: #038fff;
-    background-image: url(${Check});
-    box-shadow: -2px -2px 5px rgba(255, 255, 255, 1),
-      3px 3px 5px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-export const AutoLoginCheckbox = styled.div`
-  width: 24px;
-  height: 24px;
-  margin-right: 12px;
-  background-image: url(${CheckGray});
-  background-size: 14px;
-  background-position: center;
-  background-repeat: no-repeat;
-  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 1),
-    inset 3px 3px 5px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-`;
-
-export const AutoLoginLabel = styled.label`
-  display: flex;
-  align-items: center;
-  color: #242424;
-  cursor: pointer;
-  > input {
-    all: unset;
-    opacity: 0;
-    &:focus ~ #auto-login-checkbox {
-      outline: 1px dotted black;
-    }
-  }
 `;
 
 export const LoginButton = styled.button`

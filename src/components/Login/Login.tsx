@@ -2,26 +2,23 @@ import React, { FC } from "react";
 
 import * as S from "./style";
 
-import Loading from "../default/Loading/Loading";
 import { Eye, EyeOff } from "../../assets";
+import Loading from "../default/Loading/Loading";
 import useLogin from "../../lib/hooks/useLogin";
-import WithLoadingContainer, {
-  LoadingProps
-} from "../../containers/Loading/WithLoadingContainer";
+import useLoading from "../../lib/hooks/common/useLoading";
 
-interface Props extends LoadingProps {}
+interface Props {}
 
-const Login: FC<Props> = ({ startLoading, endLoading, loading }) => {
+const Login: FC<Props> = () => {
+  const [loading, startLoading, endLoading] = useLoading();
   const [
     id,
     pw,
     showPw,
-    autoLogin,
     errorMessage,
     handleId,
     handlePw,
     toggleEye,
-    toggleAutoLogin,
     login
   ] = useLogin(startLoading, endLoading);
 
@@ -63,27 +60,12 @@ const Login: FC<Props> = ({ startLoading, endLoading, loading }) => {
           <S.LoginButton
             onClick={e => {
               e.preventDefault();
-              login(id, pw, autoLogin);
+              login(id, pw);
             }}
           >
             로그인
           </S.LoginButton>
           <S.AutoLogin>
-            <S.AutoLoginLabel htmlFor="auto-login">
-              <input
-                type="checkbox"
-                id="auto-login"
-                onChange={toggleAutoLogin}
-                onKeyPress={e => {
-                  if (e.key === "Enter") {
-                    e.currentTarget.checked = !e.currentTarget.checked;
-                    toggleAutoLogin();
-                  }
-                }}
-              />
-              <S.AutoLoginCheckbox id="auto-login-checkbox" />
-              <span>자동로그인</span>
-            </S.AutoLoginLabel>
             <S.GoAccountPage to="/account">
               아직 계정이 없으신가요?
             </S.GoAccountPage>
@@ -94,4 +76,4 @@ const Login: FC<Props> = ({ startLoading, endLoading, loading }) => {
   );
 };
 
-export default WithLoadingContainer(Login);
+export default Login;
