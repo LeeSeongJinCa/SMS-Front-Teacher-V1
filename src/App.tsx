@@ -4,11 +4,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
 import "./lib/confirm/confirm.css";
+import Channel from "./lib/channel.js";
 import { GlobalStyle, GlobalContainer, GlobalBody } from "./GlobalStyle";
 import { Navigation, Header, Banner, Loading } from "./components";
-import { AdminRouter } from "./routers";
+import { AdminRouter, OutingRouter, NoticeRouter } from "./routers";
 import { history } from "./modules/store";
-import Channel from "./lib/channel.js";
 
 const App: FC<{}> = () => {
   useEffect(() => {
@@ -26,6 +26,8 @@ const App: FC<{}> = () => {
           <Banner />
           <Suspense fallback={<Loading />}>
             <Switch>
+              <Route path="/notice" component={NoticeRouter} />
+              <Route path="/out" component={OutingRouter} />
               <Route path="/" component={AdminRouter} />
             </Switch>
           </Suspense>
