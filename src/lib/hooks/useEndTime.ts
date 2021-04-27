@@ -52,7 +52,7 @@ const useEndTime = (
       (end.getHours() === 20 && end.getMinutes() > 30) ||
       end.getHours() > 20
     ) {
-      toast.error("종료 시간은 최대 8시 30분까지 설정할 수 있습니다.");
+      toast.error("종료 시간은 최대 20시 30분까지 설정할 수 있습니다.");
       return;
     }
 
