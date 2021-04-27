@@ -15,7 +15,7 @@ const useEndTime = (
   endTime: string
 ) => {
   const history = useHistory();
-  const [endHour, setEndHour] = useState<string>("04");
+  const [endHour, setEndHour] = useState<string>("00");
   const [endMin, setEndMin] = useState<string>("00");
 
   const handleEndHour = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -30,7 +30,7 @@ const useEndTime = (
 
   const onClickChangeOutTime = async () => {
     const end = new Date(end_time * 1000);
-    const newEnd = `${padNum(end.getHours() - 12)}:${padNum(end.getMinutes())}`;
+    const newEnd = `${padNum(end.getHours())}:${padNum(end.getMinutes())}`;
     const oldEnd = `${endHour}:${endMin}`;
 
     if (newEnd === oldEnd) {
@@ -38,7 +38,7 @@ const useEndTime = (
       return;
     }
 
-    end.setHours(+endHour + 12, +endMin);
+    end.setHours(+endHour, +endMin);
 
     if (+end < +new Date()) {
       toast.error("현재 시간보다 종료 시간이 늦을 수 없습니다.");
@@ -48,7 +48,10 @@ const useEndTime = (
       toast.error("종료 시간이 시작 시간보다 늦을 수 없습니다.");
       return;
     }
-    if (end.getHours() === 20 && end.getMinutes() > 30) {
+    if (
+      (end.getHours() === 20 && end.getMinutes() > 30) ||
+      end.getHours() > 20
+    ) {
       toast.error("종료 시간은 최대 8시 30분까지 설정할 수 있습니다.");
       return;
     }

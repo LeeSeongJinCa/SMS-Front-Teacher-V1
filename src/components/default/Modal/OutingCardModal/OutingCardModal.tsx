@@ -124,10 +124,9 @@ const OutingCardModal: FC = () => {
               <section>
                 <p>외출 종료 시간 변경</p>
                 <div>
-                  <span>오후</span>
                   <label>
                     <select value={endHour} onChange={handleEndHour}>
-                      {makeOption(5, (i: number) => padNum(i + 4))}
+                      {makeOption(24, (i: number) => padNum(i))}
                     </select>
                   </label>
                   {" : "}

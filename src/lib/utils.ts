@@ -74,11 +74,7 @@ export const getHourMinute = (date: Date): string => {
   const h = date.getHours();
   const m = date.getMinutes();
 
-  if (h > 12) {
-    return `오후 ${padNum(h - 12)}:${padNum(m)}`;
-  }
-
-  return `오전 ${padNum(h)}:${padNum(m)}`;
+  return `${padNum(h)}:${padNum(m)}`;
 };
 
 export const getOutingCardTime = (
