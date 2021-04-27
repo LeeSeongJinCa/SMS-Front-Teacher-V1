@@ -4,6 +4,7 @@ export const NotFound = styled.div`
   position: relative;
   width: 100%;
   height: 50%;
+  padding: 50px 0;
 `;
 
 export const Center = styled.div`

@@ -127,15 +127,9 @@ export const GlobalBody = styled.div`
   box-sizing: border-box;
 `;
 
-interface IGlobalInnerBody {
-  isBackNeed?: boolean;
-}
-
-export const GlobalInnerBody = styled.div<IGlobalInnerBody>`
+export const GlobalInnerBody = styled.div`
   min-width: 635px;
   border-radius: 5px;
-  background: ${({ isBackNeed = true }) =>
-    isBackNeed ? "white" : "transparent"};
-  box-shadow: ${({ isBackNeed = true }) =>
-    isBackNeed ? "0px 0px 12px 1px rgba(0, 0, 0, 0.25)" : "none"};
+  background: white;
+  box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.25);
 `;
