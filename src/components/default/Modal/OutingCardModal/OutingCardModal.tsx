@@ -109,7 +109,7 @@ const OutingCardModal: FC = () => {
                 <div>
                   <strong>시간</strong>
                   <span>
-                    오후 {startTime} - {endTime}
+                    {startTime} - {endTime}
                   </span>
                 </div>
                 <div>

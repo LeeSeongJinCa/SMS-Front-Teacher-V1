@@ -71,10 +71,14 @@ export const makeQuery = (object: any) => {
 };
 
 export const getHourMinute = (date: Date): string => {
-  const h = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
+  const h = date.getHours();
   const m = date.getMinutes();
 
-  return `${padNum(h)}:${padNum(m)}`;
+  if (h > 12) {
+    return `오후 ${padNum(h - 12)}:${padNum(m)}`;
+  }
+
+  return `오전 ${padNum(h)}:${padNum(m)}`;
 };
 
 export const getOutingCardTime = (

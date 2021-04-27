@@ -64,8 +64,8 @@ const OutingCard: FC<Props> = ({
           <S.FlexBetween>
             <S.Bar></S.Bar>
             <div>
-              <div>오후 {startTime}</div>
-              <div>오후 {endTime}</div>
+              <div>{startTime}</div>
+              <div>{endTime}</div>
             </div>
           </S.FlexBetween>
         </S.FlexBetween>
