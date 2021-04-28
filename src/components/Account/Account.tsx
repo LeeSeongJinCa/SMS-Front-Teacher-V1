@@ -1,4 +1,5 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import * as S from "./style";
 
@@ -35,6 +36,12 @@ const Account: FC<Props> = ({ accountInputs, applyAccount }) => {
   const handleApplyAccount = () => {
     applyAccount(accountInputs, homeroom);
   };
+
+  useEffect(() => {
+    toast.info(
+      "PICK 계정이 존재하는 경우, 해당 계정으로 사용하실 수 있습니다."
+    );
+  }, []);
 
   return (
     <S.AccountWrap>
