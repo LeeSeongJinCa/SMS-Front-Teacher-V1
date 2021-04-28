@@ -21,12 +21,12 @@ const Account: FC<Props> = ({ accountInputs, applyAccount }) => {
     group,
     teacherId,
     teacherPw,
-    handleName,
-    handlePhoneNumber,
-    handleGrade,
-    handleGroup,
-    handleTeacherId,
-    handleTeacherPw
+    changeName,
+    changePhone,
+    changeGrade,
+    changeGroup,
+    changeId,
+    changePw
   } = accountInputs;
 
   const toggleHomeroom = () => {
@@ -46,36 +46,19 @@ const Account: FC<Props> = ({ accountInputs, applyAccount }) => {
   return (
     <S.AccountWrap>
       <S.Title>SMS</S.Title>
-      <div>
-        <S.InputLabel>
-          <label htmlFor="grade">이름</label>
-        </S.InputLabel>
-        <S.InputWrap>
-          <input
-            type="text"
-            id="grade"
-            onChange={handleName}
-            value={name}
-            maxLength={4}
-          />
-        </S.InputWrap>
-      </div>
-
-      <div>
-        <S.InputLabel>
-          <label htmlFor="group">전화번호</label>
-        </S.InputLabel>
-        <S.InputWrap>
-          <input
-            type="text"
-            id="group"
-            onChange={handlePhoneNumber}
-            value={phoneNumber}
-            maxLength={11}
-          />
-        </S.InputWrap>
-      </div>
-
+      <AccountInput
+        text="이름"
+        attr={{ id: "name", value: name, onChange: changeName, maxLength: 4 }}
+      />
+      <AccountInput
+        text="전화번호"
+        attr={{
+          id: "phoneNumber",
+          value: phoneNumber,
+          onChange: changePhone,
+          maxLength: 11
+        }}
+      />
       <div>
         <S.InputLabel>
           <label htmlFor="homeroom">담임 선생님</label>
@@ -87,78 +70,90 @@ const Account: FC<Props> = ({ accountInputs, applyAccount }) => {
           onChange={toggleHomeroom}
         />
       </div>
-
-      <div>
-        <S.InputLabel>
-          <label htmlFor="name">학년</label>
-        </S.InputLabel>
-        <S.InputWrap className={homeroom ? "disabled" : ""}>
-          <S.Select
-            name="name"
-            id="name"
-            disabled={homeroom}
-            onChange={handleGrade}
-            value={grade}
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </S.Select>
-        </S.InputWrap>
-      </div>
-
-      <div>
-        <S.InputLabel>
-          <label htmlFor="phoneNumber">반</label>
-        </S.InputLabel>
-        <S.InputWrap className={homeroom ? "disabled" : ""}>
-          <S.Select
-            name="phoneNumber"
-            id="phoneNumber"
-            disabled={homeroom}
-            onChange={handleGroup}
-            value={group}
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </S.Select>
-        </S.InputWrap>
-      </div>
-
-      <div>
-        <S.InputLabel>
-          <label htmlFor="teacherId">아이디</label>
-        </S.InputLabel>
-        <S.InputWrap>
-          <input
-            type="text"
-            id="teacherId"
-            onChange={handleTeacherId}
-            value={teacherId}
-            maxLength={16}
-          />
-        </S.InputWrap>
-      </div>
-
-      <div>
-        <S.InputLabel>
-          <label htmlFor="teacherPw">비밀번호</label>
-        </S.InputLabel>
-        <S.InputWrap>
-          <input
-            type="password"
-            id="teacherPw"
-            onChange={handleTeacherPw}
-            value={teacherPw}
-            maxLength={16}
-          />
-        </S.InputWrap>
-      </div>
-
+      <AccountSelect
+        text="학년"
+        attr={{
+          name: "grade",
+          id: "grade",
+          value: grade,
+          onChange: changeGrade,
+          disabled: homeroom
+        }}
+        count={3}
+      />
+      <AccountSelect
+        text="반"
+        attr={{
+          name: "group",
+          id: "group",
+          value: group,
+          onChange: changeGroup,
+          disabled: homeroom
+        }}
+        count={4}
+      />
+      <AccountInput
+        text="아이디"
+        attr={{
+          id: "teacherId",
+          value: teacherId,
+          onChange: changeId,
+          maxLength: 16
+        }}
+      />
+      <AccountInput
+        text="비밀번호"
+        attr={{
+          type: "password",
+          id: "teacherPw",
+          value: teacherPw,
+          onChange: changePw,
+          maxLength: 16
+        }}
+      />
       <S.ApplyButton onClick={handleApplyAccount}>계정 신청</S.ApplyButton>
     </S.AccountWrap>
+  );
+};
+
+const AccountInput: FC<{
+  text: string;
+  attr: React.InputHTMLAttributes<HTMLInputElement>;
+}> = ({ text, attr }) => {
+  return (
+    <div>
+      <S.InputLabel>
+        <label htmlFor={attr.id}>{text}</label>
+      </S.InputLabel>
+      <S.InputWrap>
+        <input {...attr} />
+      </S.InputWrap>
+    </div>
+  );
+};
+
+const AccountSelect: FC<{
+  text: string;
+  attr: React.SelectHTMLAttributes<HTMLSelectElement>;
+  count: number;
+}> = ({ text, attr, count }) => {
+  return (
+    <div>
+      <S.InputLabel>
+        <label htmlFor={attr.id}>{text}</label>
+      </S.InputLabel>
+      <S.InputWrap className={attr.disabled ? "disabled" : ""}>
+        <S.Select {...attr}>
+          {Array(count)
+            .fill(0)
+            .map((_, i) => (
+              <option key={i} value={i + 1}>
+                {i + 1}
+              </option>
+            ))}
+        </S.Select>
+      </S.InputWrap>
+    </div>
   );
 };
 
