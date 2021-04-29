@@ -11,7 +11,7 @@ export const LazyLogin = lazy(
 export const LazyMain = lazy(
   () =>
     import(
-      /* webpackChunkName: "out.wait" */ "../containers/Admin/Main/AdminMainContainer"
+      /* webpackChunkName: "home" */ "../containers/Admin/Main/AdminMainContainer"
     )
 );
 
