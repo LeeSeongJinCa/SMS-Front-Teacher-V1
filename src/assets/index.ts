@@ -56,6 +56,8 @@ export { default as SearchIcon } from "./Board/SearchIcon.svg";
 
 export { default as MainSelector } from "./Admin/selector.svg";
 export { default as MainChangeTable } from "./Admin/change.svg";
+export { default as West } from "./Admin/west-black.svg";
+export { default as East } from "./Admin/east-black.svg";
 
 export { default as OutingWarningRedBase } from "./Outing/warningRedBase.svg";
 export { default as OutingBalloons } from "./Outing/balloons.svg";
