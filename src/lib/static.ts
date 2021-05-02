@@ -136,3 +136,30 @@ export const subNavRouter: SubNavObj = {
     }
   ]
 };
+
+export type Tutorial = {
+  texts: string[];
+  top: string;
+  left: string;
+};
+
+export const tutorials: Tutorial[] = [
+  {
+    texts: [
+      "안녕하세요. 외출 관리 페이지에 오신 것을 환영해요!",
+      "외출 관리 페이지는 대덕소프트웨어마이스터고등학교",
+      "학생들의 외출증을 관리하는 데 필요한 기능을 제공해요."
+    ],
+    top: "170px",
+    left: "calc(15vw + 15px)"
+  },
+  {
+    texts: [
+      "승인대기 외출증을 보여줘요.",
+      "학생이 외출증을 신청하면 이곳에 가장 먼저 표시돼요.",
+      "선생님은 외출증을 클릭해서 외출증을 승인 혹은 거절할 수 있어요."
+    ],
+    top: "225px",
+    left: "calc(30vw + 15px)"
+  }
+];
