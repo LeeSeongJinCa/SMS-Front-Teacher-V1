@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import {
@@ -12,10 +12,24 @@ import {
 
 import { LazyPageNotFound } from "../AdminLazy";
 import { GlobalInnerBody } from "../../GlobalStyle";
+import OutingTutorial from "../../components/Admin/Outing/tutorial/OutingTutorial";
 
 const OutingRouter: FC = () => {
+  const [tutorial, setTutorial] = useState<boolean>(false);
+
+  const endTutorial = () => {
+    setTutorial(false);
+  };
+
+  useEffect(() => {
+    if (!localStorage.getItem("taught")) {
+      setTutorial(true);
+    }
+  }, []);
+
   return (
     <GlobalInnerBody>
+      {tutorial && <OutingTutorial endTutorial={endTutorial} />}
       <Switch>
         <Route path="/out/wait" component={LazyOutingWait} />
         <Route path="/out/now" component={LazyOutingNow} />
