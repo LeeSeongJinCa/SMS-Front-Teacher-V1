@@ -13,12 +13,14 @@ import {
 import { LazyPageNotFound } from "../AdminLazy";
 import { GlobalInnerBody } from "../../GlobalStyle";
 import OutingTutorial from "../../components/Admin/Outing/tutorial/OutingTutorial";
+import { TutorialProvider } from "../../lib/contextAPI/tutorial";
 
 const OutingRouter: FC = () => {
   const [tutorial, setTutorial] = useState<boolean>(false);
 
   const endTutorial = () => {
     setTutorial(false);
+    localStorage.setItem("taught", "true");
   };
 
   useEffect(() => {
@@ -28,18 +30,20 @@ const OutingRouter: FC = () => {
   }, []);
 
   return (
-    <GlobalInnerBody>
-      {tutorial && <OutingTutorial endTutorial={endTutorial} />}
-      <Switch>
-        <Route path="/out/wait" component={LazyOutingWait} />
-        <Route path="/out/now" component={LazyOutingNow} />
-        <Route path="/out/done" component={LazyOutingDone} />
-        <Route path="/out/approved" component={LazyOutingApproved} />
-        <Route path="/out/certified" component={LazyOutingCertified} />
-        <Route path="/out/statistics" component={LazyOutingStatistics} />
-        <Route path="*" component={LazyPageNotFound} />
-      </Switch>
-    </GlobalInnerBody>
+    <TutorialProvider>
+      <GlobalInnerBody>
+        {tutorial && <OutingTutorial endTutorial={endTutorial} />}
+        <Switch>
+          <Route path="/out/wait" component={LazyOutingWait} />
+          <Route path="/out/now" component={LazyOutingNow} />
+          <Route path="/out/done" component={LazyOutingDone} />
+          <Route path="/out/approved" component={LazyOutingApproved} />
+          <Route path="/out/certified" component={LazyOutingCertified} />
+          <Route path="/out/statistics" component={LazyOutingStatistics} />
+          <Route path="*" component={LazyPageNotFound} />
+        </Switch>
+      </GlobalInnerBody>
+    </TutorialProvider>
   );
 };
 
