@@ -8,7 +8,10 @@ export const GlobalStyle: GlobalStyleComponent<
   {},
   DefaultTheme
 > = createGlobalStyle`
-
+  :root {
+    --highlight-color: white;
+    --highlight-index: 5;
+  }
   /* http://meyerweb.com/eric/tools/css/reset/
     v2.0 | 20110126
     License: none (public domain)
@@ -132,4 +135,8 @@ export const GlobalInnerBody = styled.div`
   border-radius: 5px;
   background: white;
   box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.25);
+  .highlight {
+    background-color: var(--highlight-color);
+    z-index: var(--highlight-index);
+  }
 `;
