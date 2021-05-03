@@ -1,30 +1,45 @@
-import React, { useCallback, useState } from "react";
+import React, { MouseEvent, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useHistory } from "react-router";
-import { East, West } from "../../../../assets";
-
-import { tutorials } from "../../../../lib/static";
 
 import * as S from "./style";
 
+import { tutorials } from "../../../../lib/static";
+import {
+  setTutorial,
+  useTutorialDispatch,
+  useTutorialState
+} from "../../../../lib/contextAPI/tutorial";
+
 const OutingTutorial = ({ endTutorial }: { endTutorial: () => void }) => {
   const history = useHistory();
-  const [step, setStep] = useState<number>(0);
+  const { step } = useTutorialState();
+  const dispatch = useTutorialDispatch();
 
   const onClickPrevStep = () => {
     if (step === 0) return;
-    setStep(prev => prev - 1);
+    dispatch(setTutorial(step - 1));
   };
 
   const onClickNextStep = () => {
     if (step + 1 === tutorials.length) return;
-    setStep(prev => prev + 1);
+    dispatch(setTutorial(step + 1));
+  };
+
+  const onClickMoveStep = (e: MouseEvent<HTMLLIElement>) => {
+    dispatch(setTutorial(+e.currentTarget.dataset.step));
   };
 
   const skipTutorial = () => {
-    setStep(0);
+    dispatch(setTutorial(0));
     endTutorial();
   };
+
+  useEffect(() => {
+    if (history.location.pathname !== tutorials[step].page) {
+      history.push(tutorials[step].page);
+    }
+  }, [step]);
 
   return (
     <>
@@ -36,12 +51,17 @@ const OutingTutorial = ({ endTutorial }: { endTutorial: () => void }) => {
           ))}
         </div>
         <ul>
-          {Array(tutorials.length)
-            .fill(0)
-            .map((_, i) => {
-              const className = i <= step ? "prev" : "";
-              return <li key={i} className={className} />;
-            })}
+          {tutorials.map((_, i) => {
+            const className = i <= step ? "prev" : "";
+            return (
+              <li
+                key={i}
+                className={className}
+                data-step={i}
+                onClick={onClickMoveStep}
+              />
+            );
+          })}
         </ul>
         <p>
           <span>단계</span>
@@ -51,11 +71,11 @@ const OutingTutorial = ({ endTutorial }: { endTutorial: () => void }) => {
         </p>
         <nav>
           <div>
-            {step + 1 === tutorials.length && (
-              <>
-                <button onClick={onClickPrevStep}>뒤로</button>
-                <button onClick={onClickNextStep}>앞으로</button>
-              </>
+            <button onClick={onClickPrevStep}>뒤로</button>
+            {step + 1 === tutorials.length ? (
+              <button onClick={endTutorial}>마치기</button>
+            ) : (
+              <button onClick={onClickNextStep}>앞으로</button>
             )}
           </div>
           <button onClick={skipTutorial}>건너뛰기</button>
