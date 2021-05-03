@@ -1,4 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+export const Linker = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+`;
 
 export const Container = styled.div<{ isActive: boolean }>`
   display: flex;
@@ -16,6 +22,7 @@ export const Container = styled.div<{ isActive: boolean }>`
     box-shadow: -5px 5px 10px 1px rgba(0, 0, 0, 0.3);
   }
 `;
+
 export const Header = styled.div`
   display: flex;
   align-items: center;

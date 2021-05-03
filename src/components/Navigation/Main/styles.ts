@@ -2,13 +2,12 @@ import styled, { css } from "styled-components";
 import { Container as NavigationMainContainer } from "../Main/header/styles";
 
 export const Container = styled.div<{
-  colorSet: string;
   isManagementMode: boolean;
 }>`
   width: 15vw;
   box-sizing: border-box;
   padding: 40px 0 0 30px;
-  background-color: ${props => props.colorSet};
+  background-color: var(--base-color);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -17,9 +16,9 @@ export const Container = styled.div<{
   min-height: 600px;
 
   .active {
-    color: ${props => props.colorSet};
+    color: var(--base-color);
     > div + div {
-      border-left-color: ${props => props.colorSet};
+      border-left-color: var(--base-color);
     }
   }
 

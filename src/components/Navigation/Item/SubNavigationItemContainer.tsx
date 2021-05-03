@@ -4,21 +4,20 @@ import { useDispatch } from "react-redux";
 
 import NavigationItem from "./NavigationItem";
 
-import { subPageMove } from "../../../modules/action/page";
 import { changeSubNavOpen } from "../../../modules/action/subNav";
 
 interface Props {
-  name: string;
-  isActive: boolean;
   src: string;
+  name: string;
   route: string;
+  isActive: boolean;
 }
 
 const SubNavigationItemContainer: FC<Props> = ({
-  isActive,
-  name,
   src,
-  route
+  name,
+  route,
+  isActive
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -26,19 +25,16 @@ const SubNavigationItemContainer: FC<Props> = ({
   const onClick = useCallback(() => {
     if (history.location.pathname === route) {
       dispatch(changeSubNavOpen());
-      return;
     }
-
-    dispatch(subPageMove(name));
-    history.push(route);
   }, [dispatch, route]);
 
   return (
     <NavigationItem
-      onClick={onClick}
-      isActive={isActive}
-      name={name}
       src={src}
+      name={name}
+      route={route}
+      isActive={isActive}
+      onClick={onClick}
     />
   );
 };

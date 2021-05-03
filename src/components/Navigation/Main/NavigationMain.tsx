@@ -29,11 +29,9 @@ const NavigationMain: FC<Props> = ({ routeData }) => {
     dispatch(pageMove(mainUrl));
     dispatch(subPageMove(subUrl));
   });
+
   return (
-    <S.Container
-      colorSet={routeData.color}
-      isManagementMode={routeData.isManagementMode}
-    >
+    <S.Container isManagementMode={routeData.isManagementMode}>
       <NavigationHeader isManagementMode={routeData.isManagementMode} />
       <NavigationBody navItemArr={routeData.main} mainSubArr={routeData.sub} />
       <S.BackgroundImgWrap>

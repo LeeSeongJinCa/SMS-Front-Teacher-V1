@@ -1,11 +1,10 @@
-import React from "react";
-import { FC } from "react";
-import * as S from "./styles";
-import MainNavigationItemContainer from "../../Item/MainNavigationItemContainer";
-import { useSelector } from "react-redux";
-import { stateType } from "../../../../modules/reducer";
+import React, { FC } from "react";
 
+import * as S from "./styles";
+
+import MainNavigationItemContainer from "../../Item/MainNavigationItemContainer";
 import MainSubNavigationItemContainer from "../../Item/MainSubNavigationItemContainer";
+import useCustomSelector from "../../../../lib/hooks/useCustomSelector";
 
 export interface NavItem {
   name: string;
@@ -24,28 +23,27 @@ interface Props {
 }
 
 const NavigationBody: FC<Props> = ({ navItemArr, mainSubArr }) => {
-  const mainUrl = useSelector((store: stateType) => store.page.mainUrl);
+  const mainUrl = useCustomSelector().page.mainUrl;
 
   return (
     <S.Container>
-      {navItemArr.map(({ name, white, blue, route }, index) => (
+      {navItemArr.map(({ name, white, blue, route }) => (
         <MainNavigationItemContainer
-          isActive={mainUrl === name}
-          name={name}
-          src={mainUrl === name ? blue : white}
-          route={route}
           key={route}
+          src={mainUrl === name ? blue : white}
+          name={name}
+          route={route}
+          isActive={mainUrl === name}
         />
       ))}
 
-      {mainSubArr.map(({ name, white, blue, route, subUrl }, index) => (
+      {mainSubArr.map(({ name, white, blue, route }) => (
         <MainSubNavigationItemContainer
-          isActive={mainUrl === name}
-          name={name}
-          src={mainUrl === name ? blue : white}
-          route={route}
-          subUrl={subUrl}
           key={route}
+          src={mainUrl === name ? blue : white}
+          name={name}
+          route={route}
+          isActive={mainUrl === name}
         />
       ))}
     </S.Container>

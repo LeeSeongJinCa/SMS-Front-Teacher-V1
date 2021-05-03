@@ -1,41 +1,27 @@
-import React, { FC, useCallback, memo } from 'react';
-import NavigationItem from './NavigationItem';
-import { useDispatch } from 'react-redux';
-import { pageMove, subPageMove } from '../../../modules/action/page';
-import { useHistory } from 'react-router';
+import React, { FC, memo } from "react";
+
+import NavigationItem from "./NavigationItem";
 
 interface Props {
-  isActive: boolean;
-  name: string;
   src: string;
+  name: string;
   route: string;
-  subUrl: string;
+  isActive: boolean;
 }
 
 const MainSubNavigationItemContainer: FC<Props> = ({
-  isActive,
-  name,
   src,
+  name,
   route,
-  subUrl,
+  isActive
 }) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-
-  const onClick = useCallback(() => {
-    if (history.location.pathname === route) return;
-
-    dispatch(pageMove(name));
-    dispatch(subPageMove(subUrl));
-    history.push(route);
-  }, [dispatch, route]);
-
   return (
     <NavigationItem
-      isActive={isActive}
-      name={name}
       src={src}
-      onClick={onClick}
+      name={name}
+      route={route}
+      isActive={isActive}
+      onClick={void {}}
     />
   );
 };

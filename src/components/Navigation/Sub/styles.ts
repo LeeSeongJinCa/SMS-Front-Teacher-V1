@@ -1,9 +1,8 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const Container = styled.div<{
   isActive: boolean;
   isClose: boolean;
-  colorSet: string;
 }>`
   box-sizing: border-box;
   white-space: nowrap;
@@ -12,7 +11,7 @@ export const Container = styled.div<{
   z-index: 2;
   transition: width 0.3s, opacity 0.3s;
   opacity: 0;
-  ${(props) =>
+  ${props =>
     props.isActive &&
     css`
       border-right: 1px solid #dddddd;
@@ -22,7 +21,7 @@ export const Container = styled.div<{
       opacity: 1;
     `};
 
-  ${(props) =>
+  ${props =>
     props.isClose &&
     css`
       min-width: 0px;
@@ -34,7 +33,7 @@ export const Container = styled.div<{
 
   .active {
     font-weight: bold;
-    color: ${(props) => props.colorSet};
+    color: #23b2ad;
   }
 `;
 
@@ -45,7 +44,7 @@ export const CenterImg = styled.img<{ isClose: boolean }>`
   transition: 0.3s;
   transform: translateY(-50%);
 
-  ${(props) =>
+  ${props =>
     props.isClose &&
     css`
       transform: translateY(-50%) rotate(180deg);

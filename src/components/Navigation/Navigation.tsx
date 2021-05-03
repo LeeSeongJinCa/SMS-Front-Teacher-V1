@@ -13,9 +13,7 @@ const Navigation: FC = () => {
       <Switch>
         <Route
           path="/"
-          render={() => {
-            return <NavigationMain routeData={adminRouter} />;
-          }}
+          render={() => <NavigationMain routeData={adminRouter} />}
         />
       </Switch>
       <NavigationSub subRouteData={subNavRouter} />
