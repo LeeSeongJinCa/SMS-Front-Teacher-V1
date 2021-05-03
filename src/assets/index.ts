@@ -46,6 +46,7 @@ export { default as NavIconApprovedMint } from "./navigation/NavIcon-approved-mi
 export { default as IconWhite } from "./navigation/Icon-white.svg";
 export { default as IconBlack } from "./navigation/Icon-Black.svg";
 export { default as CloseMenu } from "./navigation/CloseMenu.svg";
+export { default as Restart } from "./navigation/Restart.svg";
 
 export { default as MainArrow } from "./main/arrow.svg";
 export { default as MainBike } from "./main/bike.svg";
