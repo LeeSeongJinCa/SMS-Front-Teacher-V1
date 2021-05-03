@@ -1,9 +1,9 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Refresh, Spinner } from "../../../assets";
 
 import * as S from "./styles";
 
+import { Refresh, Spinner } from "../../../assets";
 import OutingCard from "../OutingCard/OutingCard";
 import OutingCardFilter from "../Filter/OutingCardFilter";
 import OutingCardModal from "../Modal/OutingCardModal/OutingCardModal";
@@ -16,6 +16,7 @@ import {
   addOutingCardListSaga,
   getOutingCardListSaga
 } from "../../../modules/action/outingCard";
+import { useTutorialState } from "../../../lib/contextAPI/tutorial";
 
 interface Props {
   title: string;
@@ -24,6 +25,7 @@ interface Props {
 }
 
 const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
+  const { step } = useTutorialState();
   const { data, readMore, loading } = useSelector((state: stateType) => ({
     data: state.outingCard.list,
     readMore: state.outingCard.readMore,
@@ -130,8 +132,8 @@ const OutingCardPage: FC<Props> = ({ title, isClicked, status }) => {
   }, []);
 
   return (
-    <S.Container>
-      <S.Header>
+    <S.Container className={step === 9 ? "highlight" : ""}>
+      <S.Header className={step === 7 || step === 8 ? "highlight" : ""}>
         <S.HeaderText>
           {title}
           <S.RefreshIcon onClick={refresh} src={Refresh} />

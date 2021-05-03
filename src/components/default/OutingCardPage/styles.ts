@@ -13,7 +13,6 @@ export const Header = styled.div`
   transform: translateX(-10px);
   border-bottom: 2px solid #dddddd;
   position: relative;
-  z-index: 1;
 `;
 
 export const HeaderText = styled.div`
