@@ -9,6 +9,7 @@ export const GlobalStyle: GlobalStyleComponent<
   DefaultTheme
 > = createGlobalStyle`
   :root {
+    --base-color: #23b2ad;
     --highlight-color: white;
     --highlight-index: 5;
   }

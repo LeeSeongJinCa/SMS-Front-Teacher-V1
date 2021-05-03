@@ -30,7 +30,6 @@ import {
 export interface RouteData {
   main: NavItem[];
   sub: MainSubItem[];
-  color: string;
   isManagementMode?: boolean;
 }
 
@@ -58,8 +57,7 @@ export const adminRouter: RouteData = {
       white: NavIconNoticeWhite,
       blue: NavIconNoticeMint
     }
-  ],
-  color: "#23B2AD"
+  ]
 };
 
 interface SubNavItem {
