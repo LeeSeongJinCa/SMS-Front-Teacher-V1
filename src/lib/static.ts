@@ -141,6 +141,13 @@ export type Tutorial = {
   texts: string[];
   top: string;
   left: string;
+  page: string;
+  bubbler: {
+    width: string;
+    top: string;
+    left: string;
+    color: string;
+  };
 };
 
 export const tutorials: Tutorial[] = [
@@ -151,7 +158,14 @@ export const tutorials: Tutorial[] = [
       "학생들의 외출증을 관리하는 데 필요한 기능을 제공해요."
     ],
     top: "170px",
-    left: "calc(15vw + 15px)"
+    left: "calc(15vw + 15px)",
+    page: "/out/wait",
+    bubbler: {
+      width: "15px 15px 15px 0",
+      left: "-15px",
+      top: "45px",
+      color: "transparent #ffffff"
+    }
   },
   {
     texts: [
@@ -160,6 +174,166 @@ export const tutorials: Tutorial[] = [
       "선생님은 외출증을 클릭해서 외출증을 승인 혹은 거절할 수 있어요."
     ],
     top: "225px",
-    left: "calc(30vw + 15px)"
+    left: "calc(30vw + 15px)",
+    page: "/out/wait",
+    bubbler: {
+      width: "15px 15px 15px 0",
+      left: "-15px",
+      top: "45px",
+      color: "transparent #ffffff"
+    }
+  },
+  {
+    texts: [
+      "승인된 외출증을 보여줘요.",
+      "승인대기 외출증에서 승인된 외출증이 표시돼요.",
+      "지킴이 선생님이 외출을 나갈 수 있는 학생을",
+      "판단하기 쉽도록 만들었어요."
+    ],
+    top: "280px",
+    left: "calc(30vw + 15px)",
+    page: "/out/approved",
+    bubbler: {
+      width: "15px 15px 15px 0",
+      left: "-15px",
+      top: "45px",
+      color: "transparent #ffffff"
+    }
+  },
+  {
+    texts: [
+      "승인된 외출증을 보여줘요.",
+      "승인대기 외출증에서 승인된 외출증이 표시돼요.",
+      "지킴이 선생님이 외출을 나갈 수 있는 학생을",
+      "판단하기 쉽도록 만들었어요."
+    ],
+    top: "335px",
+    left: "calc(30vw + 15px)",
+    page: "/out/now",
+    bubbler: {
+      width: "15px 15px 15px 0",
+      left: "-15px",
+      top: "45px",
+      color: "transparent #ffffff"
+    }
+  },
+  {
+    texts: [
+      "승인된 외출증을 보여줘요.",
+      "승인대기 외출증에서 승인된 외출증이 표시돼요.",
+      "지킴이 선생님이 외출을 나갈 수 있는 학생을",
+      "판단하기 쉽도록 만들었어요."
+    ],
+    top: "390px",
+    left: "calc(30vw + 15px)",
+    page: "/out/done",
+    bubbler: {
+      width: "15px 15px 15px 0",
+      left: "-15px",
+      top: "45px",
+      color: "transparent #ffffff"
+    }
+  },
+  {
+    texts: [
+      "승인된 외출증을 보여줘요.",
+      "승인대기 외출증에서 승인된 외출증이 표시돼요.",
+      "지킴이 선생님이 외출을 나갈 수 있는 학생을",
+      "판단하기 쉽도록 만들었어요."
+    ],
+    top: "445px",
+    left: "calc(30vw + 15px)",
+    page: "/out/certified",
+    bubbler: {
+      width: "15px 15px 15px 0",
+      left: "-15px",
+      top: "45px",
+      color: "transparent #ffffff"
+    }
+  },
+  {
+    texts: [
+      "승인된 외출증을 보여줘요.",
+      "승인대기 외출증에서 승인된 외출증이 표시돼요.",
+      "지킴이 선생님이 외출을 나갈 수 있는 학생을",
+      "판단하기 쉽도록 만들었어요."
+    ],
+    top: "500px",
+    left: "calc(30vw + 15px)",
+    page: "/out/statistics",
+    bubbler: {
+      width: "15px 15px 15px 0",
+      left: "-15px",
+      top: "45px",
+      color: "transparent #ffffff"
+    }
+  },
+  {
+    texts: [
+      "승인된 외출증을 보여줘요.",
+      "승인대기 외출증에서 승인된 외출증이 표시돼요.",
+      "지킴이 선생님이 외출을 나갈 수 있는 학생을",
+      "판단하기 쉽도록 만들었어요."
+    ],
+    top: "135px",
+    left: "calc(30vw + 15px + 25px)",
+    page: "/out/wait",
+    bubbler: {
+      width: "0 15px 15px",
+      top: "-15px;",
+      left: "110px;",
+      color: "#ffffff transparent"
+    }
+  },
+  {
+    texts: [
+      "승인된 외출증을 보여줘요.",
+      "승인대기 외출증에서 승인된 외출증이 표시돼요.",
+      "지킴이 선생님이 외출을 나갈 수 있는 학생을",
+      "판단하기 쉽도록 만들었어요."
+    ],
+    top: "135px",
+    left: "calc(100% - 360px)",
+    page: "/out/wait",
+    bubbler: {
+      width: "0 15px 15px",
+      top: "-15px;",
+      left: "110px;",
+      color: "#ffffff transparent"
+    }
+  },
+  {
+    texts: [
+      "승인된 외출증을 보여줘요.",
+      "승인대기 외출증에서 승인된 외출증이 표시돼요.",
+      "지킴이 선생님이 외출을 나갈 수 있는 학생을",
+      "판단하기 쉽도록 만들었어요."
+    ],
+    top: "360px",
+    left: "225px",
+    page: "/out/wait",
+    bubbler: {
+      width: "15px 0 15px 15px",
+      top: "45px",
+      left: "100%",
+      color: "transparent #ffffff"
+    }
+  },
+  {
+    texts: [
+      "승인된 외출증을 보여줘요.",
+      "승인대기 외출증에서 승인된 외출증이 표시돼요.",
+      "지킴이 선생님이 외출을 나갈 수 있는 학생을",
+      "판단하기 쉽도록 만들었어요."
+    ],
+    top: "calc(100vh - 275px)",
+    left: "calc(100vw - 550px)",
+    page: "/out/wait",
+    bubbler: {
+      width: "15px 0 15px 15px",
+      top: "calc(100% - 45px)",
+      left: "100%",
+      color: "transparent #ffffff"
+    }
   }
 ];
