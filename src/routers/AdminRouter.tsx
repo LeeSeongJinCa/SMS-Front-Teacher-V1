@@ -6,8 +6,7 @@ import {
   LazyPassword,
   LazyAccount,
   LazyLogin,
-  LazyMyPage,
-  LazyPageNotFound
+  LazyMyPage
 } from "./AdminLazy";
 
 const AdminRouter: FC = () => {
@@ -18,7 +17,6 @@ const AdminRouter: FC = () => {
       <Route path="/login" component={LazyLogin} />
       <Route path="/user" component={LazyMyPage} />
       <Route path="/" component={LazyMain} />
-      <Route path="*" component={LazyPageNotFound} />
     </Switch>
   );
 };
