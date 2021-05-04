@@ -9,29 +9,25 @@ import React, {
 } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import EditerJS from "@editorjs/editorjs";
+
+import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import List from "@editorjs/list";
-import { BoardType, BoardWriteFilter } from "../../../lib/api/payloads/Board";
+
 import * as S from "./styles";
-import { PageHeader } from "..";
+
+import { PageHeader } from "../";
 import WriteCategory from "../Category/WriteCategory";
 import { writeNotice } from "../../../modules/action/notice/detail";
 import { isIncludeEmpty } from "../../../lib/utils";
+import { BoardWriteFilter } from "../../../lib/api/payloads/Board";
+import { NavIconNoticeMint } from "../../../assets";
 
-export interface NoticeWriteSet {
-  title: string;
-  imgSrc: string;
-  color: string;
-  type: BoardType;
-}
-interface Props {
-  setting: NoticeWriteSet;
-}
+interface Props {}
 
-const AdminNoticeWriting: FC<Props> = ({ setting }) => {
+const AdminNoticeWriting: FC<Props> = () => {
   const dispatch = useDispatch();
-  const editerRef = useRef<EditerJS>();
+  const editorRef = useRef<EditorJS>();
   const [title, setTitle] = useState<string>("");
   const [filterData, setFilterData] = useState<BoardWriteFilter>({
     target_grade: 0,
@@ -39,17 +35,17 @@ const AdminNoticeWriting: FC<Props> = ({ setting }) => {
   });
 
   useEffect(() => {
-    const editer = new EditerJS({
+    const editor = new EditorJS({
       holder: "editer",
       tools: {
         header: Header,
         list: List
       }
     });
-    editerRef.current = editer;
+    editorRef.current = editor;
   }, []);
 
-  const helpMosueMove = useCallback((e: MouseEvent<HTMLDivElement>) => {
+  const helpMouseMove = useCallback((e: MouseEvent<HTMLDivElement>) => {
     if (e.target !== e.currentTarget) return;
     const contentLines = document.querySelectorAll(
       ".codex-editor__redactor > .ce-block > div > div"
@@ -68,17 +64,17 @@ const AdminNoticeWriting: FC<Props> = ({ setting }) => {
   }, []);
 
   const saveHandler = useCallback(async () => {
-    if (!editerRef) return;
+    if (!editorRef) return;
     if (!title) {
       toast.error("제목을 입력해주세요");
       return;
     }
 
-    if (setting.type === "school" && isIncludeEmpty(filterData)) {
+    if (isIncludeEmpty(filterData)) {
       toast.error("필터를 적용해주세요");
       return;
     }
-    const writeData = await editerRef.current.save();
+    const writeData = await editorRef.current.save();
     if (!writeData.blocks.length) {
       toast.error("내용을 입력해주세요");
       return;
@@ -90,15 +86,19 @@ const AdminNoticeWriting: FC<Props> = ({ setting }) => {
       writeNotice({
         content: writeDataStr,
         title,
-        type: setting.type,
+        type: "school",
         ...filterData
       })
     );
-  }, [title, filterData, setting.type]);
+  }, [title, filterData]);
 
   return (
     <S.Container>
-      <PageHeader imgSrc={setting.imgSrc} title={setting.title} type="DETAIL" />
+      <PageHeader
+        imgSrc={NavIconNoticeMint}
+        title="학교 공지사항 작성"
+        type="DETAIL"
+      />
       <S.Hr />
       <S.TitleInput
         onChange={changeHeaderText}
@@ -107,20 +107,18 @@ const AdminNoticeWriting: FC<Props> = ({ setting }) => {
         placeholder="제목을 입력하세요"
       />
       <S.Hr />
-      {setting.type === "school" && (
-        <WriteCategory onChange={writeFilterHandler} />
-      )}
-      <S.EditerBackground>
-        <S.Editer id="editer" onClick={helpMosueMove}></S.Editer>
-      </S.EditerBackground>
+      <WriteCategory onChange={writeFilterHandler} />
+      <S.EditorBackground>
+        <S.Editor id="editer" onClick={helpMouseMove}></S.Editor>
+      </S.EditorBackground>
       <S.Footer>
         <S.Button color="black" borderColor="#FBFBFB" backgroundColor="#FBFBFB">
           취소
         </S.Button>
         <S.Button
           color="white"
-          borderColor={setting.color}
-          backgroundColor={setting.color}
+          borderColor={"#23B2AD"}
+          backgroundColor={"#23B2AD"}
           onClick={saveHandler}
         >
           작성

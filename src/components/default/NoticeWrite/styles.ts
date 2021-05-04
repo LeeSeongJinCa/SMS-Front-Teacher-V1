@@ -8,7 +8,7 @@ export const Container = styled.div`
 export const TitleInput = styled.input`
   color: #888888;
   border: none;
-  width:100%;
+  width: 100%;
   font-size: 15px;
 `;
 
@@ -17,13 +17,13 @@ export const Hr = styled.hr`
   margin: 15px 0;
 `;
 
-export const EditerBackground = styled.div`
+export const EditorBackground = styled.div`
   background-color: #eef5fa;
   padding: 10px;
   box-sizing: border-box;
 `;
 
-export const Editer = styled.div`
+export const Editor = styled.div`
   background: white;
   border-radius: 4px;
   box-shadow: 0px 0px 20px 1px rgb(0, 0, 0, 0.2);
