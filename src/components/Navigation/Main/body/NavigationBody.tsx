@@ -36,7 +36,6 @@ const NavigationBody: FC<Props> = ({ navItemArr, mainSubArr }) => {
           isActive={mainUrl === name}
         />
       ))}
-
       {mainSubArr.map(({ name, white, blue, route }) => (
         <MainSubNavigationItemContainer
           key={route}

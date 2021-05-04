@@ -19,7 +19,7 @@ const NavigationItem: FC<Props> = ({ src, name, route, isActive, onClick }) => {
         onClick={onClick}
       >
         <S.Header>
-          <S.Img src={src} />
+          <S.Img src={src} alt="navigation-icon" title="navigation-icon" />
           <S.ItemName>{name}</S.ItemName>
         </S.Header>
         {isActive && <S.Triangle />}

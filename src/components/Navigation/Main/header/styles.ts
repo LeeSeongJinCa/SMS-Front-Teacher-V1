@@ -18,6 +18,7 @@ export const InnerContainer = styled.div`
   z-index: 2;
 `;
 
-export const Container = styled.div``;
-
-export const LogoImg = styled.img``;
+export const LogoImg = styled.img`
+  width: 34px;
+  height: 22px;
+`;

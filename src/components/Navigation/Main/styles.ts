@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { Container as NavigationMainContainer } from "../Main/header/styles";
 
 export const Container = styled.div<{
   isManagementMode: boolean;
@@ -25,7 +24,7 @@ export const Container = styled.div<{
   ${props =>
     props.isManagementMode &&
     css`
-      ${NavigationMainContainer} {
+      div {
         * {
           color: black !important;
         }
@@ -57,10 +56,14 @@ export const BackgroundImgWrap = styled.div`
 export const Circle = styled.img<{
   top: number;
   left: number;
+  width: number;
+  height: number;
 }>`
   position: relative;
   top: ${props => props.top}px;
   left: ${props => props.left}px;
+  width: ${props => props.width}px;
+  height: ${props => props.height}px;
 `;
 
 export const ManagementMenu = styled.div`

@@ -31,6 +31,7 @@ export const Header = styled.div`
 
 export const Img = styled.img`
   width: 15px;
+  height: 15px;
 `;
 
 export const ItemName = styled.div`

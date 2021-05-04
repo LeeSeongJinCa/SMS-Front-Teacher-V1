@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
-import * as S from './styles';
+import React, { FC } from "react";
 
-const NavigationSubHeader: FC<{}> = ({ children }) => {
+import * as S from "./styles";
+
+const NavigationSubHeader: FC = ({ children }) => {
   return <S.Container>{children}</S.Container>;
 };
 

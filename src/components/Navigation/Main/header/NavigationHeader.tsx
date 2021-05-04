@@ -1,7 +1,9 @@
 import React, { FC } from "react";
-import * as S from "./styles";
-import { IconBlack, IconWhite } from "../../../../assets/";
 import { Link } from "react-router-dom";
+
+import * as S from "./styles";
+
+import { IconBlack, IconWhite } from "../../../../assets/";
 
 interface Props {
   isManagementMode: boolean;
@@ -9,15 +11,19 @@ interface Props {
 
 const NavigationHeader: FC<Props> = ({ isManagementMode }) => {
   return (
-    <S.Container>
+    <div>
       <S.InnerContainer>
         <Link to="/">
-          <S.LogoImg src={isManagementMode ? IconBlack : IconWhite} />
+          <S.LogoImg
+            src={isManagementMode ? IconBlack : IconWhite}
+            alt="navigation-background-icon"
+            title="navigation-background-icon"
+          />
           <S.LogoText>SMS</S.LogoText>
         </Link>
       </S.InnerContainer>
       {isManagementMode && <div>Club Admin Service</div>}
-    </S.Container>
+    </div>
   );
 };
 

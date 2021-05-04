@@ -35,10 +35,34 @@ const NavigationMain: FC<Props> = ({ routeData }) => {
       <NavigationHeader isManagementMode={routeData.isManagementMode} />
       <NavigationBody navItemArr={routeData.main} mainSubArr={routeData.sub} />
       <S.BackgroundImgWrap>
-        <S.Circle src={MintBackgroundCircle1} top={150} left={190} />
-        <S.Circle src={MintBackgroundCircle2} top={450} left={-140} />
-        <S.Circle src={MintBackgroundCircle3} top={410} left={0} />
-        <S.Circle src={MintBackgroundCircle4} top={410} left={-40} />
+        <S.Circle
+          src={MintBackgroundCircle1}
+          top={150}
+          left={190}
+          width={100}
+          height={100}
+        />
+        <S.Circle
+          src={MintBackgroundCircle2}
+          top={450}
+          left={-140}
+          width={100}
+          height={100}
+        />
+        <S.Circle
+          src={MintBackgroundCircle3}
+          top={410}
+          left={0}
+          width={24}
+          height={24}
+        />
+        <S.Circle
+          src={MintBackgroundCircle4}
+          top={410}
+          left={-40}
+          width={220}
+          height={220}
+        />
       </S.BackgroundImgWrap>
     </S.Container>
   );
