@@ -1,6 +1,8 @@
-import React, { FC, ChangeEvent, memo } from 'react';
-import * as S from './styles';
-import { SearchIcon } from '../../../assets';
+import React, { FC, ChangeEvent, memo } from "react";
+
+import * as S from "./styles";
+
+import { SearchIcon } from "../../../assets";
 
 interface Props {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;

@@ -6,15 +6,17 @@ import React, {
   useRef,
   useCallback
 } from "react";
-import { PageHeader } from "../../default";
-import * as S from "../../Admin/Notice/writing/styles";
-import EditerJS from "@editorjs/editorjs";
-import Header from "@editorjs/header";
-import List from "@editorjs/list";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+
+import EditorJS from "@editorjs/editorjs";
+import Header from "@editorjs/header";
+import List from "@editorjs/list";
+
+import { PageHeader } from "../../default";
+import * as S from "../../Admin/Notice/writing/styles";
 import { editNotice } from "../../../modules/action/notice/detail";
-import { useHistory, useParams } from "react-router-dom";
 import { BoardWriteFilter } from "../../../lib/api/payloads/Board";
 import WriteCategory from "../Category/WriteCategory";
 import { isIncludeEmpty } from "../../../lib/utils";
@@ -37,11 +39,9 @@ interface Props {
 
 const NoticeEdit: FC<Props> = ({ editData, setting }) => {
   const dispatch = useDispatch();
-  const editerRef = useRef<EditerJS>();
   const history = useHistory();
-
   const id: string = useParams<{ id: string }>().id;
-
+  const editorRef = useRef<EditorJS>();
   const [newTitle, setNewTitle] = useState<string>("");
   const [filterData, setFilterData] = useState<BoardWriteFilter>({});
 
@@ -52,7 +52,7 @@ const NoticeEdit: FC<Props> = ({ editData, setting }) => {
 
     setNewTitle(title);
 
-    const editer = new EditerJS({
+    const editor = new EditorJS({
       holder: "editer",
       tools: {
         header: Header,
@@ -60,7 +60,7 @@ const NoticeEdit: FC<Props> = ({ editData, setting }) => {
       },
       data: JSON.parse(content)
     });
-    editerRef.current = editer;
+    editorRef.current = editor;
   }, [editData.title, editData.content]);
 
   const writeFilterHandler = useCallback((data: BoardWriteFilter) => {
@@ -87,7 +87,7 @@ const NoticeEdit: FC<Props> = ({ editData, setting }) => {
       return;
     }
 
-    const writeData = await editerRef.current.save();
+    const writeData = await editorRef.current.save();
     if (!writeData.blocks.length) {
       toast.error("내용을 입력하세요");
       return;
@@ -120,9 +120,9 @@ const NoticeEdit: FC<Props> = ({ editData, setting }) => {
       {setting.type === "school" && (
         <WriteCategory onChange={writeFilterHandler} />
       )}
-      <S.EditerBackground>
-        <S.Editer id="editer"></S.Editer>
-      </S.EditerBackground>
+      <S.EditorBackground>
+        <S.Editor id="editer"></S.Editor>
+      </S.EditorBackground>
       <S.Footer>
         <S.Button
           color="white"

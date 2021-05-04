@@ -6,7 +6,7 @@ import * as S from "./styles";
 import BoardTableHeader from "./Table/header/BoardTableHeader";
 import BoardTableBody from "./Table/body/BoardTableBody";
 
-import PagiNation from "../PagiNation/PagiNation";
+import PageNation from "../PageNation/PageNation";
 import { BoardListItem } from "../../../lib/api/payloads/Board";
 
 export interface BoardObj {
@@ -30,7 +30,7 @@ const Board: FC<Props> = ({ data, names, maxSize }) => {
     <S.Container>
       <BoardTableHeader names={names} />
       <BoardTableBody data={data} />
-      <PagiNation page={page} maxSize={maxSize} />
+      <PageNation page={page} maxSize={maxSize} />
     </S.Container>
   );
 };

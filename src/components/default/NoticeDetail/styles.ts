@@ -9,9 +9,9 @@ export const P = styled.p`
   font-size: 20px;
 `;
 
-export const Button = styled.button<{ color: string; backgroundcolor: string }>`
+export const Button = styled.button<{ color: string; backgroundColor: string }>`
   color: ${props => props.color};
-  background-color: ${props => props.backgroundcolor};
+  background-color: ${props => props.backgroundColor};
   border: 1px solid #dddddd;
   font-size: 15px;
   padding: 8px 33px;

@@ -1,9 +1,11 @@
-import React, { FC, useState, useCallback, ChangeEvent, memo } from "react";
-import { Board, ListPageHeader } from "../../default";
+import React, { FC, useState, useCallback, ChangeEvent } from "react";
+
 import * as S from "./styles";
+
+import { Spinner } from "../../../assets";
+import { Board, ListPageHeader } from "../../default";
 import { makeFilterFunc } from "../../../lib/utils";
 import { BoardListItem } from "../../../lib/api/payloads/Board";
-import { Spinner } from "../../../assets";
 
 export interface NoticeListSet {
   title: string;

@@ -1,7 +1,9 @@
 import React, { FC, ChangeEvent, memo } from "react";
+
 import * as S from "./styles";
-import { Hr } from "../Board/styles";
 import PageHeader from "./PageHeader";
+
+import { Hr } from "../Board/styles";
 import { SearchInput } from "../../default";
 
 interface Props {

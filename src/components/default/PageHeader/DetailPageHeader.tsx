@@ -1,11 +1,13 @@
 import React, { FC, memo, useCallback } from "react";
-import * as S from "./styles";
-import { Hr } from "../Board/styles";
-import PageHeader from "./PageHeader";
-import { NoticeDetailHeaderSet } from "../NoticeDetail/NoticeDetail";
 import { useParams } from "react-router-dom";
-import Confirm from "../../../lib/confirm/confirm";
 import { useDispatch } from "react-redux";
+
+import * as S from "./styles";
+import PageHeader from "./PageHeader";
+
+import { Hr } from "../Board/styles";
+import { NoticeDetailHeaderSet } from "../NoticeDetail/NoticeDetail";
+import Confirm from "../../../lib/confirm/confirm";
 import { deleteNotice } from "../../../modules/action/notice/detail";
 import { BoardType, ReqBoardDelete } from "../../../lib/api/payloads/Board";
 

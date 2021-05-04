@@ -1,5 +1,7 @@
-import React, { FC, memo } from "react";
+import React, { FC } from "react";
+
 import * as S from "./styles";
+
 import { DetailPageHeader } from "../../../components/default";
 import PageMove from "../../default/PageMove/PageMove";
 import NoticeDetailBody from "../../Notice/Detail/NoticeDetailBody/NoticeDetailBody";

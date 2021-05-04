@@ -1,5 +1,6 @@
-import React, { FC, memo } from 'react';
-import * as S from './styles';
+import React, { FC, memo } from "react";
+
+import * as S from "./styles";
 
 interface Props {
   imgSrc?: string;
@@ -10,7 +11,7 @@ interface Props {
 const PageHeader: FC<Props> = ({ imgSrc, title, type }) => {
   return (
     <S.Container type={type}>
-      {imgSrc && <S.Img src={imgSrc} type={type} /> }
+      {imgSrc && <S.Img src={imgSrc} type={type} />}
       <S.Title type={type}>{title}</S.Title>
     </S.Container>
   );

@@ -4,7 +4,7 @@ import { FC } from "react";
 import * as S from "./styles";
 
 import { ResOutingCardListItem } from "../../../lib/api/payloads/OutingCard";
-import { getOutingCardTime } from "../../../lib/utils";
+import { getOutingCardTime, padNum } from "../../../lib/utils";
 import { OutingCard } from "../../../modules/action/outingCard";
 
 interface Props extends ResOutingCardListItem {
@@ -35,7 +35,7 @@ const OutingCard: FC<Props> = ({
         <div>
           {grade}
           {group}
-          {`${number}`.padStart(2, "0")} {name}
+          {padNum(number)} {name}
         </div>
         <S.RightHeader>
           {outing_situation === "EMERGENCY" ? (

@@ -1,5 +1,5 @@
-import React, { FC, MouseEvent } from "react";
-import { memo } from "react";
+import React, { FC, MouseEvent, memo } from "react";
+
 import * as S from "./styles";
 
 interface ToggleSet {
@@ -9,7 +9,7 @@ interface ToggleSet {
 }
 
 export interface Props {
-  actvieSet: ToggleSet;
+  activeSet: ToggleSet;
   defaultSet: ToggleSet;
   circleColor: string;
   isActive: boolean;
@@ -17,7 +17,7 @@ export interface Props {
 }
 
 const Toggle: FC<Props> = ({
-  actvieSet,
+  activeSet,
   circleColor,
   clickHandler,
   isActive,
@@ -27,7 +27,7 @@ const Toggle: FC<Props> = ({
     backgroundColor: activeBackgroundColor,
     color: activeColor,
     text: activeText
-  } = actvieSet;
+  } = activeSet;
 
   const {
     backgroundColor: defaultBackgroundColor,

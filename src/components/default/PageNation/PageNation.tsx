@@ -1,5 +1,6 @@
 import React, { FC, memo, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 import * as S from "./styles";
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
   maxSize: number;
 }
 
-const PagiNation: FC<Props> = ({ maxSize, page }) => {
+const PageNation: FC<Props> = ({ maxSize, page }) => {
   const startPage = Math.floor(page / 5);
   const history = useHistory();
 
@@ -17,7 +18,7 @@ const PagiNation: FC<Props> = ({ maxSize, page }) => {
 
   useEffect(() => {
     if (page <= 0 || page >= maxPage) {
-      history.push(`${pathname}`);
+      history.push(pathname);
     }
   }, [page]);
   return (
@@ -51,4 +52,4 @@ const PagiNation: FC<Props> = ({ maxSize, page }) => {
   );
 };
 
-export default memo(PagiNation);
+export default memo(PageNation);
