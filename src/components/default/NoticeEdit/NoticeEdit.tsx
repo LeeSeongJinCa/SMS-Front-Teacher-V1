@@ -82,7 +82,7 @@ const NoticeEdit: FC<Props> = ({ editData, setting }) => {
       return;
     }
 
-    if (type === "school" && isIncludeEmpty(filterData)) {
+    if (isIncludeEmpty(filterData)) {
       toast.error("필터를 적용해 주세요");
       return;
     }

@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { History } from "history";
@@ -7,8 +6,6 @@ import { ResDefault } from "./api/payloads";
 import { BoardType } from "./api/payloads/Board";
 
 import { PageState } from "../modules/reducer/page";
-import { stateType } from "../modules/reducer";
-import { SERVER } from "../lib/api/client";
 
 type valueType = [string, string];
 
@@ -50,18 +47,12 @@ export const getNavUrl = (url: string): PageState => {
 
 //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-export type CallbackFunc = (state: stateType) => any;
-export const customSelector = (callback: CallbackFunc) => useSelector(callback);
-
 export const makeFilterFunc = <T>(
   data: T[],
   callback: (data: T, str: string) => boolean
 ): ((keyword: string) => T[]) => {
   return (keyword: string) => data.filter(item => callback(item, keyword));
 };
-
-export const getImgUrl = url =>
-  `${SERVER.s3Url}/${url}?timestamps=${Date.now()}`;
 
 export const makeQuery = (object: any) => {
   return Object.keys(object).reduce(
@@ -70,7 +61,7 @@ export const makeQuery = (object: any) => {
   );
 };
 
-export const getHourMinute = (date: Date): string => {
+const getHourMinute = (date: Date): string => {
   const h = date.getHours();
   const m = date.getMinutes();
 
@@ -95,26 +86,22 @@ export const getOutingCardTime = (
   return [dateStr, date1Time, date2Time];
 };
 
-export const isIncludeEmpty = (datas: any[] | object): boolean => {
-  for (let i in datas) {
-    if (!datas[i]) return true;
+export const isIncludeEmpty = (dataArr: any[] | object): boolean => {
+  for (const i in dataArr) {
+    if (!dataArr[i]) return true;
   }
   return false;
 };
+
 export const getWeekOfMonth = (d: Date) => {
   const month = d.getMonth(),
     year = d.getFullYear(),
     firstWeekday = new Date(year, month, 1).getDay(),
-    lastDateOfMonth = new Date(year, month + 1, 0).getDate(),
     offsetDate = d.getDate() + firstWeekday - 1,
-    index = 1, // start index at 0 or 1, your choice
-    weeksInMonth = index + Math.ceil((lastDateOfMonth + firstWeekday - 7) / 7),
+    index = 1,
     week = index + Math.floor(offsetDate / 7);
 
   return week;
-
-  // if (week < 2 + index) return week;
-  // return week === weeksInMonth ? index + 5 : week;
 };
 
 export const padNum = (n: number) => (n + "").padStart(2, "0");
@@ -129,8 +116,6 @@ export const errorHandler = (errStatus: number, history: History): void => {
     }
   }
 };
-
-export const getFacebookLink = (id: string) => `https://www.facebook.com/${id}`;
 
 export const getAxiosError = (err: AxiosError<ResDefault>) => {
   const { status, code } = err.response.data;

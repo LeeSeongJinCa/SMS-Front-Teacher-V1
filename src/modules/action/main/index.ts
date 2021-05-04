@@ -1,9 +1,4 @@
-import { ResSchedule, ResTimetable } from "../../../lib/api/payloads/Main";
-
-export const GET_TIMETABLES_SAGA = "main/GET_TIMETABLE_SAGA" as const;
-export const SET_TIMETABLES = "main/SET_TIMETABLE" as const;
-export const START_TIMETABLE = "main/START_TIMETABLE" as const;
-export const END_TIMETABLE = "main/END_TIMETABLE" as const;
+import { ResSchedule } from "../../../lib/api/payloads/Main";
 
 export const GET_SCHEDULES_SAGA = "main/GET_SCHEDULES_SAGA" as const;
 export const SET_SCHEDULES = "main/FETCH_SCHEDULES" as const;
@@ -20,18 +15,6 @@ export const getSchedulesSaga = (year: number, month: number) => ({
   type: GET_SCHEDULES_SAGA,
   payload: { year, month }
 });
-export const getTimetablesSaga = (
-  year: number,
-  month: number,
-  day: number
-) => ({
-  type: GET_TIMETABLES_SAGA,
-  payload: { year, month, day }
-});
-export const setTimetables = (timetable: ResTimetable) => ({
-  type: SET_TIMETABLES,
-  payload: { timetable }
-});
 export const setSchedules = (schedules: ResSchedule[]) => ({
   type: SET_SCHEDULES,
   payload: { schedules }
@@ -43,12 +26,6 @@ export const setSchedulerDate = (date: Date) => ({
 export const setTargetUuid = (scheduleUuid: string) => ({
   type: SET_TARGET_UUID,
   payload: { scheduleUuid }
-});
-export const startTimetableLoading = () => ({
-  type: START_TIMETABLE
-});
-export const endTimetableLoading = () => ({
-  type: END_TIMETABLE
 });
 export const startScheduleLoading = () => ({
   type: START_SCHEDULE
@@ -62,13 +39,9 @@ export const setSelectedDate = (localDate: string) => ({
 });
 export type TimetableAction = ReturnType<
   | typeof getSchedulesSaga
-  | typeof setTimetables
-  | typeof getTimetablesSaga
   | typeof setSchedules
   | typeof setSchedulerDate
   | typeof setTargetUuid
-  | typeof startTimetableLoading
-  | typeof endTimetableLoading
   | typeof startScheduleLoading
   | typeof endScheduleLoading
   | typeof setSelectedDate

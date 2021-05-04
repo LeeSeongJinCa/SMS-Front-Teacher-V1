@@ -1,12 +1,9 @@
-import { ResSchedule, ResTimetable } from "../../../lib/api/payloads/Main";
+import { ResSchedule } from "../../../lib/api/payloads/Main";
 import {
   TimetableAction,
-  SET_TIMETABLES,
   SET_SCHEDULES,
   SET_SCHEDULER_DATE,
   SET_TARGET_UUID,
-  START_TIMETABLE,
-  END_TIMETABLE,
   START_SCHEDULE,
   END_SCHEDULE,
   SET_SELECTED_DATE
@@ -15,7 +12,6 @@ import {
 export interface TimetableState {
   timetableLoading: boolean;
   scheduleLoading: boolean;
-  timetable: ResTimetable;
   schedules: ResSchedule[];
   schedulerDate: Date;
   targetUuid: string;
@@ -25,15 +21,6 @@ export interface TimetableState {
 const initialState: TimetableState = {
   timetableLoading: false,
   scheduleLoading: false,
-  timetable: {
-    time1: "-",
-    time2: "-",
-    time3: "-",
-    time4: "-",
-    time5: "-",
-    time6: "-",
-    time7: "-"
-  },
   schedules: [],
   schedulerDate: new Date(),
   targetUuid: "",
@@ -45,11 +32,6 @@ const ManagementInfoReduce = (
   action: TimetableAction
 ): TimetableState => {
   switch (action.type) {
-    case SET_TIMETABLES:
-      return {
-        ...state,
-        timetable: action.payload.timetable
-      };
     case SET_SCHEDULES:
       return {
         ...state,
@@ -64,16 +46,6 @@ const ManagementInfoReduce = (
       return {
         ...state,
         targetUuid: action.payload.scheduleUuid
-      };
-    case START_TIMETABLE:
-      return {
-        ...state,
-        timetableLoading: true
-      };
-    case END_TIMETABLE:
-      return {
-        ...state,
-        timetableLoading: false
       };
     case START_SCHEDULE:
       return {

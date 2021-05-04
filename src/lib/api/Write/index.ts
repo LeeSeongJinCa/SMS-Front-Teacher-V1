@@ -2,7 +2,7 @@ import { apiDefault } from "../client";
 import { BoardEdit, BoardWriteData, BoardWriteFilter } from "../payloads/Board";
 
 export const writeNotice = (
-  type: "school" | "club",
+  type: "school",
   data: BoardWriteData,
   filter: BoardWriteFilter
 ) => {

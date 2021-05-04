@@ -1,4 +1,7 @@
 import { call, getContext, put, takeEvery } from "redux-saga/effects";
+import { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
+
 import { finishLoading, startLoading } from "../../../action/loading";
 import * as noticeApi from "../../../../lib/api/notice";
 import {
@@ -12,9 +15,7 @@ import {
   GET_NOTICE_DETAIL,
   WRITE_NOTICE
 } from "../../../action/notice/detail";
-import { AxiosResponse } from "axios";
 import { ResBoardDetail } from "../../../../lib/api/payloads/Board";
-import { toast } from "react-toastify";
 import { getSuccessHistory } from "../../../../lib/utils";
 
 function* getNoticeDetailSaga(action: ReturnType<typeof getNoticeDetail>) {
