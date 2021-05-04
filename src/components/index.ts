@@ -22,11 +22,6 @@ export { default as Category } from "./default/Category/Category";
 export { default as CircleAllDetail } from "./default/Info/CircleAllDetail";
 export { default as CircleWantedDetail } from "./default/Info/CircleWantedDetail";
 
-export { default as CircleAll } from "./Circle/All/CircleAll";
-export { default as CircleNoticeList } from "./Circle/Notice/List/CircleNoticeList";
-export { default as CircleWantedList } from "./Circle/Wanted/List/CircleWantedList";
-export { default as CircleNoticeDetail } from "./Circle/Notice/Detail/CircleNoticeDetail";
-
 export { default as AdminMain } from "./Admin/Main/Main";
 
 export { default as AdminNoticeAll } from "./Admin/Notice/all/AdminNoticeAll";
