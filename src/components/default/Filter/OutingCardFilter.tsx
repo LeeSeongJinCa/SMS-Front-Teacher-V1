@@ -6,15 +6,17 @@ import React, {
   useState
 } from "react";
 import { toast } from "react-toastify";
-import { OutingCardFilter } from "../../../lib/api/payloads/OutingCard";
+
 import * as S from "./styles";
+
+import { OutingCardFilter } from "../../../lib/api/payloads/OutingCard";
 
 interface Props {
   onChange: (data: OutingCardFilter) => void;
 }
 
 const OutingCardFilter: FC<Props> = ({ onChange }) => {
-  const [settingIsOpen, setSetiingIsOpen] = useState<boolean>(false);
+  const [settingIsOpen, setSettingIsOpen] = useState<boolean>(false);
   const [typeIsFloor, setTypeIsFloor] = useState<boolean>(false);
   const [filterData, setFilterData] = useState<OutingCardFilter>({});
   const [filterOn, setFilterOn] = useState<boolean>(false);
@@ -42,8 +44,8 @@ const OutingCardFilter: FC<Props> = ({ onChange }) => {
     [filterOn]
   );
 
-  const changeSetiingIsOpen = useCallback(() => {
-    setSetiingIsOpen(prev => {
+  const changeSettingIsOpen = useCallback(() => {
+    setSettingIsOpen(prev => {
       if (!prev && !filterOn) return prev;
       return !prev;
     });
@@ -62,7 +64,7 @@ const OutingCardFilter: FC<Props> = ({ onChange }) => {
   const filterToggle = useCallback(() => {
     if (filterOn) {
       setFilterOn(false);
-      setSetiingIsOpen(false);
+      setSettingIsOpen(false);
       onChange({ grade: 0, group: 0 });
       return;
     }
@@ -76,7 +78,7 @@ const OutingCardFilter: FC<Props> = ({ onChange }) => {
     <S.CenterDiv>
       <S.Container>
         <S.FilterBasic>
-          <S.FilterWrap onClick={changeSetiingIsOpen}>
+          <S.FilterWrap onClick={changeSettingIsOpen}>
             <S.Triangle />
             <div>필터링</div>
           </S.FilterWrap>

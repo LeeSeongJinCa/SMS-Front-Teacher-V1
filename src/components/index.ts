@@ -19,11 +19,8 @@ export { default as NoticeDetail } from "./Notice/Detail/NoticeDetail";
 
 export * from "./default";
 export { default as Category } from "./default/Category/Category";
-export { default as CircleAllDetail } from "./default/Info/CircleAllDetail";
-export { default as CircleWantedDetail } from "./default/Info/CircleWantedDetail";
 
 export { default as AdminMain } from "./Admin/Main/Main";
-
 export { default as AdminNoticeAll } from "./Admin/Notice/all/AdminNoticeAll";
 export { default as AdminNoticeEdit } from "./Admin/Notice/edit/AdminNoticeEdit";
 export { default as AdminNoticeMine } from "./Admin/Notice/mine/AdminNoticeMine";

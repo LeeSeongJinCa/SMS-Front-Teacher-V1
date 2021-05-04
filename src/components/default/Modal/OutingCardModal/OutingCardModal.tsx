@@ -1,10 +1,9 @@
 import React, { useCallback, FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 import * as S from "./styles";
 
-import { stateType } from "../../../../modules/reducer";
 import {
   approveOutingCardSaga,
   CloseOutingCardModal,
@@ -12,28 +11,27 @@ import {
 } from "../../../../modules/action/outingCard";
 import { getOutingCardTime, padNum } from "../../../../lib/utils";
 import useEndTime from "../../../../lib/hooks/useEndTime";
+import useCustomSelector from "../../../../lib/hooks/useCustomSelector";
+
+const initialState = {
+  grade: 0,
+  name: "",
+  group: 0,
+  number: 0,
+  start_time: 0,
+  end_time: 0,
+  place: "",
+  reason: "",
+  outing_uuid: ""
+};
 
 const OutingCardModal: FC = () => {
   const dispatch = useDispatch();
-  const { isOpen, data } = useSelector((state: stateType) => ({
-    data: state.outingCard.list.find(
-      ({ outing_uuid }) => outing_uuid === state.outingCard.outingUuid
-    ) || {
-      outing_uuid: "",
-      name: "",
-      grade: 0,
-      group: 0,
-      number: 0,
-      place: "",
-      reason: "",
-      start_time: 0,
-      end_time: 0,
-      outing_situation: "",
-      outing_status: "",
-      is_late: false
-    },
-    isOpen: state.outingCard.modalIsOpen
-  }));
+  const {
+    list,
+    modalIsOpen,
+    outingUuid: uuid
+  } = useCustomSelector().outingCard;
   const {
     grade,
     name,
@@ -44,7 +42,7 @@ const OutingCardModal: FC = () => {
     place,
     reason,
     outing_uuid
-  } = data;
+  } = list.find(({ outing_uuid }) => outing_uuid === uuid) || initialState;
   const [date, startTime, endTime] = getOutingCardTime(start_time, end_time);
   const [
     endHour,
@@ -82,7 +80,7 @@ const OutingCardModal: FC = () => {
 
   return (
     <>
-      {isOpen && (
+      {modalIsOpen && (
         <S.Container>
           <ToastContainer autoClose={2000} />
           <S.Modal>
@@ -95,7 +93,7 @@ const OutingCardModal: FC = () => {
                   <span>
                     {grade}
                     {group}
-                    {`${number}`.padStart(2, "0")}
+                    {padNum(number)}
                   </span>
                 </div>
                 <div>

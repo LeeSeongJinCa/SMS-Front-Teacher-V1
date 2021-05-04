@@ -1,6 +1,8 @@
 import React, { FC, ChangeEvent, memo, useState, useCallback } from "react";
-import { SearchInput } from "../../default";
+
 import * as S from "./styles";
+
+import { SearchInput } from "../../default";
 
 interface Props {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;

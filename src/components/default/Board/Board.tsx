@@ -1,11 +1,13 @@
 import React, { FC } from "react";
+import { useLocation } from "react-router-dom";
+import qs from "query-string";
+
 import * as S from "./styles";
 import BoardTableHeader from "./Table/header/BoardTableHeader";
 import BoardTableBody from "./Table/body/BoardTableBody";
-import { BoardListItem } from "../../../lib/api/payloads/Board";
-import qs from "query-string";
+
 import PagiNation from "../PagiNation/PagiNation";
-import { useLocation } from "react-router-dom";
+import { BoardListItem } from "../../../lib/api/payloads/Board";
 
 export interface BoardObj {
   id: number;
