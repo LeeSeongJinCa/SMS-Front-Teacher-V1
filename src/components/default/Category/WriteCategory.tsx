@@ -1,14 +1,9 @@
-import React, {
-  FC,
-  useCallback,
-  useEffect,
-  useState,
-  ChangeEvent,
-  MouseEvent
-} from "react";
+import React, { FC, useCallback, useEffect, useState, MouseEvent } from "react";
 import { toast } from "react-toastify";
-import { BoardWriteFilter } from "../../../lib/api/payloads/Board";
+
 import * as S from "./styles";
+
+import { BoardWriteFilter } from "../../../lib/api/payloads/Board";
 
 interface Props {
   onChange: (data: BoardWriteFilter) => void;
@@ -138,7 +133,6 @@ const WriteCategory: FC<Props> = ({ onChange }) => {
             value="1"
             type="checkbox"
           />
-
           <span>1학년</span>
         </label>
         <label>
