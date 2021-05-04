@@ -1,5 +1,6 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import {
   LazyOutingCertified,
@@ -14,25 +15,32 @@ import { LazyPageNotFound } from "../AdminLazy";
 import { GlobalInnerBody } from "../../GlobalStyle";
 import OutingTutorial from "../../components/Admin/Outing/tutorial/OutingTutorial";
 import { TutorialProvider } from "../../lib/contextAPI/tutorial";
+import useCustomSelector from "../../lib/hooks/useCustomSelector";
+import { setTutorial } from "../../modules/action/page";
 
 const OutingRouter: FC = () => {
-  const [tutorial, setTutorial] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const isTutorialOpen = useCustomSelector().page.isTutorialOpen;
+
+  const startTutorial = () => {
+    dispatch(setTutorial(true));
+  };
 
   const endTutorial = () => {
-    setTutorial(false);
+    dispatch(setTutorial(false));
     localStorage.setItem("taught", "true");
   };
 
   useEffect(() => {
     if (!localStorage.getItem("taught")) {
-      setTutorial(true);
+      startTutorial();
     }
   }, []);
 
   return (
     <TutorialProvider>
       <GlobalInnerBody>
-        {tutorial && <OutingTutorial endTutorial={endTutorial} />}
+        {isTutorialOpen && <OutingTutorial endTutorial={endTutorial} />}
         <Switch>
           <Route path="/out/wait" component={LazyOutingWait} />
           <Route path="/out/now" component={LazyOutingNow} />
